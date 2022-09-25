@@ -1,0 +1,726 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Spectrematic | Autobot</title>
+    <link href="ttps://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link type="text/css" href="vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        #cacing {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  width: 140px;
+}
+#btnExecutor {
+  position: absolute;
+  bottom: 10px;
+  right: 55px;
+}
+
+    
+    table {
+	background-color: transparent
+}
+
+caption {
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: #777;
+	text-align: left
+}
+
+th,td {
+  text-align: left;
+  font-size: 15px;
+}
+
+.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 20px
+}
+
+.table>tbody>tr>td,.table>tbody>tr>th,.table>thead>tr>td,.table>thead>tr>th {
+	padding: 5px;
+	line-height: 0.3;
+	vertical-align: top;
+	border-top: 1px solid #ddd
+}
+
+.table>thead>tr>th {
+	vertical-align: bottom;
+	border-bottom: 1.5px solid #ddd
+}
+
+
+.table-responsive {
+	min-height: .01%;
+	overflow-x: auto
+}
+
+@media screen and (max-width:767px) {
+	.table-responsive {
+		width: 100%;
+		margin-bottom: 1px;
+		overflow-y: hidden;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+		border: 1px solid #ddd
+	}
+
+	.table-responsive>.table {
+		margin-bottom: 0
+	}
+
+	.table-responsive>.table>tbody>tr>td,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>thead>tr>th {
+		white-space: nowrap
+	}
+}
+</style>
+  </head>
+  <body class="sb-nav-fixed">
+      <div id="PotRx" style="display:non">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+              <!-- <ul class="navbar-nav ms-auto me-1 me-lg-2">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-print "></i></a>
+          <ul class="dropdown-menu dropdown-menu-start" style="width:600px" aria-labelledby="navbarDropdown">
+                
+          </ul>
+        </li>
+      </ul> -->
+      <!-- Navbar Brand-->
+      <a class="navbar-brand ps-3" href="">SMBOT</a>
+      <!-- Sidebar Toggle-->
+      <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+     
+      <!-- Navbar Search--
+       <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+          <input class="badge bg-success" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+          <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+      </form>
+      <!-- Navbar-->
+
+            <ul class="navbar-nav ms-auto me-3 me-lg-4">
+              
+  <select class="badge bg-success" aria-label="Default Select Market" for="simpleinput" id="cmb_market"></select>
+      </ul>
+
+<!-- <ul class="navbar-nav ms-auto me-1 me-lg-2">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-list "></i></a>
+          <ul class="dropdown-menu dropdown-menu-end" style="width:200px" aria-labelledby="navbarDropdown">
+            <!-- <div class="col-xl-6 col-md-12"> --
+              <div class="card border-primary text-white col-md-12">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Trx ID
+                    <span class="badge bg-primary rounded-pill" id="lblTransactionId">00000</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Investment
+                    <span class="badge bg-primary rounded-pill" id="lblInvest">00000</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Contract
+                    <span class="badge bg-primary rounded-pill" id="lblContract">N/A</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Entry Price
+                    <span class="badge bg-primary rounded-pill" id="lblEntryPrice">00000</span>
+                    </li>
+                </ul>
+                </div>
+            <!-- </div> --                                   
+          </ul>
+        </li>
+      </ul> -->
+
+      <ul class="navbar-nav ">
+        <select class="badge bg-success"id="cmbAccountType">
+                        <option class="dropdown-item" value="1">Demo</option>
+            <option class="dropdown-item" value="4">Reguler</option>
+            <!--
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"id="">
+
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#!">Logout</a></li>
+          </ul>-->
+        </select>
+      </ul>
+      
+                  <ul class="navbar-nav">               
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+          <ul class="dropdown-menu dropdown-menu-end"style="width:250px" aria-labelledby="navbarDropdown">
+                                              <!-- <div class="col-xl-6 col-md-6"> -->
+                            <div class="card border-primary text-white col-md-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Trader ID
+                                    <span class="badge bg-primary rounded-pill" id="lblAccId">00000</span>
+                                    </li>
+
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    End Balance
+                                    <span class="badge bg-primary rounded-pill" id="lblCurrentBalance">00000</span>
+                                    </li>
+                                                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                     Balance
+                                    <span class="badge bg-primary rounded-pill" id="lblStartBalance">00000</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                             Profit
+                                    <span class="badge bg-light rounded-pill" id="lblPL">00000</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        <!-- </div> -->
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" id="out">Logout</a></li>
+          </ul>
+        </li>
+        
+        
+      </ul>
+        <span id="mserver"><i class="fas fa-circle" style="width:10px;" ></i></span>
+        <span id="fserver"><i class="fas fa-signal" style="margin-right:20px;"></i></span>
+    </nav>
+
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <div class="sb-sidenav-menu">
+            <div class="nav">
+            <!--  <a class="nav-link" id"Dasboard">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Dashboard
+              </a>-->
+                 <a class="nav-link acktiv" id="Dasboard">
+                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                Dasboard
+              </a>
+              <a class="nav-link" id="setting">
+                <div class="sb-nav-link-icon"><i class="fas fa-cog stopPopSettings"></i></div>
+                Setting
+              </a>
+              <a class="nav-link" id="tabprofit" >
+                <div class="sb-nav-link-icon"><i class="fas fa-print"></i></div>
+                TabelProfit
+              </a>
+              <!-- <a class="nav-link" href="users.html">
+                <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                User
+              </a> -->
+            </div>
+          </div>
+          <div class="sb-sidenav-footer">
+            <div class="small"></div>
+            
+          </div>
+        </nav>
+      </div>
+
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+              <div id="homesho" style="display:non">
+            
+
+          <!--  <div class="col-12 mb-2">
+                <div class="form-control">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                            <h3 class="fs-5 fw-bold mb-0">API Token Authorization</h3>
+                            </div>
+                        </div>
+
+                        <form class="row g-2">
+                            <div class="col-8 mb-2 mt-4">
+                            <input type="password" class="badge bg-success" id="xtToken" aria-describedby="tokenHelp" placeholder="Paste your API Token here" />
+                            </div>
+                            <div class="col-4 mb-2 mt-4">
+                            <select id="cmbAccountTyp" class="badge bg-success">
+                                <option value="1">Demo</option>
+                                <option value="4" selected>Real</option>
+                            </select>
+                            </div>
+                        </form>
+                        
+                        <div class="container">
+                            <div class="d-flex justify-content-end gap-2">
+                            <a
+                                href="https://wss.hyper-api.com/authorize.php?app_id=601823bea3f866c6cd380a0d3f28d5e3&grant=oauth&response_type=code&client_id=601823bea3f866c6cd380a0d3f28d5e3&state=spectrematic"
+                                target="_blank"
+                                class="btn btn-primary btn-sm"
+                                id="btnGetToken"
+                                type="button"
+                            >
+                                Get Token</a
+                            >--
+                            <button class="btn btn-primary btn-sm" id="btnConnect" type="button">Connect</button>
+                            <!--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                  <!--  <div class="col-xl-6 col-md-6">
+                            <div class="form-control text-white mb-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Trader ID
+                                    <span class="badge bg-primary rounded-pill" id="lblAccId">00000</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Start Balance
+                                    <span class="badge bg-primary rounded-pill" id="lblStartBalance">00000</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    End Balance
+                                    <span class="badge bg-primary rounded-pill" id="lblCurrentBalance">00000</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Total Profit/Loss
+                                    <span class="badge bg-light rounded-pill" id="lblPL">00000</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>-->
+                        </div>
+
+
+            <div class="row" id="homeshow" style="display:non">
+                <div class="col-xl-12">
+                    <div class="card border-primary mb-4">
+                    <div class="card-header" style="display:none">
+                        <div class="row">
+                            <div class="col">
+                                <select class="form-select" aria-label="Default Select Market" for="simpleinput" id="cmb_marke"></select>
+                            </div>
+                            <div class="col">
+                                <select id="cmb_time_frame" class="form-select">
+                                <!-- <option value="3">3S</option>
+                                <option value="5">5S</option>
+                                <option value="10">10S</option>
+                                <option value="30">30S</option> -->
+                                <option value="60">1M</option>
+                                <!-- <option value="300" selected>5M</option>
+                                <option value="600">10M</option>
+                                <option value="900">15M</option> -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button id="btnGetPrice" class="btn btn-success col-sm-12 mx-auto">Get Market</button>
+                            </div>
+                             
+                        </div>
+                    </div>
+                    <div class="card-bod position-relative">
+                        <iframe src="" style="width: 100%; height: 480px" frameborder="0" id="loaderCC"></iframe>
+                             <span class="d-grid" id="cacing">
+                              <ul class="list-group " style="display:none;" id="trx_atv">
+                                <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                Trx ID
+                                <span class="badge bg-primary rounded-pill" id="lblTransactionId">00000</span>
+                                </span>
+                                <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                Investment
+                                <span class="badge bg-primary rounded-pill" id="lblInvest">00000</span>
+                                </li>
+                                <!-- <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;">
+                                Contract
+                                <span class="badge bg-primary rounded-pill" id="lblContract">N/A</span>
+                                </li> -->
+                                <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                Entry Price
+                                <span class="badge bg-primary rounded-pill" id="lblEntryPrice">00000</span>
+                                </li>
+                            
+                               <span class="d-flex justify-content-center" style="font-size: 20px; font-weight: bold;" id="lblTradeStatus"> WAIT </span>
+                              </ul>
+                              <span class="d-fle justify-content-center" style=" display:none;font-size: 20px; font-weight: bold;" id="Status"> WAIT Analisis</span>
+                                 <span class="d-flex justify-content-right" style="font-size: 8px; font-weight: bold;color:aqua" id="price_open"> 0000 </span>
+
+                            <span class="d-flex justify-content-right" style="font-size: 8px; font-weight: bold;color:aqua" id="price_high"> 0000 </span>
+                              <span class="d-flex justify-content-left" style="font-size: 8px; font-weight: bold;color:aqua" id="price_low"> 0000 </span>
+                                                     <span id="chartline" class="dynamicsparkline" style="height: 50px"></span>
+                            <span class="d-flex justify-content-center" style="font-size: 10px; font-weight: bold;" id="spot3"> 0000 </span>
+                             <span class="d-flex justify-content-center" style="font-size: 10px; font-weight: bold;" id="spot2"> 0000 </span>
+                              <span class="d-flex justify-content-center" style="font-size: 10px; font-weight: bold;" id="spot1"> 0000 </span>
+                              <span class="d-flex justify-content-center" style="font-size: 10px; font-weight: bold;" id="spot"> 0000 </span>
+                               <span class="d-flex justify-content-center" style="font-size: 20px; font-weight: bold;" id="price_point"> 0000 </span>
+                              <span id="chartline" class="dynamicsparklin" style="height: 20px"></span>
+                           
+                         </span>
+                        <span class="" id="btnExecutor" style="display:non">
+                            <div style="display:none" id="Auto">                           <button id="btnStart" class="btn btn-success btn-lg" style="color: white"><span class="fas fa-angle-double-up mr-1"></span>&nbsp;&nbsp;&nbsp;Start&nbsp;&nbsp;&nbsp;</button>
+                            </div>
+                            <div style="display:non;" id="man">
+                            <button id="btnCal" class="btn btn-success btn-lg" style="color: white"><span class="fas fa-angle-double-up mr-1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            <button id="btnPut" class="btn btn-danger btn-lg"><span class="fas fa-angle-double-down mr-1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                            </div>
+                        </span>
+
+
+                    </div>
+                    </div>
+                </div>
+                <!-- <div class="col-xl-4">
+                    <div class="card mb-4">
+                    <div class="card-body" style="height: 200px">
+                        
+                    </div>
+                    
+                    <div class="d-flex justify-content-center gap-2 mb-2">
+                        
+                        
+                    </div>
+                    </div>
+                </div> -->
+            </div>
+
+
+            <div class="row">
+                <div class="col-xl-12" id="settingshow" style="display:none">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Investment</label>
+                                        <input type="text" id="txt_invest" class="form-control" value='1'>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput"> Duration</label>
+                                        <select id="cmb_duration" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Take Profit</label>
+                                        <input type="text" id="txt_takeprofit" class="form-control" value='0'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Multiplier</label>
+                                        <input type="text" id="txt_muliplier" class="form-control" value='0'>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Max. Step</label>
+                                        <input type="text" id="txt_max_step" class="form-control" value='0'>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Stop Loss</label>
+                                        <input type="text" id="txt_stoploss" class="form-control" value='0'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">Signal</label>
+                                        <select id="cmb_signal" class="form-control">
+                                            <option value="manual">Manual</option>
+                                            <option value="timesignaltemplate">Time Signal</option>
+                                            <option value="ctpoint"> Reversal</option>
+                                            <option value="ctpointF"> Follow Trend</option>
+                                            <option value="pattern">fast signal</option>
+                                            <option value="Rul3">Three signal</option>
+                                            <option value="Xspott">Limit</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">if Loss</label>
+                                        <select id="cmb_if_signal_false" class="form-control">
+                                            <option value="waitnew">Wait New Signal</option>
+                                            <option value="follow">Follow Last Entry</option>
+                                            <option value="reversal">Reversal Last Entry</option>
+                                            <option value="stop">Stop Trade</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row mb-2" style="display:none" id="Limit">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">[ - ]</label>
+                                        <input type="text" id="PointicLS" class="form-control" value='54.0000'>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">[ + ]</label>
+                                        <input type="text" id="PointicLB" class="form-control" value='54.00000'>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                            <div class="form-group"style="display:none" id="Ticpoin">
+                                <label class="form-label" for="simpleinput">Poin</label>
+                                <input type="text" id="Pointic" class="form-control" value='50'>
+                            </div>
+                            <div class="form-group"style="display:none"id ="Jam">
+                                <div class="panel-tag">
+                                    Insert your template signal with format <code>HH:MM B/S</code> line by line in the textbox bellow</code><br>
+                                    Example :<br>
+                                    <code>
+                                    09:25 S
+                                    </code><br>
+                                    <code>
+                                    10:15 B
+                                    </code><br>
+                                    <code>
+                                    20:10 S
+                                    </code><br>
+                                    <code>
+                                    23:59 B
+                                    </code><br>
+                                </div>
+                                <label class="form-label" for="example-textarea">Signal time => Time Local :[ <span id="mytimeLocal"> </span> ]</label>
+                                <textarea class="form-control" id="txtSignalTemplate" rows="5"></textarea>
+                            </div>
+                            <div class="row" style="margin-bottom:5px">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="simpleinput">After Max Step</label>
+                                        <select id="cmb_after_step" class="form-control">
+                                            <option value="follow">Continue And Reset Investment</option>
+                                            <option value="stop">Stop Trade</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6"style="display:non" id="VirtualSistem">
+                                    <label class="form-label" for="simpleinput">Virtual Entry System</label>
+                                    <select id="lossvirtual" class="form-control">
+                                            <option value="">off</option>
+                                            <option value="1">ves 1x</option>
+                                            <option value="2">ves 2x</option>
+                                            <option value="3">ves 3x</option>
+                                            <option value="4">ves 4x</option>
+                                            <option value="5">ves 5x</option>
+                                            <option value="6">ves 6x</option>
+                                            <option value="7">ves 7x</option>
+                                            <option value="8">ves 8x</option>
+                                            <option value="9">ves 9x</option>
+                                            <option value="10">ves 10x</option>
+                                            <option value="11">ves 11x</option>
+                                            <option value="12">ves 12x</option>
+                                            <option value="13">ves 13x</option>
+                                            <option value="14">ves 14x</option>
+                                            <option value="15">ves 15x</option>
+                                    </select>
+                                    </div>
+                                       <div class="row" style="margin-bottom:5px">
+                                    <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Selected Ves</label>
+                                    <select id="cmb_Ves" class="form-control">
+                                        <option value="Vesloss">Ves Loss</option>
+                                        <option value="Veswin">Ves Win</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="simpleinput">Selected Loss</label>
+                                    <select id="cmb_VesLoss" class="form-control">
+                                        <option value="lossC">Loss Continue</option>
+                                        <option value="lossV">Loss To Ves</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                            
+                                         <!-- <div class="row">
+  <div class="col-md-12 align-middle">
+  <div class="radio">
+      <input type="radio" id="Ves1" name="radio" checked="">
+      <label>
+          Win Back To Ves Loss Continue
+      </label>
+      </div>
+      </div>
+      </div>
+                                         <div class="row">
+                                       <div class="col-md-12 align-middle">
+                        <div class="radio">
+
+                            <input type="radio" id="Ves2" name="radio" >
+                            <label>Loss Back To Ves Win Continue
+                            </label>
+                            </div>
+                            </div>
+
+
+
+                   </div>-->
+             </div>
+
+
+                                <div class="col-md-6 align-middle"><br>
+                                    <div  class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch2" checked="">
+                                        <label class="custom-control-label" for="customSwitch2">Play Notification Sound</label>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container col-xl-6">
+                    <div class="row">
+
+                      <!--  <div class="col-xl-6 col-md-6">
+                            <div class="card border-primary mb-4 text-center">
+                            <div class="card-header">If everything is ready</div>
+                            <div class="card-body d-flex align-items-center justify-content-center">
+                                <button id="btnStart" class="btn btn-dark col-sm-12 mx-auto">Start</button>
+                            </div>
+                            </div>
+                        </div>-->
+
+                       <!-- <div class="col-xl-6 col-md-6">
+                            <div class="form-control text-white mb-4">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Trx ID
+                                <span class="badge bg-primary rounded-pill" id="lblTransactionId">00000</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Investment
+                                <span class="badge bg-primary rounded-pill" id="lblInvest">00000</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Contract
+                                <span class="badge bg-primary rounded-pill" id="lblContract">N/A</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Entry Price
+                                <span class="badge bg-primary rounded-pill" id="lblEntryPrice">00000</span>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card border-primary mt-2 mb-4" id="tabprofitshow" style="display:none">
+                <div class="card-header">Profit Table</div>
+                <div class="card-body">
+                  <div class="dataTable-container">
+                    <table id="datatablesSimple" class="dataTable-table">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Trx Id</td>
+                                <td>Assets</td>
+                                <td>Volume</td>
+                                <td>Duration</td>
+                                <td> Contract</td>
+                                <td>Entry Price</td>
+                                <td>Exit Price</td>
+                                <td> Result</td>
+                                </tr>
+                                </thead>
+                        <tbody>
+                            
+                        </tbody>
+                        </table>
+                        </div>
+                        <div class="dataTable-bottom">
+                            <div class="dataTable-info"></div>
+                            <nav class="dataTable-pagination">
+                                <ul class="dataTable-pagination-list"></ul>
+                            </nav></div></div>
+            </div>
+          </div>
+        </main>
+
+        <footer class="py-4 bg-light mt-auto">
+          <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+              <div class="text-muted">Copyright &copy; Smbot 2022</div>
+              <div>
+                <a href="#">Privacy Policy</a>
+                &middot;
+                <a href="#">Terms &amp; Conditions</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    </div>
+                    <div id="Landscapex" style="display:none">
+                    <div class="container">
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6">
+                                <div class="text-center mt-4">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="59" height="300" viewBox="0 0 59 64"><g fill="none">
+
+<path fill="#85AC" d="M58.063 57.177v-21.65c0-1.78-1.442-3.217-3.22-3.217H30.025v4.343h21.839c.49 0 .884.397.884.886v17.625c0 .49-.395.886-.884.886H30.025v4.346h24.816c1.78 0 3.222-1.441 3.222-3.219zM3.237 63.944h21.65c1.777 0 3.22-1.442 3.22-3.22V19.425c0-1.778-1.444-3.22-3.22-3.22H3.238c-1.78 0-3.219 1.442-3.219 3.22v41.299c.002 1.778 1.44 3.22 3.219 3.22zm10.772-1.967c-1.122 0-2.028-.906-2.028-2.026 0-1.12.906-2.027 2.028-2.027 1.118 0 2.026.907 2.026 2.027s-.908 2.026-2.026 2.026zM4.363 22.403c0-.49.397-.885.886-.885h17.625c.49 0 .886.396.886.885v31.795c0 .49-.397.885-.886.885H5.25c-.489 0-.886-.395-.886-.885V22.403z" /></g></svg>
+<input type="text" id="txt_t" class="form-control" value="">
+                                    <p class="lead"> Portrait view is currently not supported.
+Please rotate your device to Landscape view.</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
+    <script src="vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> 
+    <script src="vendor/moment/moment.js"></script>
+    <script src="vendor/moment/moment-timezone-with-data.js"></script>
+    <script src="htps://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="js/websocket.js"></script>
+    <script src="js/utility.js"></script>
+    <script src="js/w.js"></script>
+    
+
+    <script src="js/vendors.bundle.js"></script>
+    <script src="vendor/sparkline/spark.js"></script>
+    <script src="js/app.bundle.js"></script>
+    <script type="text/javascript"></script>
+  </body>
+</html>
