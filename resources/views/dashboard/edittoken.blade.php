@@ -1,9 +1,28 @@
-@extends('dashboard.layouts.main')
+@extends('dashboard.layouts.token')
 
 @section('content')
 
-<main class="mt-4">
-    <div class="container-fluid px-4">
+<main class="mt-3">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center px-4 pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            Get Token
+        </h1>
+
+    </div>
+    <form method="post" action="/token/{{ $user->token }}">
+        @csrf
+        @method('put')
+
+        <div class="mb-3">
+            <label for="inputToken" class="form-label">Token</label>
+            <input type="text" value="{{ $user->token }}" name="token" class="form-control" id="inputToken">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+
+    {{-- <div class="container-fluid px-4">
+
         <div id="homesho" style="display:non">
         </div>
 
@@ -50,11 +69,11 @@
                                         <option value="timesignaltemplate">Time Signal</option>
                                         <option value="ctpoint"> Reversal</option>
                                         <option value="ctpointF"> Follow Trend</option>
-                                        <option value="pattern">Fast signal</option>
-                                        <option value="Rul3">Trend signal</option>
-                                        <option value="B_Limit">Buy Limit</option>
+                                        <option value="pattern">fast signal</option>
+                                        <option value="Rul3">Three signal</option>
+                                        <option value="B_Limit">Bay Limit</option>
                                         <option value="S_Limit">Sell Limit</option>
-                                        <option value="B_Stop">Buy Stop</option>
+                                        <option value="B_Stop">Bay Stop</option>
                                         <option value="S_Stop">Sell Stop</option>
                                     </select>
                                 </div>
@@ -142,19 +161,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <div class="row">
                 <div class="col-xl-12" id="settingshow" style="display:none">
@@ -367,7 +373,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </main>
 
 @endsection

@@ -68,8 +68,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-// Route::get('/token', [TokenController::class, 'edit'])->middleware('auth');
-// Route::post('/token', [TokenController::class, 'update'])->middleware('auth');
 
 Route::get('/dashboard', function() {
     return view('dashboard.index', [
@@ -77,3 +75,5 @@ Route::get('/dashboard', function() {
         'active' => 'dashboard'
     ]);
 })->middleware('auth');
+
+Route::resource('/token', TokenController::class)->middleware('auth');

@@ -34,90 +34,6 @@
         <link href="{{ url('mt/css/styles.css') }}" rel="stylesheet" />
         <link type="text/css" href="{{ url('mt/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        <style>
-            #cacing {
-            position: absolute;
-            bottom: 60px;
-            right: 60px;
-            width: 140px;
-            }
-            #signal {
-            position: absolute;
-            bottom: 328px;
-            right: 60px;
-            width: 140px;
-            }
-            #signal1 {
-            position: absolute;
-            bottom: 440px;
-            right: 60px;
-            width: 140px;
-            }
-            #btnExecutor {
-            position: absolute;
-            bottom: 10px;
-            right: 55px;
-            }
-
-
-                table {
-                background-color: transparent
-            }
-
-            caption {
-                padding-top: 8px;
-                padding-bottom: 8px;
-                color: #777;
-                text-align: left
-            }
-
-            th,td {
-            text-align: left;
-            font-size: 15px;
-            }
-
-            .table {
-                width: 100%;
-                max-width: 100%;
-                margin-bottom: 20px
-            }
-
-            .table>tbody>tr>td,.table>tbody>tr>th,.table>thead>tr>td,.table>thead>tr>th {
-                padding: 5px;
-                line-height: 0.3;
-                vertical-align: top;
-                border-top: 1px solid #ddd
-            }
-
-            .table>thead>tr>th {
-                vertical-align: bottom;
-                border-bottom: 1.5px solid #ddd
-            }
-
-
-            .table-responsive {
-                min-height: .01%;
-                overflow-x: auto
-            }
-
-            @media screen and (max-width:767px) {
-                .table-responsive {
-                    width: 100%;
-                    margin-bottom: 1px;
-                    overflow-y: hidden;
-                    -ms-overflow-style: -ms-autohiding-scrollbar;
-                    border: 1px solid #ddd
-                }
-
-                .table-responsive>.table {
-                    margin-bottom: 0
-                }
-
-                .table-responsive>.table>tbody>tr>td,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>thead>tr>th {
-                    white-space: nowrap
-                }
-            }
-        </style>
     </head>
     <body class="sb-nav-fixed">
         <div id="PotRx" style="display:non">
@@ -187,71 +103,14 @@
 
             <div id="layoutSidenav">
                 <div id="layoutSidenav_nav">
-                    @include('dashboard.includes.nav')
+                    {{-- @include('dashboard.includes.nav') --}}
                 </div>
 
                 <div id="layoutSidenav_content">
                     @yield('content')
-
-                    {{-- <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Smbot 2022</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                        </div>
-                    </div>
-                    </footer> --}}
                 </div>
             </div>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modaltoken" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modaltokenLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="modaltokenLabel">You have to enter the token first</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/dashboard" method="POST">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="mb-3">
-                          <label for="gettoken" class="col-form-label">Paste your token</label>
-                          <input type="text" name="token" class="form-control" id="gettoken" value="{{ auth()->user()->token }}">
-                          <span><a href="">Get Token</a></span>
-                        </div>
-                        <div class="modal-footer">
-                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                      </form>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div id="Landscapex" style="display:none">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="text-center mt-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="59" height="300" viewBox="0 0 59 64"><g fill="none">
-                                <path fill="#85AC" d="M58.063 57.177v-21.65c0-1.78-1.442-3.217-3.22-3.217H30.025v4.343h21.839c.49 0 .884.397.884.886v17.625c0 .49-.395.886-.884.886H30.025v4.346h24.816c1.78 0 3.222-1.441 3.222-3.219zM3.237 63.944h21.65c1.777 0 3.22-1.442 3.22-3.22V19.425c0-1.778-1.444-3.22-3.22-3.22H3.238c-1.78 0-3.219 1.442-3.219 3.22v41.299c.002 1.778 1.44 3.22 3.219 3.22zm10.772-1.967c-1.122 0-2.028-.906-2.028-2.026 0-1.12.906-2.027 2.028-2.027 1.118 0 2.026.907 2.026 2.027s-.908 2.026-2.026 2.026zM4.363 22.403c0-.49.397-.885.886-.885h17.625c.49 0 .886.396.886.885v31.795c0 .49-.397.885-.886.885H5.25c-.489 0-.886-.395-.886-.885V22.403z" /></g>
-                            </svg>
-                            {{-- <input type="text" id="txt_t" class="form-control" value=""> --}}
-                            <input type="text" id="txt_t" class="form-control" value="{{ auth()->user()->token }}">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         @include('dashboard.includes.script')
     </body>
 
