@@ -9,7 +9,7 @@
         </h1>
 
     </div>
-    <form method="post" action="/token/{{ $user->token }}">
+    <form method="post" action="/token/{{ $user->id }}">
         @csrf
         @method('put')
 
@@ -17,7 +17,7 @@
             <label for="inputToken" class="form-label">Token</label>
             <input type="text" value="{{ $user->token }}" name="token" class="form-control" id="inputToken">
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Save</button>
       </form>
 
 

@@ -61,13 +61,28 @@ class TokenController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+
+    //  versi 1
+    // public function edit(User $user)
+    // {
+    //     return view('dashboard.edittoken', [
+    //         'title' => 'Update Token',
+    //         'user' => User::where('id', auth()->user()->id)->first()
+    //     ]);
+    // }
+
+    // versi 2
+    public function edit($id)
     {
+        // $user = User::findOrFail($id); //ini bisa juga, tapi semua tidak auth
+        $user = User::findOrFail(auth()->user()->id);
+
         return view('dashboard.edittoken', [
             'title' => 'Update Token',
-            'user' => User::where('id', auth()->user()->id)->first()
+            'user' => $user
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -76,12 +91,15 @@ class TokenController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $id)
+    public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        return dd($user);
-        $user->update($request->all());
+        // $user = User::findOrFail($id);
+        // return dd($user);
+        // $user->update($request->all());
 
+        $post = User::find($id)->update($request->all());
+        return redirect()->route('dashboard');
+        // User::where('id',$id)->first()->update($request->all());
     }
 
     /**

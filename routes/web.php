@@ -74,6 +74,6 @@ Route::get('/dashboard', function() {
         'title' => 'Dashboard',
         'active' => 'dashboard'
     ]);
-})->middleware('auth');
+})->middleware('auth')->name('dashboard');
 
 Route::resource('/token', TokenController::class)->middleware('auth');
