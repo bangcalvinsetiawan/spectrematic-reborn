@@ -17,6 +17,10 @@
             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
             Token
         </a>
+        <a class="nav-link {{ Request::is('order') ? 'active' : '' }}" href="/order" target="_blank">
+            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+            Order
+        </a>
         </div>
     </div>
     {{-- <div class="sb-sidenav-footer">

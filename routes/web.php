@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -77,3 +78,4 @@ Route::get('/dashboard', function() {
 })->middleware('auth')->name('dashboard');
 
 Route::resource('/token', TokenController::class)->middleware('auth');
+Route::resource('/order', OrderController::class)->middleware('auth');
