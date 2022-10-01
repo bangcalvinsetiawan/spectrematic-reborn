@@ -19,6 +19,22 @@
 
             <div class="card-body">
                 <a href="/order/create" class="btn btn-primary mb-3">Place new order</a>
+
+                @if(session()->has('success'))
+                    <div class="alert alert-success" id="alertSuccess" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if(session()->has('samedata'))
+                    <div class="alert alert-warning" id="alertSamedata" role="alert">
+                        {{ session('samedata') }}
+                    </div>
+                @endif
+                @if(session()->has('problem'))
+                    <div class="alert alert-danger" id="problem" role="alert">
+                        {{ session('problem') }}
+                    </div>
+                @endif
               <table id="datatablesSimple">
                 <thead>
                   <tr>
@@ -47,7 +63,7 @@
                 <tbody>
                     @foreach ($orders as $order )
                     <tr>
-                      <td>{{ $loop->last }}</td>
+                      <td>{{ $loop->iteration }}</td>
                       <td>{{ $order->signal }}</td>
                       <td>{{ $order->price }}</td>
                       <td>{{ $order->market }}</td>
@@ -55,8 +71,12 @@
                       <td>{{ $order->duration }}</td>
                       <td>Result</td>
                       <td>
-                        <a href="/order/{{ $order->id }}/edit" class="badge bg-info"><i class="fas fa-edit"></i></a>
-                        <a href="" class="badge bg-danger"><i class="fas fa-trash-alt"></i></i></a>
+                        <button type="button" href="#" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id='{{ $order->id }}'><i class="fas fa-edit"></i></button>
+                        <form action="/order/{{ $order->id }}" method="post" class="d-inline">
+                            @csrf
+                            @method('delete')
+                            <button href="" class="badge bg-danger border-0"><i class="fas fa-trash-alt"></i></i></button>
+                        </form>
                       </td>
                     </tr>
 
@@ -64,10 +84,23 @@
                 </tbody>
               </table>
             </div>
-          </div>
         </div>
-      </main>
+        @include('dashboard.orders.edit')
+    </main>
+
 
 </main>
+
+<script>
+    setTimeout(function() {
+    $('#alertSuccess').hide();
+    }, 3000);
+
+
+    setTimeout(function() {
+    $('#alertSamedata').hide();
+    }, 3000);
+
+</script>
 
 @endsection

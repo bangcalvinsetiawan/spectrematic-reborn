@@ -30,7 +30,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Spectrematic | {{ $title }}</title>
-        <link href="ttps://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{{ url('mt/css/styles.css') }}" rel="stylesheet" />
         <link type="text/css" href="{{ url('mt/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>

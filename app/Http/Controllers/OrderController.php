@@ -17,9 +17,11 @@ class OrderController extends Controller
     {
 
         // return Order::where('user_id', auth()->user()->id)->get();
+        // ini sudah ok dibawah ini
         return view('dashboard.orders.order', [
             'title' => 'Order',
-            'orders' => Order::where('user_id', auth()->user()->id)->get()
+            'orders' => Order::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get()
+
         ]);
     }
 
@@ -43,7 +45,29 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $validatedData = $request->validate([
+            'signal' => 'required',
+            'price' => 'required',
+            'market' => 'required',
+            'investment' => 'required',
+            'duration' => 'required'
+        ]);
+
+        $validatedData['user_id'] = auth()->user()->id;
+
+        $order = Order::firstOrCreate($validatedData);
+
+        if ($order->wasRecentlyCreated) {
+            // new user
+            return redirect('/order')
+            ->with('success', 'New order has been placed!');
+        } else {
+            // user already exists
+            return redirect('/order')
+            ->with('samedata', 'Data already exist!');
+        }
+
     }
 
     /**
@@ -65,7 +89,10 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('dashboard.orders.create', [
+            'order' => $id,
+            'title' => 'Edit Order'
+        ]);
     }
 
     /**
@@ -88,6 +115,10 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::destroy($id);
+        return redirect('/order')
+            ->with('success', 'Order has been deleted!');
+
+
     }
 }

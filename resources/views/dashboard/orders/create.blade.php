@@ -4,25 +4,63 @@
 
 <main class="col-lg-8">
 
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center px-4 pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            Place Order Limit
+        </h1>
 
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center px-4 pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">
-        Place Order
-    </h1>
+    </div>
+    <form method="post" action="/order">
+        @csrf
+        <div class="mb-3">
+            <label for="inputSignal" class="form-label">Order Limit</label>
+            <select class="form-select" name="signal" id="inputSignal">
+                <option value="1">BUY LIMIT</option>
+                <option value="2">BUY STOP</option>
+                <option value="3">SELL LIMIT</option>
+                <option value="4">SELL STOP</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="inputPrice" class="form-label">Price</label>
+            <div class="input-group">
 
-</div>
-<div class="mb-3 row">
-    <label for="trader" class="col-sm-2 col-form-label">Trader</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="trader" value="Calvin">
-    </div>
-  </div>
-  <div class="mb-3 row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword">
-    </div>
-  </div>
+                <span class="input-group-text">0.00</span>
+                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="inputPrice" aria-label="Input Price" required>
+                @error('price')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="inputSignal" class="form-label">Select Market</label>
+            <select type="text" class="form-select" name="market" id="cmb_marke" aria-label="Select Market">
+                <option value="1">EPIC5000</option>
+                <option value="2">EPIC3000</option>
+                <option value="3">EPIC1000</option>
+                <option value="4">APPLE</option>
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control @error('investment') is-invalid @enderror" name="investment" id="txt_invest" aria-label="Input Investment" required>
+            @error('price')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="inputDuration" class="form-label">Trade Duration</label>
+            <select type="text" class="form-select" name="duration" id="cmb_time_frame" aria-label="Select Market">
+                <option value="60">1M</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Order</button>
+    </form>
+
 </main>
 
 @endsection
