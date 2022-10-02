@@ -66,9 +66,9 @@
         }*/
     //  setCookie("token","a5a88308819e1b47aaa4e810af906bc38dd35074");
     //setCookie("_authToken", "?php echo $access_token ?>", "365");
-    if (getCookie("_authToken")) {
-    $("#txt_t").val(getCookie("_authToken"));
-    }
+    // if (getCookie("_authToken")) {
+    // $("#txt_t").val(getCookie("_authToken"));
+    // }
 
     //load last account type
     if (getCookie("_authAccountType")) {
@@ -794,7 +794,7 @@
     false
     );
     if(($("#txt_t").val())==""){
-        window.open('https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=smbot');
+        // window.open('https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=smbot');
     //window.open("login.html");
     };
     spot.addEventListener(

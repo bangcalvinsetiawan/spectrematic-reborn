@@ -16,7 +16,7 @@
         <div class="mb-3">
             <label for="inputToken" class="form-label">Token</label>
             <input type="text" value="{{ $user->token }}" name="token" class="form-control" id="inputToken">
-            <a href="https://wss.hyper-api.com/authorize.php?app_id=601823bea3f866c6cd380a0d3f28d5e3&grant=oauth&response_type=code&client_id=601823bea3f866c6cd380a0d3f28d5e3&state=spectrematic" target="_blank">Get your token</a>
+            <a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a>
           </div>
           <button type="submit" class="btn btn-primary">Save</button>
       </form>

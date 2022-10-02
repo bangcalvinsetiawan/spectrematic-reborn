@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <main class="mt-3">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center px-4 pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">
@@ -69,6 +70,7 @@
                       <td>{{ $order->market }}</td>
                       <td>{{ $order->investment }}</td>
                       <td>{{ $order->duration }}</td>
+
                       <td>Result</td>
                       <td>
 
