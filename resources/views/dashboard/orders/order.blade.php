@@ -71,7 +71,11 @@
                       <td>{{ $order->duration }}</td>
                       <td>Result</td>
                       <td>
-                        <button type="button" href="#" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id='{{ $order->id }}'><i class="fas fa-edit"></i></button>
+
+                        {{-- <button type="button" href="/order/{{ $order->id }}/edit" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id='{{ $order->id }}'><i class="fas fa-edit"></i></button> --}}
+
+                        <a type="button" href="/order/{{ $order->id }}/edit" class="badge bg-info"><i class="fas fa-edit"></i></a>
+
                         <form action="/order/{{ $order->id }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
@@ -85,7 +89,6 @@
               </table>
             </div>
         </div>
-        @include('dashboard.orders.edit')
     </main>
 
 

@@ -48,9 +48,9 @@ class OrderController extends Controller
         // return $request;
         $validatedData = $request->validate([
             'signal' => 'required',
-            'price' => 'required',
+            'price' => 'required|max:12',
             'market' => 'required',
-            'investment' => 'required',
+            'investment' => 'required|max:8',
             'duration' => 'required'
         ]);
 
@@ -89,9 +89,13 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        return view('dashboard.orders.create', [
-            'order' => $id,
-            'title' => 'Edit Order'
+
+
+        $order = Order::find($id);
+        // dd($order);
+        return view('dashboard.orders.edit', compact('order'), [
+            'title' => 'Edit Order',
+            // 'order' => Order::where('user_id', auth()->user()->id)->first()
         ]);
     }
 
@@ -104,7 +108,22 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'signal' => 'required',
+            'price' => 'required|max:12',
+            'market' => 'required',
+            'investment' => 'required|max:8',
+            'duration' => 'required'
+        ];
+        $validatedData = $request->validate($rules);
+
+        // $validatedData['user_id'] = auth()->user()->id;
+
+        Order::find($id)
+            ->update($validatedData);
+
+        return redirect('/order')
+            ->with('success', 'Order has been edited!');
     }
 
     /**

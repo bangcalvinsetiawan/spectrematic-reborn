@@ -25,8 +25,8 @@
             <label for="inputPrice" class="form-label">Price</label>
             <div class="input-group">
 
-                <span class="input-group-text">0.00</span>
-                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="inputPrice" aria-label="Input Price" required>
+                <span class="input-group-text">00.000</span>
+                <input type="number" step="0.0000000001" class="form-control @error('price') is-invalid @enderror" name="price" id="inputPrice" aria-label="Input Price" required>
                 @error('price')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -45,7 +45,7 @@
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
-            <input type="text" class="form-control @error('investment') is-invalid @enderror" name="investment" id="txt_invest" aria-label="Input Investment" required>
+            <input type="number" step="0.001" class="form-control @error('investment') is-invalid @enderror" name="investment" id="txt_invest" aria-label="Input Investment" required>
             @error('price')
                 <div class="invalid-feedback">
                     {{ $message }}
