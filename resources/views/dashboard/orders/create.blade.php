@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.token')
+@extends('dashboard.layouts.order')
 
 @section('content')
 
@@ -36,7 +36,7 @@
         </div>
         <div class="mb-3">
             <label for="inputSignal" class="form-label">Select Market</label>
-            <select type="text" class="form-select" name="market" id="cmb_marke" aria-label="Select Market">
+            <select type="text" class="form-select" name="market" id="cmb_market" aria-label="Select Market">
                 <option value="1">EPIC5000</option>
                 <option value="2">EPIC3000</option>
                 <option value="3">EPIC1000</option>
@@ -60,7 +60,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Order</button>
     </form>
-
 </main>
 
+
+
 @endsection
+
+

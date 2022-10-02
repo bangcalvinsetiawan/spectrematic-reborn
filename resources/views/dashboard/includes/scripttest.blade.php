@@ -1,75 +1,19 @@
-<?php
-error_reporting("E_ALL");
-ini_set('display_errors', 1);
-$code = $_GET['code'];
-$header_values = array("Accept: application/json", "Content-Type: application/x-www-form-urlencoded");
-$url = 'https://wss.hyper-api.com/token.php';
-$post_arr = array("code" => $code, "grant_type" => "authorization_code");
-$process = curl_init($url);
-curl_setopt($process, CURLOPT_HTTPHEADER, $header_values);
-curl_setopt($process, CURLOPT_USERPWD, "2999a8b9e1ecc9bd2f8d7d85aa46b0f7:0ca33103c520ed2edd261cf66eed06");
-curl_setopt($process, CURLOPT_POST, 1);
-curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($post_arr));
-curl_setopt($process, CURLOPT_RETURNTRANSFER, 1);
-$result = curl_exec($process);
-$json_object = json_decode($result, true);
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="{{ url('mt/js/scripts.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="{{ url('mt/assets/demo/chart-area-demo.js') }}"></script>
+<script src="{{ url('mt/assets/demo/chart-bar-demo.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+<script src="{{ url('mt/js/datatables-simple-demo.js') }}"></script>
+<script src="{{ url('mt/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
-$access_token = $json_object['access_token'];
- //echo $access_token;
- //print_r($access_token);
-?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="csrf-token" content="GpBNaDN9RrOrYDlnlYnXuqPESpXqrWBFb3faYGdP" />
-
-    <title>Spectrematic</title>
-
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" />
-    <link rel="apple-touch-icon" sizes="120x120" href="https://spectrematic.com/backend/img/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://spectrematic.com/backend/img/favicon/favicon-32x32.png" />
-    <link type="text/css" href="https://spectrematic.com/backend/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
-    <link type="text/css" href="https://spectrematic.com/backend/vendor/notyf/notyf.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://spectrematic.com/backend/css/fontawesome/backend/css/all.css" />
-    <link rel="stylesheet" href="https://spectrematic.com/backend/css/fontawesome/js/all.js" />
-    <link type="text/css" href="https://spectrematic.com/backend/css/volt.css" rel="stylesheet" /> -->
-  </head>
-  <body>
-    <div class="mt-2 text-end">
-      <span>
-        <i class="fa fa-bar-chart" aria-hidden="true"></i> :
-        <b> <span style="color: Green; font-size: 150%">•</span> <span id="mserver">Reconnecting</span></b>
-    </span>
-    </div>
-
-    <a
-      href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic_mt"
-      class="btn btn-primary btn-sm"
-      id="btnGetToken"
-      type="button"
-    >
-      Login
-    </a>
-   <!-- <form>
-      <input type="password" id="txtToken" size="50" placeholder="Paste your API Token here" />
-    </form>-->
-
-    <table>
-      <tr>
-        <th>
-          <select class="form-select" aria-label="Default Select Market" for="simpleinput" id="cmb_market"></select>
-        </th>
-      </tr>
-    </table>
-    <span id="spot"></span>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-
-    <script src="js/websocket.js"></script>
-    <script src="js/utility.js"></script>
-    <script src="js/ws.j" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="{{ url('mt/vendor/moment/moment.js') }}"></script>
+<script src="{{ url('mt/vendor/moment/moment-timezone-with-data.js') }}"></script>
+<script src="htps://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="{{ url('mt/js/websocket.js') }}"></script>
+<script src="{{ url('mt/js/utility.js') }}"></script>
+<script src="js/.js"></script>
 
 <script>
 
@@ -77,8 +21,7 @@ $access_token = $json_object['access_token'];
     var msocket, msocket_status;
     msocket_status = 0;
     last_market = "";
-    var token = "<?php echo $access_token; ?>";
-    // var token = "d96958eb80f4aa3a69a5c93fbc3f396ed46676a8";
+    var token = "d96958eb80f4aa3a69a5c93fbc3f396ed46676a8";
 
     //var token =$("#txtToken").val("540fb97fb8d9a3f53fae23a590cd3da44d52906f");
 
@@ -220,6 +163,3 @@ $access_token = $json_object['access_token'];
 
 
 </script>
-
-  </body>
-</html>

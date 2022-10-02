@@ -33,7 +33,8 @@ class OrderController extends Controller
     public function create()
     {
         return view('dashboard.orders.create', [
-            'title' => 'Place Order'
+            'title' => 'Place Order',
+            'order' => Order::where('user_id', auth()->user()->id)->get()
         ]);
     }
 

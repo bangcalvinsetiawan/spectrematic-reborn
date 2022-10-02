@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.token')
+@extends('dashboard.layouts.order')
 
 @section('content')
 
@@ -38,10 +38,20 @@
         <div class="mb-3">
             <label for="inputSignal" class="form-label">Select Market</label>
             <select type="text" class="form-select" name="market" id="cmb_marke" aria-label="Select Market">
+
                 <option value="1" {{ $order->market === '1' ? 'selected' : '' }}>EPIC5000</option>
                 <option value="2" {{ $order->market === '2' ? 'selected' : '' }}>EPIC3000</option>
                 <option value="3" {{ $order->market === '3' ? 'selected' : '' }}>EPIC1000</option>
                 <option value="4" {{ $order->market === '4' ? 'selected' : '' }}>APPLE</option>
+                <option value="1002">AAPL</option>
+                <option value="402">AAVE/USD</option>
+                <option value="1017">ABNB</option>
+                <option value="612" {{ $order->market === '612' ? 'selected' : '' }}>ATOMUSDv</option>
+                <option value="406">AVAX/USD</option>
+                <option value="420">BAT/USD</option>
+                <option value="602">BCHUSDv</option>
+                <option value="418">BNT/USD</option>
+                <option value="1021">BUD</option>
             </select>
         </div>
         <div class="input-group mb-3">

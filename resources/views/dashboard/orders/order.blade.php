@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.token')
+@extends('dashboard.layouts.order')
 
 @section('content')
 
