@@ -670,19 +670,32 @@
             }
         }
         break;
-        case "B_Limit":
+
+        @foreach ($orders as $order )
+        case "{{ $order->signal }}":
             // alert(spot_price1)
             $("#Ticpoin").hide();
             $("#Jam").hide();
             $("#LimitB").show();
-            if (Math.abs(parseFloat(spot_price1)) <= $("#PointicLS").val()){
+            if (Math.abs(parseFloat(spot_price1)) {{ $order->signal === 'BL' ? '<=' : '' }}{{ $order->signal === 'BS' ? '>=' : '' }}{{ $order->signal === 'SL' ? '>=' : '' }}{{ $order->signal === 'SS' ? '<=' : '' }} $("{{ $order->price }}").val()){
                 if (OnTrade == false) {
                 if ($("#btnStart").text() == "Stop") {
                 OnTrade = true;
                 //alert(Ontrade);
-                LastDirection = "CALL";
-                Signal='CALL';
-                OpenOrder(LastDirection);
+                // LastDirection = "CALL";
+                // Signal='CALL';
+                // OpenOrder(LastDirection);
+                var msg = {
+                        action: "newtrade",
+                        data: {
+                        account_type: $("#cmbAccountType option").filter(":selected").val(),
+                        direction: "{{ $order->signal === 'BL' ? 'CALL' : '' }}{{ $order->signal === 'BS' ? 'CALL' : '' }}{{ $order->signal === 'SL' ? 'PUT' : '' }}{{ $order->signal === 'SS' ? 'PUT' : '' }}",
+                        asset_id: "{{ $order->market }}",
+                        expiration: "{{ $order->duration }}",
+                        investment: "{{ $order->investment }}",
+                        },
+                        token: $("#txt_t").val(),
+                    };
                 }
                 if (OnTrade == 0) {
             OnTrade = 1;
@@ -691,8 +704,9 @@
 
 
             }
-
             break;
+
+            @endforeach
 
             case "S_Limit":
             // alert(spot_price1)

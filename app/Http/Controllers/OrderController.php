@@ -18,9 +18,12 @@ class OrderController extends Controller
 
         // return Order::where('user_id', auth()->user()->id)->get();
         // ini sudah ok dibawah ini
+
+        $user = User::findOrFail(auth()->user()->id);
         return view('dashboard.orders.order', [
             'title' => 'Order',
-            'orders' => Order::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get()
+            'orders' => Order::where('user_id', auth()->user()->id)->get(),
+            'user' => $user
 
         ]);
     }
@@ -32,9 +35,12 @@ class OrderController extends Controller
      */
     public function create()
     {
+        $user = User::findOrFail(auth()->user()->id);
+
         return view('dashboard.orders.create', [
             'title' => 'Place Order',
-            'order' => Order::where('user_id', auth()->user()->id)->get()
+            'order' => Order::where('user_id', auth()->user()->id)->get(),
+            'user' => $user
         ]);
     }
 
@@ -93,10 +99,11 @@ class OrderController extends Controller
 
 
         $order = Order::find($id);
+        $user = User::findOrFail(auth()->user()->id);
         // dd($order);
         return view('dashboard.orders.edit', compact('order'), [
             'title' => 'Edit Order',
-            // 'order' => Order::where('user_id', auth()->user()->id)->first()
+            'user' => $user
         ]);
     }
 

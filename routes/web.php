@@ -91,12 +91,14 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 
 
-Route::get('/dashboard', function() {
-    return view('dashboard.index', [
-        'title' => 'Dashboard',
-        'active' => 'dashboard'
-    ]);
-})->middleware('auth')->name('dashboard');
+// Route::get('/dashboard', function() {
+//     return view('dashboard.index', [
+//         'title' => 'Dashboard',
+//         'active' => 'dashboard'
+//     ]);
+// })->middleware('auth')->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::resource('/token', TokenController::class)->middleware('auth');
 Route::resource('/order', OrderController::class)->middleware('auth');

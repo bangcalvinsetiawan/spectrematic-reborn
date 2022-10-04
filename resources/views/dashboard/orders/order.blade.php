@@ -8,6 +8,17 @@
         <h1 class="h2">
             List Order
         </h1>
+        <span id="spot">0.0000</span>
+
+        <div class="mb-3">
+            <label for="inputSignal" class="form-label">Select Market</label>
+            <select type="text" class="form-select" name="market" id="cmb_market" aria-label="Select Market">
+                {{-- <option value="1">EPIC5000</option>
+                <option value="2">EPIC3000</option>
+                <option value="3">EPIC1000</option>
+                <option value="4">APPLE</option> --}}
+            </select>
+        </div>
 
     </div>
     <main class="col-lg-8">

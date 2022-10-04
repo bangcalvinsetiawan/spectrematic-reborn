@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-        @include('dashboard.includes.scripttest')
+        @include('dashboard.includes.script')
     </body>
 
 </html>

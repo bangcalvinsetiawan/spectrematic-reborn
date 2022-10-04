@@ -21,7 +21,8 @@
     var msocket, msocket_status;
     msocket_status = 0;
     last_market = "";
-    var token = "d96958eb80f4aa3a69a5c93fbc3f396ed46676a8";
+    // var token = "d96958eb80f4aa3a69a5c93fbc3f396ed46676a8";
+    var token = "{{ $user->token }}";
 
     //var token =$("#txtToken").val("540fb97fb8d9a3f53fae23a590cd3da44d52906f");
 
@@ -149,7 +150,8 @@
         }
 
         }
-        $("#spot").append(' ; ' +spot_price);
+        $("#spot").html(spot_price);
+        // $("#spot").append(' ; ' +spot_price);
 
     } else {
         $("#spot").html("");
@@ -158,8 +160,6 @@
 
     });
     /* end API market data */
-
-
 
 
 </script>

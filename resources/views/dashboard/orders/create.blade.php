@@ -2,12 +2,14 @@
 
 @section('content')
 
+{{-- <span>{{ $user->token }}</span> --}}
 <main class="col-lg-8">
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center px-4 pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">
             Place Order Limit
         </h1>
+        <span id="spot">0.0000</span>
 
     </div>
     <form method="post" action="/order">
@@ -15,10 +17,10 @@
         <div class="mb-3">
             <label for="inputSignal" class="form-label">Order Limit</label>
             <select class="form-select" name="signal" id="inputSignal">
-                <option value="1">BUY LIMIT</option>
-                <option value="2">BUY STOP</option>
-                <option value="3">SELL LIMIT</option>
-                <option value="4">SELL STOP</option>
+                <option value="BL">BUY LIMIT</option>
+                <option value="BS">BUY STOP</option>
+                <option value="SL">SELL LIMIT</option>
+                <option value="SS">SELL STOP</option>
             </select>
         </div>
         <div class="mb-3">
