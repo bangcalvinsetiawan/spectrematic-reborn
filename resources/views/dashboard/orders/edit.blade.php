@@ -16,10 +16,10 @@
         <div class="mb-3">
             <label for="inputSignal" class="form-label">Order Limit</label>
             <select class="form-select" name="signal" id="inputSignal">
-                <option value="1" {{ $order->signal === '1' ? 'selected' : '' }}>BUY LIMIT</option>
-                <option value="2" {{ $order->signal === '2' ? 'selected' : '' }}>BUY STOP</option>
-                <option value="3" {{ $order->signal === '3' ? 'selected' : '' }}>SELL LIMIT</option>
-                <option value="4" {{ $order->signal === '4' ? 'selected' : '' }}>SELL STOP</option>
+                <option value="BUY LIMIT" {{ $order->signal === '1' ? 'selected' : '' }}>BUY LIMIT</option>
+                <option value="BUY STOP" {{ $order->signal === '2' ? 'selected' : '' }}>BUY STOP</option>
+                <option value="SELL LIMIT" {{ $order->signal === '3' ? 'selected' : '' }}>SELL LIMIT</option>
+                <option value="SELL STOP" {{ $order->signal === '4' ? 'selected' : '' }}>SELL STOP</option>
             </select>
         </div>
         <div class="mb-3">
@@ -37,9 +37,9 @@
         </div>
         <div class="mb-3">
             <label for="inputSignal" class="form-label">Select Market</label>
-            <select type="text" class="form-select" name="market" id="cmb_marke" aria-label="Select Market">
+            <select type="text" class="form-select" name="market" id="cmb_market" aria-label="Select Market">
 
-                <option value="1" {{ $order->market === '1' ? 'selected' : '' }}>EPIC5000</option>
+                {{-- <option value="1" {{ $order->market === '1' ? 'selected' : '' }}>EPIC5000</option>
                 <option value="2" {{ $order->market === '2' ? 'selected' : '' }}>EPIC3000</option>
                 <option value="3" {{ $order->market === '3' ? 'selected' : '' }}>EPIC1000</option>
                 <option value="4" {{ $order->market === '4' ? 'selected' : '' }}>APPLE</option>
@@ -51,7 +51,7 @@
                 <option value="420">BAT/USD</option>
                 <option value="602">BCHUSDv</option>
                 <option value="418">BNT/USD</option>
-                <option value="1021">BUD</option>
+                <option value="1021">BUD</option> --}}
             </select>
         </div>
         <div class="input-group mb-3">
@@ -66,7 +66,7 @@
         <div class="mb-3">
             <label for="inputDuration" class="form-label">Trade Duration</label>
             <select type="text" class="form-select" name="duration" id="cmb_time_frame" aria-label="Select Market" value="{{ $order->duration }}">
-                <option value="60" {{ $order->duration === '60' ? 'selected' : '' }}>1M</option>
+                <option value="10s" {{ $order->duration === '60' ? 'selected' : '' }}>10 S</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Edit Order</button>

@@ -53,10 +53,11 @@
                                         <option value="ctpointF"> Follow Trend</option>
                                         <option value="pattern">Fast signal</option>
                                         <option value="Rul3">Trend signal</option>
-                                        <option value="BL">Buy Limit</option>
+                                        {{-- <option value="BL">Buy Limit</option>
                                         <option value="S_Limit">Sell Limit</option>
                                         <option value="B_Stop">Buy Stop</option>
-                                        <option value="S_Stop">Sell Stop</option>
+                                        <option value="S_Stop">Sell Stop</option> --}}
+                                        <option value="Pending">pending order</option>
                                     </select>
                                 </div>
                         </li>
@@ -142,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-                <table id="#">
+                {{-- <table id="#">
                     <thead>
                       <tr>
                         <th>#</th>
@@ -156,9 +157,9 @@
                       </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody> --}}
                         @foreach ($orders as $order )
-                        <tr>
+                        {{-- <tr>
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $order->signal }}</td>
                           <td>{{ $order->price }}</td>
@@ -167,11 +168,11 @@
                           <td>{{ $order->duration }}</td>
 
                           <td>Result</td>
-                          <td>
+                          <td> --}}
 
                             {{-- <button type="button" href="/order/{{ $order->id }}/edit" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id='{{ $order->id }}'><i class="fas fa-edit"></i></button> --}}
 
-                            <a type="button" href="/order/{{ $order->id }}/edit" class="badge bg-info"><i class="fas fa-edit"></i></a>
+                            {{-- <a type="button" href="/order/{{ $order->id }}/edit" class="badge bg-info"><i class="fas fa-edit"></i></a>
 
                             <form action="/order/{{ $order->id }}" method="post" class="d-inline">
                                 @csrf
@@ -179,7 +180,7 @@
                                 <button href="" class="badge bg-danger border-0"><i class="fas fa-trash-alt"></i></i></button>
                             </form>
                           </td>
-                        </tr>
+                        </tr> --}}
 
                         @endforeach
                     </tbody>

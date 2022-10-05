@@ -17,10 +17,10 @@
         <div class="mb-3">
             <label for="inputSignal" class="form-label">Order Limit</label>
             <select class="form-select" name="signal" id="inputSignal">
-                <option value="BL">BUY LIMIT</option>
-                <option value="BS">BUY STOP</option>
-                <option value="SL">SELL LIMIT</option>
-                <option value="SS">SELL STOP</option>
+                <option value="BUY LIMIT">BUY LIMIT</option>
+                <option value="BUY STOP">BUY STOP</option>
+                <option value="SELL LIMIT">SELL LIMIT</option>
+                <option value="SELL STOP">SELL STOP</option>
             </select>
         </div>
         <div class="mb-3">
@@ -39,10 +39,10 @@
         <div class="mb-3">
             <label for="inputSignal" class="form-label">Select Market</label>
             <select type="text" class="form-select" name="market" id="cmb_market" aria-label="Select Market">
-                <option value="1">EPIC5000</option>
+                {{-- <option value="1">EPIC5000</option>
                 <option value="2">EPIC3000</option>
                 <option value="3">EPIC1000</option>
-                <option value="4">APPLE</option>
+                <option value="4">APPLE</option> --}}
             </select>
         </div>
         <div class="input-group mb-3">
@@ -57,7 +57,7 @@
         <div class="mb-3">
             <label for="inputDuration" class="form-label">Trade Duration</label>
             <select type="text" class="form-select" name="duration" id="cmb_time_frame" aria-label="Select Market">
-                <option value="60">1M</option>
+                <option value="10s">10 S</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Order</button>

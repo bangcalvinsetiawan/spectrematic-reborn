@@ -635,7 +635,7 @@
         break;
 
         case "Rul3":
-        // alert(spot_price)
+         alert(spot_price)
         $("#Ticpoin").hide();
         $("#Limit").hide();
         $("#Jam").hide();
@@ -671,19 +671,21 @@
         }
         break;
 
-        @foreach ($orders as $order )
-        case "{{ $order->signal }}":
-            // alert(spot_price1)
+        // {{ $order->signal === 'BUY-LIMIT' ? '<=' : '' }}{{ $order->signal === 'BUY-STOP' ? '>=' : '' }}{{ $order->signal === 'SELL-LIMIT' ? '>=' : '' }}{{ $order->signal === 'SELL-STOP' ? '<=' : '' }}
+
+        // @foreach ($orders as $order )
+        case "Pendin":
+             //alert(spot_price1)
             $("#Ticpoin").hide();
             $("#Jam").hide();
             $("#LimitB").show();
-            if (Math.abs(parseFloat(spot_price1)) {{ $order->signal === 'BL' ? '<=' : '' }}{{ $order->signal === 'BS' ? '>=' : '' }}{{ $order->signal === 'SL' ? '>=' : '' }}{{ $order->signal === 'SS' ? '<=' : '' }} $("{{ $order->price }}").val()){
+            if (Math.abs(parseFloat(spot_price1)) <= "{{ $order->price }}"){
                 if (OnTrade == false) {
                 if ($("#btnStart").text() == "Stop") {
                 OnTrade = true;
-                //alert(Ontrade);
+                alert('Ontrade');
                 // LastDirection = "CALL";
-                // Signal='CALL';
+                 Signal='CALL';
                 // OpenOrder(LastDirection);
                 var msg = {
                         action: "newtrade",
@@ -696,6 +698,7 @@
                         },
                         token: $("#txt_t").val(),
                     };
+                    fsocket.send(JSON.stringify(msg));
                 }
                 if (OnTrade == 0) {
             OnTrade = 1;
@@ -706,21 +709,33 @@
             }
             break;
 
-            @endforeach
+            // @endforeach
 
-            case "S_Limit":
+            case "Pending":
             // alert(spot_price1)
             $("#Ticpoin").hide();
             $("#Jam").hide();
             $("#LimitS").show();
-            if (Math.abs(parseFloat(spot_price1)) >= $("#PointicLB").val()) {
+            if (Math.abs(parseFloat(spot_price1)) <= "{{ $order->price }}") {
                 if (OnTrade == false) {
                 if ($("#btnStart").text() == "Stop") {
                 OnTrade = true;
+                var msg = {
+                        action: "newtrade",
+                        data: {
+                        account_type: $("#cmbAccountType option").filter(":selected").val(),
+                        direction: "Call",
+                        asset_id: "{{ $order->market }}",
+                        expiration: "{{ $order->duration }}",
+                        investment: "{{ $order->investment }}",
+                        },
+                        token: $("#txt_t").val(),
+                    };
+                    fsocket.send(JSON.stringify(msg));
                 //alert(Ontrade);
-                LastDirection = "SELL";
-                Signal='PUT';
-                OpenOrder(LastDirection);
+               // LastDirection = "SELL";
+                Signal='BUY -STOP';
+               // OpenOrder(LastDirection);
                 }
                 if (OnTrade == 0) {
             OnTrade = 1;
