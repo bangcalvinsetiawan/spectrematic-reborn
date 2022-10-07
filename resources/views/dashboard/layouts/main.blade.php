@@ -29,7 +29,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Spectrematic | {{ $title }}</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <link href="ttps://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="{{ url('mt/css/styles.css') }}" rel="stylesheet" />
         <link type="text/css" href="{{ url('mt/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet" />
@@ -218,18 +218,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/dashboard" method="POST">
-                        @csrf
-                        @method('PUT')
+                    <form action="" method="">
+
 
                         <div class="mb-3">
                           <label for="gettoken" class="col-form-label">Paste your token</label>
-                          <input type="text" name="token" class="form-control" id="gettoken" value="{{ auth()->user()->token }}">
-                          <span><a href="">Get Token</a></span>
+                          <input type="text" class="token form-control" value="{{ auth()->user()->token }}">
+                          <span><a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a></span>
                         </div>
                         <div class="modal-footer">
                         {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary update_token">Save</button>
                         </div>
                       </form>
                 </div>
@@ -253,6 +252,33 @@
         </div>
 
         @include('dashboard.includes.script')
+        <script>
+            $(document).ready(function () {
+                $(document).on('click', '.update_token', function(e) {
+                    e.preventDefault();
+                    // alert("Hello");
+                    var data = {
+                        'token' : $('.token').val(),
+                    }
+                    // alert(data.token);
+                    $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/dashboard",
+                        data: data,
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 
 </html>

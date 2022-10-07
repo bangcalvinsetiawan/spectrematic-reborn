@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->string('market');
             $table->string('investment');
             $table->string('duration');
+            $table->string('result')->nullable();
 
             $table->timestamps();
         });

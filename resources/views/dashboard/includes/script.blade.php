@@ -671,80 +671,116 @@
         }
         break;
 
-        // {{ $order->signal === 'BUY-LIMIT' ? '<=' : '' }}{{ $order->signal === 'BUY-STOP' ? '>=' : '' }}{{ $order->signal === 'SELL-LIMIT' ? '>=' : '' }}{{ $order->signal === 'SELL-STOP' ? '<=' : '' }}
 
-        // @foreach ($orders as $order )
-        case "Pendin":
+
+
+        case "x":
              //alert(spot_price1)
             $("#Ticpoin").hide();
             $("#Jam").hide();
             $("#LimitB").show();
-            if (Math.abs(parseFloat(spot_price1)) <= "{{ $order->price }}"){
-                if (OnTrade == false) {
-                if ($("#btnStart").text() == "Stop") {
-                OnTrade = true;
-                alert('Ontrade');
-                // LastDirection = "CALL";
-                 Signal='CALL';
-                // OpenOrder(LastDirection);
-                var msg = {
-                        action: "newtrade",
-                        data: {
-                        account_type: $("#cmbAccountType option").filter(":selected").val(),
-                        direction: "{{ $order->signal === 'BL' ? 'CALL' : '' }}{{ $order->signal === 'BS' ? 'CALL' : '' }}{{ $order->signal === 'SL' ? 'PUT' : '' }}{{ $order->signal === 'SS' ? 'PUT' : '' }}",
-                        asset_id: "{{ $order->market }}",
-                        expiration: "{{ $order->duration }}",
-                        investment: "{{ $order->investment }}",
-                        },
-                        token: $("#txt_t").val(),
-                    };
-                    fsocket.send(JSON.stringify(msg));
+            if (Math.abs(parseFloat(spot_price1)) <= "isikanvariabel"){
+                    if (OnTrade == false) {
+                    if ($("#btnStart").text() == "Stop") {
+                    OnTrade = true;
+                    alert('Ontrade');
+                    // LastDirection = "CALL";
+                    Signal='CALL';
+                    // OpenOrder(LastDirection);
+                    var msg = {
+                            action: "newtrade",
+                            data: {
+                            account_type: $("#cmbAccountType option").filter(":selected").val(),
+                            direction: "isikanvariabel",
+                            asset_id: "isikanvariabel",
+                            expiration: "isikanvariabel",
+                            investment: "isikanvariabel",
+                            },
+                            token: $("#txt_t").val(),
+                        };
+                        fsocket.send(JSON.stringify(msg));
+                    }
+                    if (OnTrade == 0) {
+                OnTrade = 1;
                 }
-                if (OnTrade == 0) {
-            OnTrade = 1;
-            }
-                }
-
-
-            }
-            break;
-
-            // @endforeach
-
-            case "Pending":
-            // alert(spot_price1)
-            $("#Ticpoin").hide();
-            $("#Jam").hide();
-            $("#LimitS").show();
-            if (Math.abs(parseFloat(spot_price1)) <= "{{ $order->price }}") {
-                if (OnTrade == false) {
-                if ($("#btnStart").text() == "Stop") {
-                OnTrade = true;
-                var msg = {
-                        action: "newtrade",
-                        data: {
-                        account_type: $("#cmbAccountType option").filter(":selected").val(),
-                        direction: "Call",
-                        asset_id: "{{ $order->market }}",
-                        expiration: "{{ $order->duration }}",
-                        investment: "{{ $order->investment }}",
-                        },
-                        token: $("#txt_t").val(),
-                    };
-                    fsocket.send(JSON.stringify(msg));
-                //alert(Ontrade);
-               // LastDirection = "SELL";
-                Signal='BUY -STOP';
-               // OpenOrder(LastDirection);
-                }
-                if (OnTrade == 0) {
-            OnTrade = 1;
-            }
+                    }
                 }
 
+        break;
 
-            }
-            break;
+
+
+
+            @forelse ( $orders as $order )
+                case "Pending":
+                    // alert(spot_price1)
+                    $("#Ticpoin").hide();
+                    $("#Jam").hide();
+                    $("#LimitS").show();
+                    console.log(spot_price1 +" ==== "+ "{{ $order->price }}" +" ==== " + isNaN("{{ $order->price }}") );
+                    if (Math.abs(parseFloat(spot_price1)) <= "{{ $order->price }}") {
+                        if (OnTrade == false) {
+                        if ($("#btnStart").text() == "Stop") {
+                        OnTrade = true;
+                        var msg = {
+                                action: "newtrade",
+                                data: {
+                                account_type: $("#cmbAccountType option").filter(":selected").val(),
+                                direction: "Call",
+                                asset_id: "{{ $order->market }}",
+                                expiration: "{{ $order->duration }}",
+                                investment: "{{ $order->investment }}",
+                                },
+                                token: $("#txt_t").val(),
+                            };
+                            fsocket.send(JSON.stringify(msg));
+                        //alert(Ontrade);
+                    // LastDirection = "SELL";
+                        Signal='{{ $order->signal }}';
+                    // OpenOrder(LastDirection);
+                        }
+                        if (OnTrade == 0) {
+                    OnTrade = 1;
+                    }
+                        }
+                    }
+                break;
+            @empty
+                case "Pending":
+                    // alert(spot_price1)
+                    $("#Ticpoin").hide();
+                    $("#Jam").hide();
+                    $("#LimitS").show();
+                    if (Math.abs(parseFloat(spot_price1)) <= "nodata") {
+                        if (OnTrade == false) {
+                        if ($("#btnStart").text() == "Stop") {
+                        OnTrade = true;
+                        var msg = {
+                                action: "newtrade",
+                                data: {
+                                account_type: $("#cmbAccountType option").filter(":selected").val(),
+                                direction: "Call",
+                                asset_id: "nodata",
+                                expiration: "nodata",
+                                investment: "nodata",
+                                },
+                                token: $("#txt_t").val(),
+                            };
+                            fsocket.send(JSON.stringify(msg));
+                        //alert(Ontrade);
+                    // LastDirection = "SELL";
+                        Signal='BUY -STOP';
+                    // OpenOrder(LastDirection);
+                        }
+                        if (OnTrade == 0) {
+                    OnTrade = 1;
+                    }
+                        }
+                    }
+                break;
+            @endforelse
+
+
             case "S_Stop":
             // alert(spot_price1)
             $("#Ticpoin").hide();
@@ -1483,7 +1519,7 @@
             $("#Ticpoin").hide();
             $("#Limit").hide();
         };
-        if ($("#cmb_signal option").filter(":selected").val() === "B_Limit") {
+        if ($("#cmb_signal option").filter(":selected").val() === "Pending") {
             $("#Ticpoin").hide();
             $("#Limit").show();
             $("#BLimit").show();

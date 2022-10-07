@@ -3,6 +3,43 @@
 @section('content')
 
 {{-- <span>{{ $order }}</span> --}}
+<!-- Modal -->
+<div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        ...
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lisOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">list</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        ...
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+    </div>
+</div>
+
 <main class="mt-4">
     <div class="container-fluid px-4">
         <div id="homesho" style="display:non">
@@ -57,31 +94,37 @@
                                         <option value="S_Limit">Sell Limit</option>
                                         <option value="B_Stop">Buy Stop</option>
                                         <option value="S_Stop">Sell Stop</option> --}}
-                                        <option value="Pending">pending order</option>
+                                        <option value="Pending">Pending Order</option>
                                     </select>
                                 </div>
                         </li>
                         </span>
-                        <span class="" id="signal" style="display:non">
+                        <span class="" id="signal" style="display:no">
                             <div class="row mb-2" style="display:none" id="Limit">
-                                <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                    point
+                                <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                    {{-- point --}}
                                     <div class="col-8">
-                                        <select id="PointLimit" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
+                                        {{-- <select id="PointLimit" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
                                             <option value="0.0001">1 Point</option>
                                             <option value="0.001">10 point</option>
                                             <option value="0.01">100 Point</option>
                                             <option value="0.1">1000 Point</option>
-                                        </select>
+                                        </select> --}}
+                                        <button id="PointLimit" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#addOrderModal" style="font-size: 10px;font-weight: bold;height:25px;">
+                                            Add
+                                        </button>
+                                        <button class="badge bg-success" data-bs-toggle="modal" data-bs-target="#lisOrderModal"style="font-size: 10px;font-weight: bold;height:25px;">
+                                            List
+                                        </button>
                                     </div>
                                 </li>
-                                <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                    <b style="display:none" id="BLimit">Buy Limit</b>
-                                    <b style="display:none" id="BStop">Buy Stop</b>
+                                {{-- <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                    <b style="display:non" id="BLimit">Buy Limit</b>
+                                    <b style="display:non" id="BStop">Buy Stop</b>
                                     <div class="col-8">
-                                        <input type="text" id="PointicLS" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value='54.00000'>
+                                        <input type="text" id="PointicLS" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:non" value='54.00000'>
                                     </div>
-                                </li>
+                                </li> --}}
                                 <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
                                     <b style="display:none" id="SLimit">Sell Limit</b>
                                     <b style="display:none" id="SStop">Sell Stop</b>

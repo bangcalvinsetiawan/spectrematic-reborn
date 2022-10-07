@@ -9,7 +9,7 @@
         <h1 class="h2">
             Place Order Limit
         </h1>
-        <span id="spot">0.0000</span>
+        {{-- <span id="spot">0.0000</span> --}}
 
     </div>
     <form method="post" action="/order">
@@ -27,7 +27,7 @@
             <label for="inputPrice" class="form-label">Price</label>
             <div class="input-group">
 
-                <span class="input-group-text">00.000</span>
+                <span class="input-group-text" id="spot">00.000</span>
                 <input type="number" step="0.0000000001" class="form-control @error('price') is-invalid @enderror" name="price" id="inputPrice" aria-label="Input Price" required>
                 @error('price')
                     <div class="invalid-feedback">
@@ -57,7 +57,9 @@
         <div class="mb-3">
             <label for="inputDuration" class="form-label">Trade Duration</label>
             <select type="text" class="form-select" name="duration" id="cmb_time_frame" aria-label="Select Market">
-                <option value="10s">10 S</option>
+                <option value="10s">10s</option>
+                <option value="60s">60s</option>
+                <option value="5m">5m</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Order</button>
