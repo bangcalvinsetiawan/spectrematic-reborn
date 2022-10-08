@@ -21,4 +21,37 @@ class DashboardController extends Controller
             // 'order' => $order
         ]);
     }
+
+    public function showorderlimit()
+    {
+        return view('dashboard.index');
+    }
+
+    public function fetchorder()
+    {
+        $orders = Order::all();
+        return response()->json([
+            'orders'=>$orders,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $order = Order::find($id);
+        if($order)
+        {
+            $order->delete();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Order Deleted Successfully.'
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'No Order Found.'
+            ]);
+        }
+    }
 }

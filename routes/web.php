@@ -99,6 +99,10 @@ Route::post('/register', [RegisterController::class, 'store']);
 // })->middleware('auth')->name('dashboard');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('showorderlimit', [DashboardController::class, 'showorderlimit'])->middleware('auth');
+Route::get('fetch-order', [DashboardController::class, 'fetchorder'])->middleware('auth');
+Route::delete('delete-order/{id}', [DashboardController::class, 'destroy']);
+
 
 Route::resource('/token', TokenController::class)->middleware('auth');
 Route::resource('/order', OrderController::class)->middleware('auth');

@@ -707,12 +707,7 @@
                 }
 
         break;
-        <?php
-        $signal = $order->signal === 'SELL LIMIT' ? '>=':'';
 
-        ?>
-
-        // {{ $order->signal == 'BUY LIMIT' ? '<=' : '' }}{{ $order->signal == 'BUY STOP' ? '>=' : '' }}{{ $order->signal == 'SELL LIMIT' ? '>=' : '' }}{{ $order->signal == 'SELL STOP' ? '<=' : '' }}
 
         @forelse ( $orders as $order )
         case "Pending":

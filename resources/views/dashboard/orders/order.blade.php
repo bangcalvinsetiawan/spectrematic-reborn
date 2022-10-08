@@ -92,7 +92,7 @@
                         <form action="/order/{{ $order->id }}" method="post" class="d-inline">
                             @csrf
                             @method('delete')
-                            <button href="" class="badge bg-danger border-0"><i class="fas fa-trash-alt"></i></i></button>
+                            <button href="" class="badge bg-danger border-0"><i class="fas fa-trash-alt"></i></button>
                         </form>
                       </td>
                     </tr>
