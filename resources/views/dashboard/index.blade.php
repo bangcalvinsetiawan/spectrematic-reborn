@@ -6,13 +6,74 @@
 <!-- Modal -->
 <div class="modal fade" id="addOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" style="width:900px">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-        ...
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="success_message"></div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>
+
+                                    order Data
+                                    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
+                                        data-bs-target="#AddStudentModal">Add Order</button>
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Signal</th>
+                                      <th>Price</th>
+                                      <th>Market</th>
+                                      <th>Investment</th>
+                                      <th>Duration</th>
+                                      <th>Result</th>
+                                      <th>Action</th>
+                                    </tr>
+                                  </thead>
+                                    <tbody>
+                                      @foreach ($orders as $order )
+                                      <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $order->signal }}</td>
+                                        <td>{{ $order->price }}</td>
+                                        <td>{{ $order->market }}</td>
+                                        <td>{{ $order->investment }}</td>
+                                        <td>{{ $order->duration }}</td>
+
+                                        <td>Result</td>
+                                        <td>
+
+                                          {{-- <button type="button" href="/order/{{ $order->id }}/edit" class="badge bg-info border-0" data-bs-toggle="modal" data-bs-target="#editOrderModal" data-id='{{ $order->id }}'><i class="fas fa-edit"></i></button> --}}
+
+                                          <a type="button" href="/order/{{ $order->id }}/edit" class="badge bg-info" id="edit_market"><i class="fas fa-edit"></i></a>
+
+                                          <form action="/order/{{ $order->id }}" method="post" class="d-inline">
+                                              @csrf
+                                              @method('delete')
+                                              <button href="" class="badge bg-danger border-0"><i class="fas fa-trash-alt"></i></i></button>
+                                          </form>
+                                        </td>
+                                      </tr>
+
+                                      @endforeach
+                                  </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -21,7 +82,6 @@
     </div>
     </div>
 </div>
-
 <div class="modal fade" id="lisOrderModal" tabindex="-1" aria-labelledby="addOrderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
@@ -103,20 +163,23 @@
                             <div class="row mb-2" style="display:none" id="Limit">
                                 <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
                                     {{-- point --}}
-                                    <div class="col-8">
+                                    {{-- <div class="col-8"> --}}
                                         {{-- <select id="PointLimit" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
                                             <option value="0.0001">1 Point</option>
                                             <option value="0.001">10 point</option>
                                             <option value="0.01">100 Point</option>
                                             <option value="0.1">1000 Point</option>
                                         </select> --}}
-                                        <button id="PointLimit" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#addOrderModal" style="font-size: 10px;font-weight: bold;height:25px;">
+                                        <div class="col-8">
+                                            <button id="" class="badge bg-success"data-bs-toggle="modal" data-bs-target="#addOrderModal" style="font-size: 10px;font-weight: bold;height:22px;">LIS ORDER </button>
+                                        </div>
+                                        {{-- <button id="PointLimit" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#addOrderModal" style="font-size: 12px;font-weight: bold;height:20px;">
                                             Add
                                         </button>
                                         <button class="badge bg-success" data-bs-toggle="modal" data-bs-target="#lisOrderModal"style="font-size: 10px;font-weight: bold;height:25px;">
                                             List
-                                        </button>
-                                    </div>
+                                        </button> --}}
+                                    {{-- </div> --}}
                                 </li>
                                 {{-- <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
                                     <b style="display:non" id="BLimit">Buy Limit</b>
@@ -455,6 +518,175 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="AddStudentModal" tabindex="-1" aria-labelledby="AddStudentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddStudentModalLabel">Add  order</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <ul id="save_msgList"></ul>
+
+                    <div class="form-group mb-3">
+                        <label for="">Order Limit</label>
+                        {{-- <input type="text" required class="name form-control"> --}}
+                        <select class="form-select" name="signal" id="inputSignal">
+                          <option value="BUY LIMIT">BUY LIMIT</option>
+                          <option value="BUY STOP">BUY STOP</option>
+                          <option value="SELL LIMIT">SELL LIMIT</option>
+                          <option value="SELL STOP">SELL STOP</option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Price</label>
+                        {{-- <input type="text" required class="course form-control"> --}}
+                        <div class="input-group">
+
+                      <span class="input-group-text" id='xspot'>00.000</span>
+                      <input type="number" step="0.0000000001" class="form-control @error('price') is-invalid @enderror" name="price" id="inputPrice" aria-label="Input Price" required>
+                      @error('price')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                  </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">Select Market</label>
+                        {{-- <input type="text" required class="email form-control"> --}}
+                        <select type="text" class="form-select" name="market" id="cmb_marketlis" aria-label="Select Market">
+                          {{-- <option value="1">EPIC5000</option>
+                          <option value="2">EPIC3000</option>
+                          <option value="3">EPIC1000</option>
+                          <option value="4">APPLE</option> --}}
+                      </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="">investment</label>
+                        {{-- <input type="text" required class="phone form-control"> --}}
+                        <div class="input-group">
+                        <span class="input-group-text">$</span>
+                  <input type="number" step="0.001" class="form-control @error('investment') is-invalid @enderror" name="investment" id="txt_inves" aria-label="Input Investment" required>
+                  @error('price')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
+                    </div>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="">Trade Duration</label>
+                      {{-- <input type="text" required class="email form-control"> --}}
+                      <select type="text" class="form-select" name="duration" id="cmb_time_fram" aria-label="Select Market">
+                        <option value="1s">1s</option>
+                        <option value="3s">3s</option>
+                        <option value="5s">5s</option>
+                        <option value="10s">10s</option>
+                        <option value="30s">30s</option>
+                        <option value="60s">60s</option>
+                        <option value="5m">5m</option>
+                        <option value="10m">10m</option>
+                        <option value="15m">15m</option>
+                        <option value="20m">20m</option>
+                        <option value="25m">25m</option>
+                        <option value="30m">30m</option>
+                        <option value="35m">35m</option>
+                        <option value="40m">40m</option>
+                        <option value="45m">45m</option>
+                        <option value="50m">50m</option>
+                        <option value="55m">55m</option>
+                        <option value="60m">60m</option>
+                        <option value="1d">1d</option>
+                        <option value="EOC1M">EOC1M</option>
+                        <option value="EOC5M">EOC5M</option>
+                        <option value="EOC15M">EOC15M</option>
+                        <option value="EOC30M">EOC30M</option>
+                    </select>
+                  </div>
+          </div>
+          <form method="post" action="/order">
+              @csrf
+
+              {{-- <div class="form-group mb-3">
+                  <label for="inputSignal" class="form-label">Order Limit</label>
+                  <select class="form-select" name="signal" id="inputSignal">
+                      <option value="BUY LIMIT">BUY LIMIT</option>
+                      <option value="BUY STOP">BUY STOP</option>
+                      <option value="SELL LIMIT">SELL LIMIT</option>
+                      <option value="SELL STOP">SELL STOP</option>
+                  </select>
+              </div>
+              <div class="form-group mb-3">
+                  <label for="inputPrice" class="form-label">Price</label>
+                  <div class="input-group">
+
+                      <span class="input-group-text">00.000</span>
+                      <input type="number" step="0.0000000001" class="form-control @error('price') is-invalid @enderror" name="price" id="inputPrice" aria-label="Input Price" required>
+                      @error('price')
+                          <div class="invalid-feedback">
+                              {{ $message }}
+                          </div>
+                      @enderror
+                  </div>
+              </div>
+              <div class="form-group mb-3">
+                  <label for="inputSignal" class="form-label">Select Market</label>
+                  <select type="text" class="form-select" name="market" id="cmb_market" aria-label="Select Market">
+                      {{-- <option value="1">EPIC5000</option>
+                      <option value="2">EPIC3000</option>
+                      <option value="3">EPIC1000</option>
+                      <option value="4">APPLE</option> --}
+                  </select>
+              </div>--}}
+              {{-- <div class="input-group mb-3">
+                  <span class="input-group-text">$</span>
+                  <input type="number" step="0.001" class="form-control @error('investment') is-invalid @enderror" name="investment" id="txt_invest" aria-label="Input Investment" required>
+                  @error('price')
+                      <div class="invalid-feedback">
+                          {{ $message }}
+                      </div>
+                  @enderror
+              </div>  --}}
+              {{-- <div class="mb-3">
+                  <label for="inputDuration" class="form-label">Trade Duration</label>
+                  <select type="text" class="form-select" name="duration" id="cmb_time_frame" aria-label="Select Market">
+                      <option value="1s">1s</option>
+                      <option value="3s">3s</option>
+                      <option value="5s">5s</option>
+                      <option value="10s">10s</option>
+                      <option value="30s">30s</option>
+                      <option value="60s">60s</option>
+                      <option value="5m">5m</option>
+                      <option value="10m">10m</option>
+                      <option value="15m">15m</option>
+                      <option value="20m">20m</option>
+                      <option value="25m">25m</option>
+                      <option value="30m">30m</option>
+                      <option value="35m">35m</option>
+                      <option value="40m">40m</option>
+                      <option value="45m">45m</option>
+                      <option value="50m">50m</option>
+                      <option value="55m">55m</option>
+                      <option value="60m">60m</option>
+                      <option value="1d">1d</option>
+                      <option value="EOC1M">EOC1M</option>
+                      <option value="EOC5M">EOC5M</option>
+                      <option value="EOC15M">EOC15M</option>
+                      <option value="EOC30M">EOC30M</option>
+                  </select>
+              </div> --}}
+              {{-- <button type="submit" class="btn btn-primary">Order</button> --}}
+            </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary add_student">Save</button>
+                </div>
+
+            </div>
+        </div>
 </main>
 
 @endsection

@@ -261,6 +261,7 @@
                         'token' : $('.token').val(),
                     }
                     // alert(data.token);
+                    // console.log(data.token);
                     $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

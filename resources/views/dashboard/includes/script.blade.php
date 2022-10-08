@@ -707,18 +707,23 @@
                 }
 
         break;
+        <?php
+        $signal = $order->signal === 'SELL LIMIT' ? '>=':'';
 
+        ?>
 
+        // {{ $order->signal == 'BUY LIMIT' ? '<=' : '' }}{{ $order->signal == 'BUY STOP' ? '>=' : '' }}{{ $order->signal == 'SELL LIMIT' ? '>=' : '' }}{{ $order->signal == 'SELL STOP' ? '<=' : '' }}
 
-
-            @forelse ( $orders as $order )
-                case "Pending":
+        @forelse ( $orders as $order )
+        case "Pending":
                     // alert(spot_price1)
                     $("#Ticpoin").hide();
                     $("#Jam").hide();
                     $("#LimitS").show();
-                    console.log(spot_price1 +" ==== "+ "{{ $order->price }}" +" ==== " + isNaN("{{ $order->price }}") );
-                    if (Math.abs(parseFloat(spot_price1)) <= "{{ $order->price }}") {
+                    if (Math.abs(parseFloat(spot_price1)) <?php
+                            $acuan=$order->signal;
+                            echo ($acuan=="BUY LIMIT") ? "<=" : ($acuan=="BUY STOP" ? ">=" : ($acuan=="SELL LIMIT" ? ">=" : "<="));
+                            ?> "{{ $order->price }}") {
                         if (OnTrade == false) {
                         if ($("#btnStart").text() == "Stop") {
                         OnTrade = true;
@@ -862,21 +867,21 @@
         // window.open('https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=smbot');
     //window.open("login.html");
     };
-    spot.addEventListener(
-    "click",
-    function (e) {
-        // setCookie("_limit", $("#spot").text(), "365");
+    // spot.addEventListener(
+    // "click",
+    // function (e) {
+    //     // setCookie("_limit", $("#spot").text(), "365");
 
-        S=parseFloat($("#PointLimit option").filter(":selected").val());
-        B=parseFloat($("#spot").text())-S;
-        A=parseFloat($("#spot").text())+S;
+    //     S=parseFloat($("#PointLimit option").filter(":selected").val());
+    //     B=parseFloat($("#spot").text())-S;
+    //     A=parseFloat($("#spot").text())+S;
 
-        // Bl=getCookie("_limit");
-        // Sl=getCookie("_limit");
-        $("#PointicLS").val(B.toFixed(5));
-        $("#PointicLB").val(A.toFixed(5));
-    //alert(S)
-    });
+    //     // Bl=getCookie("_limit");
+    //     // Sl=getCookie("_limit");
+    //     $("#PointicLS").val(B.toFixed(5));
+    //     $("#PointicLB").val(A.toFixed(5));
+    // //alert(S)
+    // });
     Dasboard.addEventListener(
     "click",
     function (e) {
@@ -1852,6 +1857,7 @@
             var s_name = sname;
             if (isOpen == "1") {
             $("#cmb_market").append("<option value='" + sid + "'>"+ sname + "</option>");
+            $("#cmb_marketlis").append("<option value='" + sid + "'>"+ sname + "</option>");
             }
         }
         if (getCookie("_active_market")) {
@@ -2574,6 +2580,7 @@
         };
         msocket.send(JSON.stringify(msg));
         chart();
+        mark();
     // }*/
     });
 
@@ -2587,16 +2594,16 @@
     var js = JSON.parse(event.data);
 
     if (js.hasOwnProperty("msg")) {
-        //console.log(js.msg.close);
+        // console.log(js.msg.close);
         var spot_price = js.msg.close;
         if (parseFloat($("#spot").text()) > 0) {
         if (parseFloat(spot_price) > parseFloat($("#spot").text())) {
             $("#spot").css("color", "green");
-            // $('#Spt').css('background','green');
+             $('#xspot').css('color','green');
         }
         if (parseFloat(spot_price) < parseFloat($("#spot").text())) {
             $("#spot").css("color", "#ff471a");
-            // $('#Spt').css('background','#fc9595');
+             $('#xspot').css('color','#fc9595');
         }
         if (parseFloat(spot_price) < parseFloat($("#lblEntryPrice").text())) {
             $("#Aktiv").css("background", "#b8fcd2");
@@ -2606,6 +2613,7 @@
         }
         }
         $("#spot").html(spot_price);
+        $("#xspot").html(spot_price);
         $("#price_open").html('OPEN '+js.msg.open);
         $("#price_high").html('HIGHT ' + js.msg.high);
         $("#price_low").html('LOW ' +js.msg.low);
