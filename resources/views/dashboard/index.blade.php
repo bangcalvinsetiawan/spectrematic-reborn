@@ -32,13 +32,70 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary update_student">Update</button>
+                    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
+                            data-bs-target="#AddOrderModal">Add Order</button>
                 </div>
 
             </div>
         </div>
     </div>
     {{-- End- ShowOrder Modal --}}
+
+    {{-- Add Modal --}}
+    <div class="modal fade" id="AddOrderModal" tabindex="-1" aria-labelledby="AddOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddOrderModalLabel">Add Order Limit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <ul id="save_msgList"></ul>
+
+                    <div class="form-group mb-3">
+                        <label for="inputSignal" class="form-label">Order Limit</label>
+                        <select class="signal form-select">
+                            <option value="BUY LIMIT">BUY LIMIT</option>
+                            <option value="BUY STOP">BUY STOP</option>
+                            <option value="SELL LIMIT">SELL LIMIT</option>
+                            <option value="SELL STOP">SELL STOP</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputPrice" class="form-label">Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="xspot">00.000</span>
+                            <input type="number" step="0.0000000001" class="price form-control" aria-label="Input Price" required>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputSignal" class="form-label">Select Market</label>
+                        <select type="text" class="market form-select" id="cmb_marketlis" aria-label="Select Market">
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" step="0.001" class="investment form-control" aria-label="Input Investment" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputDuration" class="form-label">Trade Duration</label>
+                        <select type="text" class="duration form-select" id="cmb_duration2" aria-label="Select Market">
+                            <option value="10s">10s</option>
+                            <option value="60s">60s</option>
+                            <option value="5m">5m</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listOrderModal">Back</button>
+                    <button type="button" class="add_order btn btn-primary">Order</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{-- End - Add Modal --}}
 
     {{-- Delete Modal --}}
     <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -50,7 +107,7 @@
                 </div>
                 <div class="modal-body">
                     <h4>Confirm to Delete Data ?</h4>
-                    <input type="hidden" id="deleteing_id">
+                    <input type="hidden" id="deleting_id">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -124,7 +181,7 @@
                                 <div class="row mb-2" style="display:none" id="Limit">
                                     <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
                                         <div class="col-8">
-                                                <button id="" class="list_order badge bg-success"data-bs-toggle="modal" data-bs-target="#listOrderModal" style="font-size: 10px;font-weight: bold;height:22px;">LIST ORDER </button>
+                                                <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="#listOrderModal" style="font-size: 10px;font-weight: bold;height:22px;">LIST ORDER </button>
                                             </div>
                                     </li>
                                     <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
@@ -359,6 +416,7 @@
     <script>
         $(document).ready(function () {
             fetchorder();
+
             function fetchorder()
             {
                 $.ajax({
@@ -377,59 +435,63 @@
                                 <td>' + item.investment + '</td>\
                                 <td>' + item.duration + '</td>\
                                 <td>' + item.result + '</td>\
-                                <td><button type="button" value="' + item.id + '" class="badge bg-info border-0 editbtn"><i class="fas fa-edit"></i></button>\
-                                <button type="button" value="' + item.id + '" class="badge bg-danger border-0 deletebtn"><i class="fas fa-trash-alt"></i></button></td>\
+                                <td><button type="button" value="' + item.id + '" class="badge bg-danger border-0 deletebtn"><i class="fas fa-trash-alt"></i></button></td>\
                             \</tr>');
                         });
                     }
                 });
             }
 
-            // $(document).on('click', '.add_student', function (e) {
-            //     e.preventDefault();
+            $(document).on('click', '.add_order', function (e) {
+                e.preventDefault();
 
-            //     $(this).text('Sending..');
+                // $(this).text('Sending..');
 
-            //     var data = {
-            //         'name': $('.name').val(),
-            //         'course': $('.course').val(),
-            //         'email': $('.email').val(),
-            //         'phone': $('.phone').val(),
-            //     }
+                var data = {
 
-            //     $.ajaxSetup({
-            //         headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         }
-            //     });
+                    'signal': $('.signal').val(),
+                    'price': $('.price').val(),
+                    'market': $('.market').val(),
+                    'investment': $('.investment').val(),
+                    'duration': $('.duration').val(),
+                }
+                 console.log(data);
 
-            //     $.ajax({
-            //         type: "POST",
-            //         url: "/students",
-            //         data: data,
-            //         dataType: "json",
-            //         success: function (response) {
-            //             // console.log(response);
-            //             if (response.status == 400) {
-            //                 $('#save_msgList').html("");
-            //                 $('#save_msgList').addClass('alert alert-danger');
-            //                 $.each(response.errors, function (key, err_value) {
-            //                     $('#save_msgList').append('<li>' + err_value + '</li>');
-            //                 });
-            //                 $('.add_student').text('Save');
-            //             } else {
-            //                 $('#save_msgList').html("");
-            //                 $('#success_message').addClass('alert alert-success');
-            //                 $('#success_message').text(response.message);
-            //                 $('#AddStudentModal').find('input').val('');
-            //                 $('.add_student').text('Save');
-            //                 $('#AddStudentModal').modal('hide');
-            //                 fetchstudent();
-            //             }
-            //         }
-            //     });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
 
-            // });
+                $.ajax({
+                    type: "POST",
+                    url: "/showorder-limit",
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response);
+                        if (response.status == 400) {
+                            $('#save_msgList').html("");
+                            $('#save_msgList').addClass('alert alert-danger');
+                            $.each(response.errors, function (key, err_value) {
+                                $('#save_msgList').append('<li>' + err_value + '</li>');
+                            });
+                            $('.add_order').text('Save');
+                        } else {
+                            $('#save_msgList').html("");
+                            $('#success_message').addClass('alert alert-success');
+                            $('#success_message').text(response.message);
+                            $('#AddOrderModal').find('input').val('');
+                            $('.add_order').text('Save');
+                            $('#AddOrderModal').modal('hide');
+                            $('#listOrderModal').modal('show');
+                            //alert('add order success');
+                            fetchorder(listOrderModal);
+                        }
+                    }
+                });
+
+            });
 
             // $(document).on('click', '.editbtn', function (e) {
             //     e.preventDefault();
@@ -508,17 +570,17 @@
 
             // });
 
-            $(document).on('click', '.deletebtn', function () {
-                var ord_id = $(this).val();
-                $('#DeleteModal').modal('show');
-                $('#deleteing_id').val(ord_id);
-            });
+            // $(document).on('click', '.deletebtn', function () {
+            //     var ord_id = $(this).val();
+            //     $('#DeleteModal').modal('show');
+            //     $('#deleting_id').val(ord_id);
+            // });
 
-            $(document).on('click', '.delete_order', function (e) {
+            $(document).on('click', '.deletebtn', function (e) {
                 e.preventDefault();
 
-                $(this).text('Deleting..');
-                var id = $('#deleteing_id').val();
+                // $(this).text('Deleting..');
+                var id = $('.deletebtn').val();
 
                 $.ajaxSetup({
                     headers: {
@@ -547,6 +609,8 @@
                     }
                 });
             });
+
+
 
         });
 

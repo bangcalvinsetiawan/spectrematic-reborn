@@ -127,7 +127,7 @@
                 <!-- Sidebar Toggle-->
                 <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
                 <ul class="navbar-nav ms-auto me-3 me-lg-4">
-                    <select class="badge bg-success" aria-label="Default Select Market" for="simpleinput" id="cmb_duration"style="width:50px"></select>
+                    <select class="badge bg-success" aria-label="Default Select Market" for="simpleinput" id="cmb_duration" style="width:50px"></select>
                 </ul>
 
                 <ul class="navbar-nav ">

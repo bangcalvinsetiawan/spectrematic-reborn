@@ -65,7 +65,7 @@
 
         }*/
     //  setCookie("token","a5a88308819e1b47aaa4e810af906bc38dd35074");
-    //setCookie("_authToken", "?php echo $access_token ?>", "365");
+    // setCookie("_authToken", "a5a88308819e1b47aaa4e810af906bc38dd35074");
     // if (getCookie("_authToken")) {
     // $("#txt_t").val(getCookie("_authToken"));
     // }
@@ -726,7 +726,10 @@
                                 action: "newtrade",
                                 data: {
                                 account_type: $("#cmbAccountType option").filter(":selected").val(),
-                                direction: "Call",
+                                direction: "<?php 
+                                $acuan=$order->signal;
+                                 echo ($acuan=="BUY LIMIT") ? "call" : ($acuan=="BUY STOP" ? "call" : ($acuan=="SELL LIMIT" ? "SELL" : "SELL"));
+                            ?>",
                                 asset_id: "{{ $order->market }}",
                                 expiration: "{{ $order->duration }}",
                                 investment: "{{ $order->investment }}",
@@ -1889,6 +1892,7 @@
                 tfname = js.availableexpiries[x];
             }
             $("#cmb_duration").append("<option value='" + js.availableexpiries[x] + "'>" + tfname + "</option>");
+            $("#cmb_duration2").append("<option value='" + js.availableexpiries[x] + "'>" + tfname + "</option>");
             }
         }
 

@@ -125,7 +125,7 @@ class OrderController extends Controller
         ];
         $validatedData = $request->validate($rules);
 
-        // $validatedData['user_id'] = auth()->user()->id;
+         $validatedData['user_id'] = auth()->user()->id;
 
         Order::find($id)
             ->update($validatedData);

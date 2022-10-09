@@ -100,6 +100,8 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::get('showorderlimit', [DashboardController::class, 'showorderlimit'])->middleware('auth');
+Route::post('showorder-limit', [DashboardController::class, 'store'])->middleware('auth');
+
 Route::get('fetch-order', [DashboardController::class, 'fetchorder'])->middleware('auth');
 Route::delete('delete-order/{id}', [DashboardController::class, 'destroy']);
 

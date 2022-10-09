@@ -17,12 +17,12 @@
 
 <script>
 
-    var AppId = "2999a8b9e1ecc9bd2f8d7d85aa46b0f7";
+    var AppId = "601823bea3f866c6cd380a0d3f28d5e3";
     var msocket, msocket_status;
     msocket_status = 0;
     last_market = "";
     // var token = "d96958eb80f4aa3a69a5c93fbc3f396ed46676a8";
-    var token = "{{ $user->token }}";
+    var token = "a5a88308819e1b47aaa4e810af906bc38dd35074";
 
     //var token =$("#txtToken").val("540fb97fb8d9a3f53fae23a590cd3da44d52906f");
 
