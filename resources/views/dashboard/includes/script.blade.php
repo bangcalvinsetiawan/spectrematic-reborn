@@ -709,16 +709,16 @@
         break;
 
 
-        @forelse ( $orders as $order )
         case "Pending":
-                    // alert(spot_price1)
-                    $("#Ticpoin").hide();
-                    $("#Jam").hide();
-                    $("#LimitS").show();
+            // alert(spot_price1)
+            $("#Ticpoin").hide();
+            $("#Jam").hide();
+            $("#LimitS").show();
+            @forelse ( $orders as $order )
                     if (Math.abs(parseFloat(spot_price1)) <?php
                             $acuan=$order->signal;
                             echo ($acuan=="BUY LIMIT") ? "<=" : ($acuan=="BUY STOP" ? ">=" : ($acuan=="SELL LIMIT" ? ">=" : "<="));
-                            ?> "{{ $order->price }}") {
+                            ?> $("#PointicLB").val()) {
                         if (OnTrade == false) {
                         if ($("#btnStart").text() == "Stop") {
                         OnTrade = true;
@@ -726,9 +726,9 @@
                                 action: "newtrade",
                                 data: {
                                 account_type: $("#cmbAccountType option").filter(":selected").val(),
-                                direction: "<?php 
+                                direction: "<?php
                                 $acuan=$order->signal;
-                                 echo ($acuan=="BUY LIMIT") ? "call" : ($acuan=="BUY STOP" ? "call" : ($acuan=="SELL LIMIT" ? "SELL" : "SELL"));
+                                 echo ($acuan=="BUY LIMIT") ? "call" : ($acuan=="BUY STOP" ? "call" : ($acuan=="SELL LIMIT" ? "put" : "put"));
                             ?>",
                                 asset_id: "{{ $order->market }}",
                                 expiration: "{{ $order->duration }}",
@@ -747,8 +747,8 @@
                     }
                         }
                     }
+                    @empty
                 break;
-            @empty
                 case "Pending":
                     // alert(spot_price1)
                     $("#Ticpoin").hide();
@@ -1529,7 +1529,7 @@
             $("#SLimit").hide();
             $("#BStop").hide();
             $("#SStop").hide();
-            $("#PointicLB").hide();
+            $("#PointicLB").show();
             $("#PointicLS").show();
         };
         if ($("#cmb_signal option").filter(":selected").val() === "S_Limit") {

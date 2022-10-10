@@ -180,15 +180,22 @@
                             <span class="" id="signal" style="display:no">
                                 <div class="row mb-2" style="display:none" id="Limit">
                                     <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                        <div class="col-8">
-                                                <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="#listOrderModal" style="font-size: 10px;font-weight: bold;height:22px;">LIST ORDER </button>
-                                            </div>
+                                        {{-- <div class="col-8">
+                                            <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="#listOrderModal" style="font-size: 10px;font-weight: bold;height:22px;">LIST ORDER </button>
+                                        </div> --}}
                                     </li>
                                     <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                        <b style="display:none" id="SLimit">Sell Limit</b>
+                                        <b>
+                                            <select id="" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
+                                                <option value="">BUY LIMIT</option>
+                                                <option value="">BUY STOP</option>
+                                                <option value="">SELL LIMIT</option>
+                                                <option value="">SELL STOP</option>
+                                            </select>
+                                        </b>
                                         <b style="display:none" id="SStop">Sell Stop</b>
                                         <div class="col-8">
-                                            <input type="text" id="PointicLB" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value='54.00000'>
+                                            <input type="text" id="PointicLB" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value=''>
                                         </div>
                                     </li>
                                     </div>
@@ -490,8 +497,8 @@
                         }
                     }
                 });
-
             });
+
 
             // $(document).on('click', '.editbtn', function (e) {
             //     e.preventDefault();
