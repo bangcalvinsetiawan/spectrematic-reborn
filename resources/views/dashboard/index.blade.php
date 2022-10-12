@@ -1,6 +1,91 @@
 @extends('dashboard.layouts.main')
 
 @section('content')
+{{-- ShowOrderPending Modal --}}
+<div class="modal fade" id="listOrder" tabindex="-1" aria-labelledby="listOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Pending List Order Limit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="success_message"></div>
+
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            {{-- <th>ID</th> --}}
+                            <th>Signal</th>
+                            <th>Price</th>
+                            {{-- <th>Market</th>
+                            <th>Investment</th> --}}
+                            <th>Duration</th>
+                            <th>Result</th>
+                            {{-- <th>Action</th> --}}
+                        </tr>
+                    </thead>
+                    <thead id="">
+                        <tr>
+                            <th id="BL">-</th>
+                            <th id="ticBL">-</th>
+                            <th>Duration</th>
+                            <th>Result</th>
+                        </tr>
+                        <tr>
+                            <th id="SL">-</th>
+                            <th id="ticSL">-</th>
+                            <th>Duration</th>
+                            <th>Result</th>
+                        </tr><tr>
+                            <th id="BS">-</th>
+                            <th id="ticBS">-</th>
+                            <th>Duration</th>
+                            <th>Result</th>
+                        </tr><tr>
+                            <th id="SS">-</th>
+                            <th id="ticSS">-</th>
+                            <th>Duration</th>
+                            <th>Result</th>
+                        </tr>
+                        {{-- <table class="table table-hover">
+                            <thead> --}}
+
+                                {{-- <tr id="OBL">
+
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="BL"></th>
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="ticBL"></th>
+                                </tr>
+                                <tr id="OSL">
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="SL"></th>
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="ticSL"></th>
+                                </tr>
+                                <tr id="OBS">
+                                  <th style="font-size: 8px; font-weight: bold;color:" id="BS" ></th>
+                                 <th style="font-size: 8px; font-weight: bold;color:" id="ticBS"></th>
+
+                                </tr>
+                                <tr id="OSS">
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="SS"></th>
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="ticSS"></th>
+
+                                </tr> --}}
+                            {{-- </thead>
+                        </table> --}}
+
+                    </thead>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
+                        data-bs-target="#AddOrder">Add Order</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+{{-- End- ShowOrder Modal --}}
     {{-- ShowOrder Modal --}}
     <div class="modal fade" id="listOrderModal" tabindex="-1" aria-labelledby="listOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -40,6 +125,64 @@
         </div>
     </div>
     {{-- End- ShowOrder Modal --}}
+     {{-- Add Modal Pending--}}
+     <div class="modal fade" id="AddOrder" tabindex="-1" aria-labelledby="AddOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="">Add Order Limit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <ul id="save_msgList"></ul>
+
+                    <div class="form-group mb-3">
+                        <label for="inputSignal" class="form-label">Order Limit</label>
+                        <select class=" form-select" id="pdod">
+                            <option value="BUY LIMIT">BUY LIMIT</option>
+                            <option value="SELL LIMIT">SELL LIMIT</option>
+                            <option value="BUY STOP">BUY STOP</option>
+                            <option value="SELL STOP">SELL STOP</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputPrice" class="form-label">Price</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="xspot">00.000</span>
+                            <input type="text" id="PointicBL" class="form-control" style="display:none" value="54.00">
+                            <input type="text" id="PointicSL" class="form-control" style="display:none" value="54.01">
+                            <input type="text" id="PointicBS" class="form-control" style="display:none" value="54.2">
+                            <input type="text" id="PointicSS" class="form-control" style="display:none" value="54.0">
+                        </div>
+                    </div>
+                    {{-- <div class="form-group mb-3">
+                        <label for="inputSignal" class="form-label">Select Market</label>
+                        <select type="text" class="market form-select" id="cmb_marketlis" aria-label="Select Market">
+                        </select>
+                    </div> --}}
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input type="number" step="0.001" class="investment form-control" aria-label="Input Investment" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="inputDuration" class="form-label">Trade Duration</label>
+                        <select type="text" class="duration form-select" id="cmb_duration2" aria-label="Select Market">
+                            {{-- <option value="10s">10s</option>
+                            <option value="60s">60s</option>
+                            <option value="5m">5m</option> --}}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listOrder">Back</button>
+                    <button type="button" class="btn btn-primary" id="seve">SEVE</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{-- End - Add Modal --}}
 
     {{-- Add Modal --}}
     <div class="modal fade" id="AddOrderModal" tabindex="-1" aria-labelledby="AddOrderModalLabel" aria-hidden="true">
@@ -65,7 +208,7 @@
                     <div class="form-group mb-3">
                         <label for="inputPrice" class="form-label">Price</label>
                         <div class="input-group">
-                            <span class="input-group-text" id="xspot">00.000</span>
+                            <span class="input-group-text" id="">00.000</span>
                             <input type="number" step="0.0000000001" class="price form-control" aria-label="Input Price" required>
                         </div>
                     </div>
@@ -80,7 +223,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputDuration" class="form-label">Trade Duration</label>
-                        <select type="text" class="duration form-select" id="cmb_duration2" aria-label="Select Market">
+                        <select type="text" class="duration form-select" id="" aria-label="Select Market">
                             <option value="10s">10s</option>
                             <option value="60s">60s</option>
                             <option value="5m">5m</option>
@@ -150,11 +293,11 @@
                         </div>
                     </div>
                     <div class="card-bod position-relative">
-                        <table class="table table-hover">
+                        {{-- <table class="table table-hover">
                             <thead>
 
                                 <tr id="OBL">
-                                    {{-- <th>ID</th> --}}
+                                    {{-- <th>ID</th> --}
                                     <th style="font-size: 8px; font-weight: bold;color:" id="BL"></th>
                                     <th style="font-size: 8px; font-weight: bold;color:" id="ticBL"></th>
                                 </tr>
@@ -170,10 +313,10 @@
                                 <tr id="OSS">
                                     <th style="font-size: 8px; font-weight: bold;color:" id="SS"></th>
                                     <th style="font-size: 8px; font-weight: bold;color:" id="ticSS"></th>
-                                    {{-- <th>Action</th> --}}
+                                    {{-- <th>Action</th> --}
                                 </tr>
                             </thead>
-                        </table>
+                        </table> --}}
                         <iframe src="" style="width: 100%; height: 480px" frameborder="0" id="loaderCC"></iframe>
                         <span id="signal1">
                             <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
@@ -196,7 +339,7 @@
                                             {{-- <option value="S_Limit">Sell Limit</option>
                                             <option value="B_Stop">Buy Stop</option>
                                             <option value="S_Stop">Sell Stop</option> --}}
-                                            <option value="Pending">Pending Order</option>
+                                            {{-- <option value="Pending">Pending Order</option> --}}
                                         </select>
                                     </div>
                             </li>
@@ -210,28 +353,33 @@
                                                 <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="#listOrderModal" style="font-size: 10px;font-weight: bold;height:22px; ">LIST ORDER </button>
                                             </div>
                                     </li> --}}
+                                     <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                        <div class="col-8">
+                                                <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="#listOrder" style="font-size: 10px;font-weight: bold;height:22px; ">LIST ORDER </button>
+                                            </div>
+                                    </li>
                                     <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
                                         <b style="display:none" id="SLimit">
-                                            <select id="pdod" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
+                                            {{-- <select id="" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
                                                 <option value="BUY LIMIT">BUY LIMIT</option>
                                                 <option value="SELL LIMIT">SELL LIMIT</option>
                                                 <option value="BUY STOP">BUY STOP</option>
                                                 <option value="SELL STOP">SELL STOP</option>
-                                            </select>
+                                            </select> --}}
                                         </b>
                                         <b style="display:none" id="SStop">Sell Stop</b>
-                                        <div class="col-8">
+                                        {{-- <div class="col-8">
                                             <input type="text" id="PointicBL" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.00">
                                             <input type="text" id="PointicSL" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.01">
                                             <input type="text" id="PointicBS" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.2">
                                             <input type="text" id="PointicSS" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.0">
-                                        </div>
+                                        </div> --}}
                                     </li>
                                     <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                        <div class="col-8">
-                                                <button id="seve" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="" style="font-size: 10px;font-weight: bold;height:22px;">seve </button>
+                                        {{-- <div class="col-8">
+                                                <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="" style="font-size: 10px;font-weight: bold;height:22px;">seve </button>
 
-                                            </div>
+                                            </div> --}}
 
                                     </li>
                                     </div>

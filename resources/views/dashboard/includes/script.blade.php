@@ -111,6 +111,9 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                 $("#SS").text(getCookie("priseSS"));
             }
         }
+        $("#AddOrder").modal('hide');
+        $("#listOrder").modal('show');
+
     });
     if (getCookie("tic-priseBL")) {
           $("#ticBL").text(getCookie("tic-priseBL"));
@@ -871,10 +874,11 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='BUY LIMIT';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticBL").text('DOWN')
+                        $("#ticBL").text('-> ' + getCookie("tic-priseBL"));
                         setCookie("tic-priseBL", $('#PointicBL').val(),"-365");
                         setCookie("priseBL", "BUY LIMIT","-365");
-                       // $("#OBL").remove();
+
+                        $("#OBL").remove();
                         if (OnTrade == 0) {
                     OnTrade = 1;
                     }
@@ -889,10 +893,11 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='SELL LIMIT';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticSL").text('DOWN');
-                        setCookie("tic-priseSL", $('#PointicSL').val(),"-365");
+                        $("#ticSL").text('-> ' + getCookie("tic-priseSL"));
                         setCookie("priseSL", "SELL LIMIT","-365");
-                       // $("#OSL").remove();
+                        setCookie("tic-priseSL", $('#PointicSL').val(),"-365");
+
+                        $("#OSL").remove();
                         if (OnTrade == 0) {
                     OnTrade = 1;
                     }
@@ -907,10 +912,10 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='BUY STOP';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticBS").text('DOWN')
+                        $("#ticBS").text('-> ' + getCookie("tic-priseBS"));
                         setCookie("tic-priseBS", $('#PointicBS').val(),"-365");
                         setCookie("priseBS", "BUY STOP","-365");
-                       // $("#OBS").remove();
+                        $("#OBS").remove();
 
                         if (OnTrade == 0) {
                     OnTrade = 1;
@@ -926,10 +931,11 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='SELL STOP';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticSS").text('DOWN')
+                        $("#ticSS").text('-> ' + getCookie("tic-priseSS"));
                         setCookie("tic-priseSS", $('#PointicSS').val(),"-365");
                         setCookie("priseSS", "SELL STOP","-365");
-                       // $("#OSS").remove();
+
+                        $("#OSS").remove();
                         if (OnTrade == 0) {
                     OnTrade = 1;
                     }
