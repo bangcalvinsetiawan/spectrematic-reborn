@@ -115,30 +115,30 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
         $("#listOrder").modal('show');
 
     });
-    if (getCookie("tic-priseBL")) {
-          $("#ticBL").text(getCookie("tic-priseBL"));
-    }
-    if (getCookie("tic-priseSL")) {
-          $("#ticSL").text(getCookie("tic-priseSL"));
-    }
-    if (getCookie("tic-priseBS")) {
-          $("#ticBS").text(getCookie("tic-priseBS"));
-    }
-    if (getCookie("tic-priseSS")) {
-          $("#ticSS").text(getCookie("tic-priseSS"));
-    }
-    if (getCookie("priseBL")) {
-          $("#BL").text(getCookie("priseBL"));
-    }
-    if (getCookie("priseSL")) {
-          $("#SL").text(getCookie("priseSL"));
-    }
-    if (getCookie("priseBS")) {
-          $("#BS").text(getCookie("priseBS"));
-    }
-    if (getCookie("priseSS")) {
-          $("#SS").text(getCookie("priseSS"));
-    }
+    // if (getCookie("tic-priseBL")) {
+    //       $("#ticBL").text(getCookie("tic-priseBL"));
+    // }
+    // if (getCookie("tic-priseSL")) {
+    //       $("#ticSL").text(getCookie("tic-priseSL"));
+    // }
+    // if (getCookie("tic-priseBS")) {
+    //       $("#ticBS").text(getCookie("tic-priseBS"));
+    // }
+    // if (getCookie("tic-priseSS")) {
+    //       $("#ticSS").text(getCookie("tic-priseSS"));
+    // }
+    // if (getCookie("priseBL")) {
+    //       $("#BL").text(getCookie("priseBL"));
+    // }
+    // if (getCookie("priseSL")) {
+    //       $("#SL").text(getCookie("priseSL"));
+    // }
+    // if (getCookie("priseBS")) {
+    //       $("#BS").text(getCookie("priseBS"));
+    // }
+    // if (getCookie("priseSS")) {
+    //       $("#SS").text(getCookie("priseSS"));
+    // }
 
 
 
@@ -874,7 +874,7 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='BUY LIMIT';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticBL").text('-> ' + getCookie("tic-priseBL"));
+                        $("#ticBL").text('DONE -> ' + getCookie("tic-priseBL"));
                         setCookie("tic-priseBL", $('#PointicBL').val(),"-365");
                         setCookie("priseBL", "BUY LIMIT","-365");
 
@@ -893,7 +893,7 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='SELL LIMIT';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticSL").text('-> ' + getCookie("tic-priseSL"));
+                        $("#ticSL").text('DONE -> ' + getCookie("tic-priseSL"));
                         setCookie("priseSL", "SELL LIMIT","-365");
                         setCookie("tic-priseSL", $('#PointicSL').val(),"-365");
 
@@ -912,7 +912,7 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='BUY STOP';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticBS").text('-> ' + getCookie("tic-priseBS"));
+                        $("#ticBS").text('DONE -> ' + getCookie("tic-priseBS"));
                         setCookie("tic-priseBS", $('#PointicBS').val(),"-365");
                         setCookie("priseBS", "BUY STOP","-365");
                         $("#OBS").remove();
@@ -931,7 +931,7 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
                         Signal='SELL STOP';
                         OpenOrder(LastDirection);
                         }
-                        $("#ticSS").text('-> ' + getCookie("tic-priseSS"));
+                        $("#ticSS").text('DONE -> ' + getCookie("tic-priseSS"));
                         setCookie("tic-priseSS", $('#PointicSS').val(),"-365");
                         setCookie("priseSS", "SELL STOP","-365");
 
@@ -1955,6 +1955,11 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
             $("#lblTotalWin").text("0.00");
             $("#loss_t").text("0");
             $("#ein_t").text("0");
+            if (js.userdata.account_type == 4){
+                if (js.userdata.account_balance < 100) {
+                window.open('/deposit');
+            }
+            };
 
             if (fsocket_status == 1) {
             var msg = {

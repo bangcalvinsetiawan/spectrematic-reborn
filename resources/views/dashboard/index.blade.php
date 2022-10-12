@@ -20,7 +20,7 @@
                             <th>Price</th>
                             {{-- <th>Market</th>
                             <th>Investment</th> --}}
-                            <th>Duration</th>
+                            {{-- <th>Duration</th> --}}
                             <th>Result</th>
                             {{-- <th>Action</th> --}}
                         </tr>
@@ -29,23 +29,23 @@
                         <tr>
                             <th id="BL">-</th>
                             <th id="ticBL">-</th>
-                            <th>Duration</th>
+                            {{-- <th>Duration</th> --}}
                             <th>Result</th>
                         </tr>
                         <tr>
                             <th id="SL">-</th>
                             <th id="ticSL">-</th>
-                            <th>Duration</th>
+                            {{-- <th>Duration</th> --}}
                             <th>Result</th>
                         </tr><tr>
                             <th id="BS">-</th>
                             <th id="ticBS">-</th>
-                            <th>Duration</th>
+                            {{-- <th>Duration</th> --}}
                             <th>Result</th>
                         </tr><tr>
                             <th id="SS">-</th>
                             <th id="ticSS">-</th>
-                            <th>Duration</th>
+                            {{-- <th>Duration</th> --}}
                             <th>Result</th>
                         </tr>
                         {{-- <table class="table table-hover">

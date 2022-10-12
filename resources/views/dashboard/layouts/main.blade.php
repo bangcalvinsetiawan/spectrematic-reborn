@@ -215,22 +215,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="modaltokenLabel">You have to enter the token first</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                 </div>
                 <div class="modal-body">
-                    <form action="" method="">
-
-
-                        <div class="mb-3">
-                          <label for="gettoken" class="col-form-label">Paste your token</label>
-                          <input type="text" class="token form-control" value="{{ auth()->user()->token }}">
-                          <span><a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a></span>
-                        </div>
-                        <div class="modal-footer">
-                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                        <button type="submit" class="btn btn-primary update_token">Save</button>
-                        </div>
-                      </form>
+                    <ul id="update_msgList"></ul>
+                    <input type="hidden" id="user_id" />
+                    <div class="mb-3">
+                      <label for="gettoken" class="col-form-label">Paste your token</label>
+                      <input type="text" class="token form-control" id="token" value="{{ auth()->user()->token }}">
+                      <span><a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a></span>
+                    </div>
+                    <div class="modal-footer">
+                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                    <button type="submit" class="btn btn-primary update_token">Let's Trade</button>
+                    </div>
                 </div>
             </div>
             </div>
@@ -253,32 +251,84 @@
 
         @include('dashboard.includes.script')
         <script>
-            $(document).ready(function () {
-                $(document).on('click', '.update_token', function(e) {
-                    e.preventDefault();
-                    // alert("Hello");
-                    var data = {
-                        'token' : $('.token').val(),
-                    }
-                    // alert(data.token);
-                    // console.log(data.token);
-                    $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
+            // $(document).ready(function () {
+            //     $(document).on('click', '.editbtn', function (e) {
+            //         e.preventDefault();
+            //         var user_id = $(this).val();
+            //         alert(user_id);
+            //         $('#editModal').modal('show');
+            //         $.ajax({
+            //             type: "GET",
+            //             url: "/edit-student/" + stud_id,
+            //             success: function (response) {
+            //                 if (response.status == 404) {
+            //                     $('#success_message').addClass('alert alert-success');
+            //                     $('#success_message').text(response.message);
+            //                     $('#editModal').modal('hide');
+            //                 } else {
+            //                     // console.log(response.student.name);
+            //                     $('#name').val(response.student.name);
+            //                     $('#course').val(response.student.course);
+            //                     $('#email').val(response.student.email);
+            //                     $('#phone').val(response.student.phone);
+            //                     $('#stud_id').val(stud_id);
+            //                 }
+            //             }
+            //         });
+            //         $('.btn-close').find('input').val('');
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/dashboard",
-                        data: data,
-                        dataType: "json",
-                        success: function (response) {
-                            console.log(response);
-                        }
-                    });
-                });
-            });
+            //     });
+
+            //     $(document).on('click', '.update_student', function (e) {
+            //         e.preventDefault();
+
+            //         $(this).text('Updating..');
+            //         var id = $('#stud_id').val();
+            //         // alert(id);
+
+            //         var data = {
+            //             'name': $('#name').val(),
+            //             'course': $('#course').val(),
+            //             'email': $('#email').val(),
+            //             'phone': $('#phone').val(),
+            //         }
+
+            //         $.ajaxSetup({
+            //             headers: {
+            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            //             }
+            //         });
+
+            //         $.ajax({
+            //             type: "PUT",
+            //             url: "/update-student/" + id,
+            //             data: data,
+            //             dataType: "json",
+            //             success: function (response) {
+            //                 // console.log(response);
+            //                 if (response.status == 400) {
+            //                     $('#update_msgList').html("");
+            //                     $('#update_msgList').addClass('alert alert-danger');
+            //                     $.each(response.errors, function (key, err_value) {
+            //                         $('#update_msgList').append('<li>' + err_value +
+            //                             '</li>');
+            //                     });
+            //                     $('.update_student').text('Update');
+            //                 } else {
+            //                     $('#update_msgList').html("");
+
+            //                     $('#success_message').addClass('alert alert-success');
+            //                     $('#success_message').text(response.message);
+            //                     $('#editModal').find('input').val('');
+            //                     $('.update_student').text('Update');
+            //                     $('#editModal').modal('hide');
+            //                     fetchstudent();
+            //                 }
+            //             }
+            //         });
+
+            //     });
+            // });
         </script>
         @yield('scripts')
     </body>
