@@ -150,6 +150,30 @@
                         </div>
                     </div>
                     <div class="card-bod position-relative">
+                        <table class="table table-hover">
+                            <thead>
+
+                                <tr id="OBL">
+                                    {{-- <th>ID</th> --}}
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="BL"></th>
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="ticBL"></th>
+                                </tr>
+                                <tr id="OSL">
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="SL"></th>
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="ticSL"></th>
+                                </tr>
+                                <tr id="OBS">
+                                  <th style="font-size: 8px; font-weight: bold;color:" id="BS" ></th>
+                                 <th style="font-size: 8px; font-weight: bold;color:" id="ticBS"></th>
+
+                                </tr>
+                                <tr id="OSS">
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="SS"></th>
+                                    <th style="font-size: 8px; font-weight: bold;color:" id="ticSS"></th>
+                                    {{-- <th>Action</th> --}}
+                                </tr>
+                            </thead>
+                        </table>
                         <iframe src="" style="width: 100%; height: 480px" frameborder="0" id="loaderCC"></iframe>
                         <span id="signal1">
                             <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
@@ -168,8 +192,8 @@
                                             <option value="ctpointF"> Follow Trend</option>
                                             <option value="pattern">Fast signal</option>
                                             <option value="Rul3">Trend signal</option>
-                                            {{-- <option value="BL">Buy Limit</option>
-                                            <option value="S_Limit">Sell Limit</option>
+                                            <option value="Pending-order">Pending</option>
+                                            {{-- <option value="S_Limit">Sell Limit</option>
                                             <option value="B_Stop">Buy Stop</option>
                                             <option value="S_Stop">Sell Stop</option> --}}
                                             <option value="Pending">Pending Order</option>
@@ -179,24 +203,36 @@
                             </span>
                             <span class="" id="signal" style="display:no">
                                 <div class="row mb-2" style="display:none" id="Limit">
-                                    <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                        {{-- <div class="col-8">
-                                            <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="#listOrderModal" style="font-size: 10px;font-weight: bold;height:22px;">LIST ORDER </button>
-                                        </div> --}}
-                                    </li>
+
+
+                                    {{-- <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                        <div class="col-8">
+                                                <button id="" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="#listOrderModal" style="font-size: 10px;font-weight: bold;height:22px; ">LIST ORDER </button>
+                                            </div>
+                                    </li> --}}
                                     <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                        <b>
-                                            <select id="" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
-                                                <option value="">BUY LIMIT</option>
-                                                <option value="">BUY STOP</option>
-                                                <option value="">SELL LIMIT</option>
-                                                <option value="">SELL STOP</option>
+                                        <b style="display:none" id="SLimit">
+                                            <select id="pdod" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
+                                                <option value="BUY LIMIT">BUY LIMIT</option>
+                                                <option value="SELL LIMIT">SELL LIMIT</option>
+                                                <option value="BUY STOP">BUY STOP</option>
+                                                <option value="SELL STOP">SELL STOP</option>
                                             </select>
                                         </b>
                                         <b style="display:none" id="SStop">Sell Stop</b>
                                         <div class="col-8">
-                                            <input type="text" id="PointicLB" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value=''>
+                                            <input type="text" id="PointicBL" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.00">
+                                            <input type="text" id="PointicSL" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.01">
+                                            <input type="text" id="PointicBS" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.2">
+                                            <input type="text" id="PointicSS" class="form-control" style="font-size: 12px;font-weight: bold;height:20px;display:none" value="54.0">
                                         </div>
+                                    </li>
+                                    <li class=" d-flex justify-content-end align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
+                                        <div class="col-8">
+                                                <button id="seve" class="list_order badge bg-success" data-bs-toggle="modal" data-bs-target="" style="font-size: 10px;font-weight: bold;height:22px;">seve </button>
+
+                                            </div>
+
                                     </li>
                                     </div>
                                     <div class="form-group"style="display:none" id="Ticpoin">
@@ -444,6 +480,9 @@
                                 <td>' + item.result + '</td>\
                                 <td><button type="button" value="' + item.id + '" class="badge bg-danger border-0 deletebtn"><i class="fas fa-trash-alt"></i></button></td>\
                             \</tr>');
+                            // {
+                            // setInterval('location.reload()', 1000);
+                            // }
                         });
                     }
                 });
@@ -491,14 +530,13 @@
                             $('#AddOrderModal').find('input').val('');
                             $('.add_order').text('Save');
                             $('#AddOrderModal').modal('hide');
-                            $('#listOrderModal').modal('show');
                             //alert('add order success');
                             fetchorder(listOrderModal);
                         }
                     }
                 });
-            });
 
+            });
 
             // $(document).on('click', '.editbtn', function (e) {
             //     e.preventDefault();

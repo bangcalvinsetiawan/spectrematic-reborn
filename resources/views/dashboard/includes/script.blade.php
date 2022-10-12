@@ -62,9 +62,84 @@
     //var token = window.localStorage.getItem("access_token");
     /*if (window.localStorage.getItem("tokenx") == null) {
             open('./login.html')
-
+$("#pdod option").filter(":selected").val() == "BUYLIMIT"
         }*/
-    //  setCookie("token","a5a88308819e1b47aaa4e810af906bc38dd35074");
+        seve.addEventListener(
+    "click",
+    function (e) {
+        if ($("#pdod option").filter(":selected").val() == "BUY LIMIT") {
+            setCookie("tic-priseBL", $('#PointicBL').val(),"-365");
+            setCookie("tic-priseBL", $('#PointicBL').val(),"365");
+            setCookie("priseBL", "BUY LIMIT","365");
+            if (getCookie("tic-priseBL")) {
+                $("#ticBL").text(getCookie("tic-priseBL"));
+            }
+            if (getCookie("priseBL")) {
+                $("#BL").text(getCookie("priseBL"));
+            }
+        }
+        if ($("#pdod option").filter(":selected").val() == "SELL LIMIT") {
+            setCookie("tic-priseSL", $('#PointicSL').val(),"-365");
+            setCookie("tic-priseSL", $('#PointicSL').val(),"365");
+            setCookie("priseSL", "SELL LIMIT","365");
+            if (getCookie("tic-priseSL")) {
+                $("#ticSL").text(getCookie("tic-priseSL"));
+            }
+            if (getCookie("priseSL")) {
+                $("#SL").text(getCookie("priseSL"));
+            }
+        }
+        if ($("#pdod option").filter(":selected").val() == "BUY STOP") {
+            setCookie("tic-priseBS", $('#PointicBS').val(),"-365");
+            setCookie("tic-priseBS", $('#PointicBS').val(),"365");
+            setCookie("priseBS", "BUY STOP","365");
+            if (getCookie("priseBS")) {
+                $("#BS").text(getCookie("priseBS"));
+             }
+             if (getCookie("tic-priseBS")) {
+                $("#ticBS").text(getCookie("tic-priseBS"));
+             }
+        }
+        if ($("#pdod option").filter(":selected").val() == "SELL STOP") {
+            setCookie("tic-priseSS", $('#PointicSS').val(),"-365");
+            setCookie("tic-priseSS", $('#PointicSS').val(),"365");
+            setCookie("priseSS", "SELL STOP","365");
+            if (getCookie("tic-priseSS")) {
+                $("#ticSS").text(getCookie("tic-priseSS"));
+            }
+            if (getCookie("priseSS")) {
+                $("#SS").text(getCookie("priseSS"));
+            }
+        }
+    });
+    if (getCookie("tic-priseBL")) {
+          $("#ticBL").text(getCookie("tic-priseBL"));
+    }
+    if (getCookie("tic-priseSL")) {
+          $("#ticSL").text(getCookie("tic-priseSL"));
+    }
+    if (getCookie("tic-priseBS")) {
+          $("#ticBS").text(getCookie("tic-priseBS"));
+    }
+    if (getCookie("tic-priseSS")) {
+          $("#ticSS").text(getCookie("tic-priseSS"));
+    }
+    if (getCookie("priseBL")) {
+          $("#BL").text(getCookie("priseBL"));
+    }
+    if (getCookie("priseSL")) {
+          $("#SL").text(getCookie("priseSL"));
+    }
+    if (getCookie("priseBS")) {
+          $("#BS").text(getCookie("priseBS"));
+    }
+    if (getCookie("priseSS")) {
+          $("#SS").text(getCookie("priseSS"));
+    }
+
+
+
+
     // setCookie("_authToken", "a5a88308819e1b47aaa4e810af906bc38dd35074");
     // if (getCookie("_authToken")) {
     // $("#txt_t").val(getCookie("_authToken"));
@@ -709,16 +784,16 @@
         break;
 
 
+        @forelse ( $orders as $order )
         case "Pending":
-            // alert(spot_price1)
-            $("#Ticpoin").hide();
-            $("#Jam").hide();
-            $("#LimitS").show();
-            @forelse ( $orders as $order )
+                    // alert(spot_price1)
+                    $("#Ticpoin").hide();
+                    $("#Jam").hide();
+                    $("#LimitS").show();
                     if (Math.abs(parseFloat(spot_price1)) <?php
                             $acuan=$order->signal;
                             echo ($acuan=="BUY LIMIT") ? "<=" : ($acuan=="BUY STOP" ? ">=" : ($acuan=="SELL LIMIT" ? ">=" : "<="));
-                            ?> $("#PointicLB").val()) {
+                            ?> "{{ $order->price }}") {
                         if (OnTrade == false) {
                         if ($("#btnStart").text() == "Stop") {
                         OnTrade = true;
@@ -728,7 +803,7 @@
                                 account_type: $("#cmbAccountType option").filter(":selected").val(),
                                 direction: "<?php
                                 $acuan=$order->signal;
-                                 echo ($acuan=="BUY LIMIT") ? "call" : ($acuan=="BUY STOP" ? "call" : ($acuan=="SELL LIMIT" ? "put" : "put"));
+                                 echo ($acuan=="BUY LIMIT") ? "call" : ($acuan=="BUY STOP" ? "call" : ($acuan=="SELL LIMIT" ? "SELL" : "SELL"));
                             ?>",
                                 asset_id: "{{ $order->market }}",
                                 expiration: "{{ $order->duration }}",
@@ -747,8 +822,8 @@
                     }
                         }
                     }
-                    @empty
                 break;
+             @empty
                 case "Pending":
                     // alert(spot_price1)
                     $("#Ticpoin").hide();
@@ -782,6 +857,85 @@
                     }
                 break;
             @endforelse
+            case "Pending-order":
+                    // alert(spot_price1)
+                    $("#Ticpoin").hide();
+                    $("#Jam").hide();
+                    $("#LimitS").show();
+                    if (Math.abs(parseFloat(spot_price1)) <= $("#ticBL").text()) {
+                        if (OnTrade == false) {
+                     if ($("#btnStart").text() == "Stop") {
+                        OnTrade = true;
+                        //alert(Ontrade);
+                        LastDirection = "CALL";
+                        Signal='BUY LIMIT';
+                        OpenOrder(LastDirection);
+                        }
+                        $("#ticBL").text('DOWN')
+                        setCookie("tic-priseBL", $('#PointicBL').val(),"-365");
+                        setCookie("priseBL", "BUY LIMIT","-365");
+                       // $("#OBL").remove();
+                        if (OnTrade == 0) {
+                    OnTrade = 1;
+                    }
+                        }
+                    };
+                    if (Math.abs(parseFloat(spot_price1)) >= $("#ticSL").text()) {
+                        if (OnTrade == false) {
+                     if ($("#btnStart").text() == "Stop") {
+                        OnTrade = true;
+                        //alert(Ontrade);
+                        LastDirection = "PUT";
+                        Signal='SELL LIMIT';
+                        OpenOrder(LastDirection);
+                        }
+                        $("#ticSL").text('DOWN');
+                        setCookie("tic-priseSL", $('#PointicSL').val(),"-365");
+                        setCookie("priseSL", "SELL LIMIT","-365");
+                       // $("#OSL").remove();
+                        if (OnTrade == 0) {
+                    OnTrade = 1;
+                    }
+                        }
+                    };
+                    if (Math.abs(parseFloat(spot_price1)) >= $("#ticBS").text()) {
+                        if (OnTrade == false) {
+                     if ($("#btnStart").text() == "Stop") {
+                        OnTrade = true;
+                        //alert(Ontrade);
+                        LastDirection = "CALL";
+                        Signal='BUY STOP';
+                        OpenOrder(LastDirection);
+                        }
+                        $("#ticBS").text('DOWN')
+                        setCookie("tic-priseBS", $('#PointicBS').val(),"-365");
+                        setCookie("priseBS", "BUY STOP","-365");
+                       // $("#OBS").remove();
+
+                        if (OnTrade == 0) {
+                    OnTrade = 1;
+                    }
+                        }
+                    };
+                    if (Math.abs(parseFloat(spot_price1)) <= $("#ticSS").text()) {
+                        if (OnTrade == false) {
+                     if ($("#btnStart").text() == "Stop") {
+                        OnTrade = true;
+                        //alert(Ontrade);
+                        LastDirection = "CALL";
+                        Signal='SELL STOP';
+                        OpenOrder(LastDirection);
+                        }
+                        $("#ticSS").text('DOWN')
+                        setCookie("tic-priseSS", $('#PointicSS').val(),"-365");
+                        setCookie("priseSS", "SELL STOP","-365");
+                       // $("#OSS").remove();
+                        if (OnTrade == 0) {
+                    OnTrade = 1;
+                    }
+                        }
+                    };
+                break;
 
 
             case "S_Stop":
@@ -1362,19 +1516,19 @@
     setCookie("_active_duration", $("#cmb_duration option").filter(":selected").val(), "365");
     }
     // },false);
-    portrait.addEventListener("change", function(e) {
-        if(e.matches) {
-            $("#PotR").hide();
-            $("#Landscape").show();
-            //alert('Landscape')
-            // Portrait mode
-        } else {
-            // Landscape
-            $("#PotR").show();
-            $("#Landscape").hide();
-            Mark();
-        }
-    })
+    // portrait.addEventListener("change", function(e) {
+    //     if(e.matches) {
+    //         $("#PotR").hide();
+    //         $("#Landscape").show();
+    //         //alert('Landscape')
+    //         // Portrait mode
+    //     } else {
+    //         // Landscape
+    //         $("#PotR").show();
+    //         $("#Landscape").hide();
+    //         Mark();
+    //     }
+    // });
 
     cmb_if_signal_false.addEventListener(
     "change",
@@ -1526,21 +1680,50 @@
             $("#Ticpoin").hide();
             $("#Limit").show();
             $("#BLimit").show();
-            $("#SLimit").hide();
+            //$("#SLimit").hide();
             $("#BStop").hide();
             $("#SStop").hide();
-            $("#PointicLB").show();
-            $("#PointicLS").show();
+            $("#PointicLB").hide();
+           // $("#PointicLS").show();
         };
-        if ($("#cmb_signal option").filter(":selected").val() === "S_Limit") {
+        if ($("#cmb_signal option").filter(":selected").val() === "Pending-order") {
             $("#Ticpoin").hide();
             $("#Limit").show();
             $("#BLimit").hide();
             $("#SLimit").show();
             $("#BStop").hide();
             $("#SStop").hide();
-            $("#PointicLB").show();
-            $("#PointicLS").hide();
+            $("#PointicBL").show();
+            pdod.addEventListener(
+                "change",
+                function (e) {
+            if ($("#pdod option").filter(":selected").val() === "BUY LIMIT"){
+                $("#PointicBL").show();
+                $("#PointicSL").hide();
+                $("#PointicSS").hide();
+                $("#PointicBS").hide();
+            }
+            if ($("#pdod option").filter(":selected").val() === "SELL LIMIT"){
+                $("#PointicBL").hide();
+                $("#PointicSL").show();
+                $("#PointicSS").hide();
+                $("#PointicBS").hide();
+            }
+            if ($("#pdod option").filter(":selected").val() === "BUY STOP"){
+                $("#PointicBL").hide();
+                $("#PointicSL").hide();
+                $("#PointicSS").hide();
+                $("#PointicBS").show();
+            }
+            if ($("#pdod option").filter(":selected").val() === "SELL STOP"){
+                $("#PointicBL").hide();
+                $("#PointicSL").hide();
+                $("#PointicSS").show();
+                $("#PointicBS").hide();
+            }
+        });
+
+
         };
         if ($("#cmb_signal option").filter(":selected").val() === "B_Stop") {
             $("#Ticpoin").hide();
