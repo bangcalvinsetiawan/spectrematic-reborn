@@ -17,7 +17,7 @@
           <label for="inputToken" class="form-label">Token adalah {{ $user->token }}</label>
         </div>
         <a type="submit" class="btn btn-primary" href="/token/{{ $user->id }}/edit">Edit</a>
-      </form>
+    </form>
 
 
     {{-- <div class="container-fluid px-4">

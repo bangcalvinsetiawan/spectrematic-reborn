@@ -19,7 +19,7 @@
             <a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a>
           </div>
           <button type="submit" class="btn btn-primary">Save</button>
-      </form>
+    </form>
 
 
     {{-- <div class="container-fluid px-4">

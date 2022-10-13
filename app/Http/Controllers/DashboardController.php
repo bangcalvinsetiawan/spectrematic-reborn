@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
@@ -14,11 +16,13 @@ class DashboardController extends Controller
         // return dd(Order::where('user_id', auth()->user()->id)->get());
         // $order = Order::where('user_id', auth()->user()->id)->get();
         // return dd($order);
+        $user = User::findOrFail(auth()->user()->id);
 
         return view('dashboard.index', [
             'title' => 'Dashboard',
             'active' => 'dashboard',
             'orders' => Order::where('user_id', auth()->user()->id)->get(),
+            'user' => $user,
             // 'order' => $order
         ]);
     }
@@ -73,51 +77,16 @@ class DashboardController extends Controller
         if ($order->wasRecentlyCreated) {
             return response()->json([
                 'status'=>200,
-                'message'=>'Student Added Successfully.'
+                'message'=>'Order Added Successfully.'
             ]);
-            // new user
-            // return redirect('/dashboard')
-            // ->with('success', 'New order has been placed!');
         } else {
-            // user already exists
-            // return redirect('/order')
-            // ->with('samedata', 'Data already exist!');
             return response()->json([
                         'status'=>400,
                         'errors'=>$order->errors()
                     ]);
         }
 
-
-        // $validator = Validator::make($request->all(), [
-        //     'signal' => 'required',
-        //     'price' => 'required|max:12',
-        //     'market' => 'required',
-        //     'investment' => 'required|max:8',
-        //     'duration' => 'required'
-        // ]);
-
-        // if($validator->fails())
-        // {
-        //     return response()->json([
-        //         'status'=>400,
-        //         'errors'=>$validator->errors()
-        //     ]);
-        // }
-        // else
-        // {
-        //     $order = new Order;
-        //     $order->signal = $request->input('signal');
-        //     $order->price = $request->input('price');
-        //     $order->market = $request->input('market');
-        //     $order->investment = $request->input('investment');
-        //     $order->duration = $request->input('duration');
-        //     $order->save();
-        //     return response()->json([
-        //         'status'=>200,
-        //         'message'=>'Order Added Successfully.'
-        //     ]);
-        // }
-
     }
+
+
 }

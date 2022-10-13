@@ -165,11 +165,11 @@
                             <li><hr class="dropdown-divider" /></li>
 
                             <li style="display:none;"><a class="dropdown-item" id="out"></a></li>
-                            <li>
-                                <a type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modaltoken">
+                            {{-- <li>
+                                <a type="button" class="editbtn dropdown-item" data-bs-toggle="modal" data-bs-target="#modaltoken">
                                     Get Token
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li><a type="button" href="{{ route('logout') }}" style="cursor: pointer" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" class="dropdown-item">Logout</a>
@@ -209,30 +209,61 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="modaltoken" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modaltokenLabel" aria-hidden="true">
+        <!-- Modal Edit Token -->
+
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">You have to enter the token first</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div id="success_message"></div>
+
+                        <input type="hidden" value="{{ $user->id }}" id="user_id" />
+
+                        <div class="form-group mb-3">
+                            <label for="">Paste your token</label>
+                            <input type="text" id="token" value="" required class="form-control">
+                            <span><a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a></span>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary update_token">Update</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="modal fade" id="modaltoken" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modaltokenLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="modaltokenLabel">You have to enter the token first</h5>
-                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <ul id="update_msgList"></ul>
-                    <input type="hidden" id="user_id" />
                     <div class="mb-3">
                       <label for="gettoken" class="col-form-label">Paste your token</label>
                       <input type="text" class="token form-control" id="token" value="{{ auth()->user()->token }}">
                       <span><a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a></span>
                     </div>
                     <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary update_token">Let's Trade</button>
                     </div>
                 </div>
             </div>
             </div>
-        </div>
+        </div> --}}
+        <!-- End - Modal Edit Token -->
+
         <div id="Landscapex" style="display:none">
             <div class="container">
                 <div class="row justify-content-center">
@@ -250,87 +281,130 @@
         </div>
 
         @include('dashboard.includes.script')
+
         <script>
-            // $(document).ready(function () {
-            //     $(document).on('click', '.editbtn', function (e) {
-            //         e.preventDefault();
-            //         var user_id = $(this).val();
-            //         alert(user_id);
-            //         $('#editModal').modal('show');
-            //         $.ajax({
-            //             type: "GET",
-            //             url: "/edit-student/" + stud_id,
-            //             success: function (response) {
-            //                 if (response.status == 404) {
-            //                     $('#success_message').addClass('alert alert-success');
-            //                     $('#success_message').text(response.message);
-            //                     $('#editModal').modal('hide');
-            //                 } else {
-            //                     // console.log(response.student.name);
-            //                     $('#name').val(response.student.name);
-            //                     $('#course').val(response.student.course);
-            //                     $('#email').val(response.student.email);
-            //                     $('#phone').val(response.student.phone);
-            //                     $('#stud_id').val(stud_id);
-            //                 }
-            //             }
-            //         });
-            //         $('.btn-close').find('input').val('');
+            $(document).ready(function () {
 
-            //     });
+                $(document).on('click', '.editbtn', function (e) {
+                    e.preventDefault();
+                    var user_id = $('#user_id').val();
+                    // alert(user_id);
+                    $('#editModal').modal('show');
+                    $.ajax({
+                        type: "GET",
+                        url: "/edit-token/edit" + user_id,
+                        success: function (response) {
+                            // console.log(response);
+                            if (response.status == 404) {
+                                $('#success_message').addClass('alert alert-success');
+                                $('#success_message').text(response.message);
+                                $('#editModal').modal('hide');
+                            } else {
+                                // console.log(response.user.token);
+                                $('#validatetoken').val(response.user.token);
+                                // $('#course').val(response.student.course);
+                                // $('#email').val(response.student.email);
+                                // $('#phone').val(response.student.phone);
+                                // $('#stud_id').val(stud_id);
+                            }
+                        }
+                    });
+                    $('.btn-close').find('input').val('');
 
-            //     $(document).on('click', '.update_student', function (e) {
-            //         e.preventDefault();
+                });
 
-            //         $(this).text('Updating..');
-            //         var id = $('#stud_id').val();
-            //         // alert(id);
+                $(document).on('click', '.update_token', function (e) {
+                    e.preventDefault();
 
-            //         var data = {
-            //             'name': $('#name').val(),
-            //             'course': $('#course').val(),
-            //             'email': $('#email').val(),
-            //             'phone': $('#phone').val(),
-            //         }
+                    $(this).text('Updating..');
+                    var id = $('#user_id').val();
+                    // alert(id);
 
-            //         $.ajaxSetup({
-            //             headers: {
-            //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //             }
-            //         });
+                    var data = {
+                        'token': $('#token').val(),
+                    }
 
-            //         $.ajax({
-            //             type: "PUT",
-            //             url: "/update-student/" + id,
-            //             data: data,
-            //             dataType: "json",
-            //             success: function (response) {
-            //                 // console.log(response);
-            //                 if (response.status == 400) {
-            //                     $('#update_msgList').html("");
-            //                     $('#update_msgList').addClass('alert alert-danger');
-            //                     $.each(response.errors, function (key, err_value) {
-            //                         $('#update_msgList').append('<li>' + err_value +
-            //                             '</li>');
-            //                     });
-            //                     $('.update_student').text('Update');
-            //                 } else {
-            //                     $('#update_msgList').html("");
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
 
-            //                     $('#success_message').addClass('alert alert-success');
-            //                     $('#success_message').text(response.message);
-            //                     $('#editModal').find('input').val('');
-            //                     $('.update_student').text('Update');
-            //                     $('#editModal').modal('hide');
-            //                     fetchstudent();
-            //                 }
-            //             }
-            //         });
+                    $.ajax({
+                        type: "PUT",
+                        url: "/update-token/" + id,
+                        data: data,
+                        dataType: "json",
+                        success: function (response) {
+                            // console.log(response);
+                            if (response.status == 400) {
+                                $('#update_msgList').html("");
+                                $('#update_msgList').addClass('alert alert-danger');
+                                $.each(response.errors, function (key, err_value) {
+                                    $('#update_msgList').append('<li>' + err_value +
+                                        '</li>');
+                                });
+                                $('.update_token').text('Update');
+                            } else {
+                                $('#update_msgList').html("");
 
-            //     });
-            // });
+                                $('#success_message').addClass('alert alert-success');
+                                $('#success_message').text(response.message);
+                                $('#editModal').find('input').val('');
+                                $('.update_student').text('Update');
+                                $('#editModal').modal('hide');
+                                // fetchstudent();
+                            }
+                        }
+                    });
+
+                });
+
+                // $(document).on('click', '.deletebtn', function () {
+                //     var stud_id = $(this).val();
+                //     $('#DeleteModal').modal('show');
+                //     $('#deleteing_id').val(stud_id);
+                // });
+
+                // $(document).on('click', '.delete_student', function (e) {
+                //     e.preventDefault();
+
+                //     $(this).text('Deleting..');
+                //     var id = $('#deleteing_id').val();
+
+                //     $.ajaxSetup({
+                //         headers: {
+                //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //         }
+                //     });
+
+                //     $.ajax({
+                //         type: "DELETE",
+                //         url: "/delete-student/" + id,
+                //         dataType: "json",
+                //         success: function (response) {
+                //             // console.log(response);
+                //             if (response.status == 404) {
+                //                 $('#success_message').addClass('alert alert-success');
+                //                 $('#success_message').text(response.message);
+                //                 $('.delete_student').text('Yes Delete');
+                //             } else {
+                //                 $('#success_message').html("");
+                //                 $('#success_message').addClass('alert alert-success');
+                //                 $('#success_message').text(response.message);
+                //                 $('.delete_student').text('Yes Delete');
+                //                 $('#DeleteModal').modal('hide');
+                //                 fetchstudent();
+                //             }
+                //         }
+                //     });
+                // });
+
+            });
+
         </script>
-        @yield('scripts')
+
+        {{-- @yield('scripts') --}}
     </body>
 
 </html>

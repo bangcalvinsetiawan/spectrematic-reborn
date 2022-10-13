@@ -13,7 +13,7 @@
             <div class="sb-nav-link-icon"><i class="fas fa-print"></i></div>
             TabelProfit
         </a>
-        <a class="nav-link {{ Request::is('token') ? 'active' : '' }}" href="/token" target="_blank">
+        <a class="nav-link {{ Request::is('token') ? 'active' : '' }}" href="/token/{{ $user->id }}/edit">
             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
             Token
         </a>

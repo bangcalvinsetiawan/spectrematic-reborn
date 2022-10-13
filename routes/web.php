@@ -54,16 +54,6 @@ use App\Http\Controllers\DashboardController;
 //     ]);
 // });
 
-// Route::get('/about', function () {
-//     return view('about', [
-//         'title' => 'About',
-//         'active' => 'about',
-//         'name' => 'Sandhika Galih',
-//         'email' => 'sandhikagalih@gmail.com',
-//         'image' => 'sandhika.jpg'
-//     ]);
-// });
-
 // Route::get('/posts', [PostController::class, 'index']);
 // Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
@@ -77,7 +67,7 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
-    return view('login.index', [
+    return view('auth.login', [
         'title' => 'Login',
         'active' => 'login'
     ]);
@@ -89,6 +79,8 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::resource('/token', TokenController::class)->middleware('auth');
 
 
 // Route::get('/dashboard', function() {
@@ -98,13 +90,12 @@ Route::post('/register', [RegisterController::class, 'store']);
 //     ]);
 // })->middleware('auth')->name('dashboard');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::get('showorderlimit', [DashboardController::class, 'showorderlimit'])->middleware('auth');
-Route::post('showorder-limit', [DashboardController::class, 'store'])->middleware('auth');
-
-Route::get('fetch-order', [DashboardController::class, 'fetchorder'])->middleware('auth');
-Route::delete('delete-order/{id}', [DashboardController::class, 'destroy']);
+// Route::get('showorderlimit', [DashboardController::class, 'showorderlimit'])->middleware('auth');
+// Route::post('showorder-limit', [DashboardController::class, 'store'])->middleware('auth');
 
 
-Route::resource('/token', TokenController::class)->middleware('auth');
-Route::resource('/order', OrderController::class)->middleware('auth');
+// Route::get('fetch-order', [DashboardController::class, 'fetchorder'])->middleware('auth');
+// Route::delete('delete-order/{id}', [DashboardController::class, 'destroy']);
+
+
+// Route::resource('/order', OrderController::class)->middleware('auth');
