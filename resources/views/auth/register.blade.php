@@ -8,14 +8,17 @@
 
     @guest
     <div>
-        <img src="{{ url('auth/assets/images/moonton-white.svg') }}" alt="">
+        {{-- <img src="{{ url('auth/assets/images/moonton-white.svg') }}" alt=""> --}}
+        <div class="font-semibold text-[30px] mb-3">
+            Spectrematic
+        </div>
         <div class="my-[70px]">
             <div class="font-semibold text-[26px] mb-3">
                 Sign Up
             </div>
             <p class="text-base text-[#767676] leading-7">
-                Explore our new movies and get <br>
-                the better insight for your life
+                Get more profitable with us <br>
+                Register Spectrematic
             </p>
         </div>
         <form class="w-[370px]" action="/register" method="post">

@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> --}}
 <script src="{{ url('mt/js/scripts.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
 <script src="{{ url('mt/assets/demo/chart-area-demo.js') }}"></script>
@@ -13,7 +13,7 @@
 <script src="htps://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="{{ url('mt/js/websocket.js') }}"></script>
 <script src="{{ url('mt/js/utility.js') }}"></script>
-<script src="js/.js"></script>
+{{-- <script src="js/.js"></script> --}}
 <script>
     //2999a8b9e1ecc9bd2f8d7d85aa46b0f7  0ca33103c520ed2edd261cf66eed06
     //601823bea3f866c6cd380a0d3f28d5e3
@@ -62,9 +62,9 @@
     //var token = window.localStorage.getItem("access_token");
     /*if (window.localStorage.getItem("tokenx") == null) {
             open('./login.html')
-$("#pdod option").filter(":selected").val() == "BUYLIMIT"
+    $("#pdod option").filter(":selected").val() == "BUYLIMIT"
         }*/
-        seve.addEventListener(
+        save.addEventListener(
     "click",
     function (e) {
         if ($("#pdod option").filter(":selected").val() == "BUY LIMIT") {
@@ -787,79 +787,6 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
         break;
 
 
-        @forelse ( $orders as $order )
-        case "Pending":
-                    // alert(spot_price1)
-                    $("#Ticpoin").hide();
-                    $("#Jam").hide();
-                    $("#LimitS").show();
-                    if (Math.abs(parseFloat(spot_price1)) <?php
-                            $acuan=$order->signal;
-                            echo ($acuan=="BUY LIMIT") ? "<=" : ($acuan=="BUY STOP" ? ">=" : ($acuan=="SELL LIMIT" ? ">=" : "<="));
-                            ?> "{{ $order->price }}") {
-                        if (OnTrade == false) {
-                        if ($("#btnStart").text() == "Stop") {
-                        OnTrade = true;
-                        var msg = {
-                                action: "newtrade",
-                                data: {
-                                account_type: $("#cmbAccountType option").filter(":selected").val(),
-                                direction: "<?php
-                                $acuan=$order->signal;
-                                 echo ($acuan=="BUY LIMIT") ? "call" : ($acuan=="BUY STOP" ? "call" : ($acuan=="SELL LIMIT" ? "SELL" : "SELL"));
-                            ?>",
-                                asset_id: "{{ $order->market }}",
-                                expiration: "{{ $order->duration }}",
-                                investment: "{{ $order->investment }}",
-                                },
-                                token: $("#txt_t").val(),
-                            };
-                            fsocket.send(JSON.stringify(msg));
-                        //alert(Ontrade);
-                    // LastDirection = "SELL";
-                        Signal='{{ $order->signal }}';
-                    // OpenOrder(LastDirection);
-                        }
-                        if (OnTrade == 0) {
-                    OnTrade = 1;
-                    }
-                        }
-                    }
-                break;
-             @empty
-                case "Pending":
-                    // alert(spot_price1)
-                    $("#Ticpoin").hide();
-                    $("#Jam").hide();
-                    $("#LimitS").show();
-                    if (Math.abs(parseFloat(spot_price1)) <= "nodata") {
-                        if (OnTrade == false) {
-                        if ($("#btnStart").text() == "Stop") {
-                        OnTrade = true;
-                        var msg = {
-                                action: "newtrade",
-                                data: {
-                                account_type: $("#cmbAccountType option").filter(":selected").val(),
-                                direction: "Call",
-                                asset_id: "nodata",
-                                expiration: "nodata",
-                                investment: "nodata",
-                                },
-                                token: $("#txt_t").val(),
-                            };
-                            fsocket.send(JSON.stringify(msg));
-                        //alert(Ontrade);
-                    // LastDirection = "SELL";
-                        Signal='BUY -STOP';
-                    // OpenOrder(LastDirection);
-                        }
-                        if (OnTrade == 0) {
-                    OnTrade = 1;
-                    }
-                        }
-                    }
-                break;
-            @endforelse
             case "Pending-order":
                     // alert(spot_price1)
                     $("#Ticpoin").hide();
@@ -1022,8 +949,10 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
     false
     );
     if(($("#txt_t").val())==""){
-        // window.open('https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=smbot');
-    //window.open("login.html");
+
+    //     window.open('https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=smbot');
+    // window.open("login.html");
+        window.open('/token/{id}/edit');
     };
     // spot.addEventListener(
     // "click",
@@ -1047,6 +976,9 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
             $("#settingshow").hide();
             $("#tabprofitshow").hide();
             $("#homeshow").show();
+            $('#Dasboard').addClass('active');
+            $('#setting').removeClass('active');
+            $('#tabprofit').removeClass('active');
         // }
     });
     setting.addEventListener(
@@ -1056,6 +988,9 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
             $("#settingshow").show();
             $("#tabprofitshow").hide();
             $("#homeshow").hide();
+            $('#setting').addClass('active');
+            $('#Dasboard').removeClass('active');
+            $('#tabprofit').removeClass('active');
         // };
         });
     tabprofit.addEventListener(
@@ -1065,6 +1000,9 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
             $("#settingshow").hide()
             $("#tabprofitshow").show();
             $("#homeshow").hide();
+            $('#tabprofit').addClass('active');
+            $('#Dasboard').removeClass('active');
+            $('#setting').removeClass('active');
         //  }
     });
 
@@ -1929,7 +1867,7 @@ $("#pdod option").filter(":selected").val() == "BUYLIMIT"
         '<table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;"><thead><tr><td>No</td><td>Trx Id</td> <td>Assets</td><td>Volume</td><td>Duration</td><td> Contract</td><td>Entry Price</td><td>Exit Price</td><td> Result</td></tr></thead><tbody>' +
         tableN +
         "</tbody></table>";
-    $("#datatablesSimple").html(tableprofit);
+    $("#datatableprofit").html(tableprofit);
     switch (js.action) {
         case "userdata":
         if (js.userdata.hasOwnProperty("user_id")) {

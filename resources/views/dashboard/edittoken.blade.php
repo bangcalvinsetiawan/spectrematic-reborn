@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.token')
+@extends('dashboard.layouts.dash')
 
 @section('content')
 
@@ -15,10 +15,11 @@
 
         <div class="mb-3">
             <label for="inputToken" class="form-label">Token</label>
-            <input type="text" value="{{ $user->token }}" name="token" class="form-control" id="inputToken">
+            <input type="password" value="{{ $user->token }}" name="token" class="form-control" id="inputToken">
             <a href="https://wss.hyper-api.com/authorize.php?app_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&grant=oauth&response_type=code&client_id=2999a8b9e1ecc9bd2f8d7d85aa46b0f7&state=spectrematic" target="_blank">Get your token</a>
           </div>
           <button type="submit" class="btn btn-primary">Save</button>
+          <a href="/dashboard" class="btn btn-success">Back to Trading</a>
     </form>
 
 

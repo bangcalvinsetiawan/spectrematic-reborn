@@ -181,6 +181,11 @@
             <i class="icon ic-msg"></i>
             Messages
           </a>
+          {{-- <a href="#" class="item-menu">
+            <i class="icon ic-stats"></i>
+            Stats
+          </a> --}}
+
         </div>
         <div class="menu">
           <p>Others</p>
@@ -222,6 +227,27 @@
                   </button>
                 </div>
                 <div class="d-flex align-items-center justify-content-end gap-4 navbar fixed-top">
+                  {{-- <input
+                    type="text"
+                    placeholder="Search report or product"
+                    class="search form-control"
+                  />
+                  <button
+                    class="btn btn-search d-flex justify-content-center align-items-center p-0"
+                    type="button"
+                  >
+                    <img
+                      src="{{ url('dash/assets/images/ic_search.svg') }}"
+                      width="20px"
+                      height="20px"
+                    />
+                  </button>
+                  <img
+                    src="{{ url('dash/assets/images/avatar.jpg') }}"
+                    alt="Photo Profile"
+                    class="avatar"
+                  /> --}}
+
                   <ul class="navbar-nav ">
                       <select class="badge bg-success" id="cmbAccountType">
                           <option class="dropdown-item" value="4" selected>Reguler</option>
@@ -248,7 +274,7 @@
         </div>
     </main>
 
-    @include('dashboard.includes.scripttest')
+    @include('dashboard.includes.script')
 
     <!-- Bootstrap JS -->
     <script

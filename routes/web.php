@@ -81,6 +81,7 @@ Route::get('/register', [RegisterController::class, 'index'])->middleware('guest
 Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::resource('/token', TokenController::class)->middleware('auth');
+// Route::get('/dashboardtest', [DashboardController::class, 'index2'])->middleware('auth');
 
 
 // Route::get('/dashboard', function() {

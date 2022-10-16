@@ -1,6 +1,102 @@
-@extends('dashboard.layouts.main')
+@extends('dashboard.layouts.dash')
 
 @section('content')
+
+    <section class="p-3">
+        <header>
+        <h3>Overview</h3>
+        <p>Your Account Information</p>
+        </header>
+        <div class="information d-flex flex-column gap-5">
+            <div class="row px-1 mb-2 gap-5">
+                <div class="col-xl-6 col-6 card debit">
+                    <div class="row">
+                        <div class="col">
+                            <img src="dash/assets/images/ic_card.svg" alt="Debit" width="54px" />
+                            <div class="mt-2">
+                                <span>Trader ID</span>
+                            </div>
+                            <p class="number mt-2"><span id="lblAccId"></span></p>
+                            <div class="mt-4">
+                                <p class="fw-semibold m-0">{{ $user->name }}</p>
+                                <p class="fw-light m-0">$ <span id="lblCurrentBalance"></span></p>
+                            </div>
+                        </div>
+                        <div class="col position-relative">
+                            <div class="position-absolute bottom-0 start-0">
+                                <p class="m-0">Start</p>
+                                <span id="lblStartBalance"></span>
+                                <p class="m-0">$ <span id="lblPL"></span></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-6 col-12 p-0 mb-5 mb-xl-0 revenue">
+                    <h5>Statistic</h5>
+                    <div>
+                        <canvas id="chart-revenue" width="100%"></canvas>
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="row px-1 d-flex justify-content-between">
+
+                <div class="col-xl-6 col-12 p-0 ps-xl-4 transaction">
+                    <h5>Latest Transactions</h5>
+                    <div class="d-flex flex-column gap-4">
+                        <div class="d-flex flex-row gap-3">
+                        <div class="icon-history">
+                            <img
+                            src="dash/assets/images/ic_spotify.svg"
+                            width="32"
+                            height="32"
+                            />
+                        </div>
+                        <div class="trans-history flex-fill">
+                            <div>
+                            <p class="m-0 title">Spotify</p>
+                            <p class="m-0 date">12 Jan</p>
+                            </div>
+                            <p class="m-0 outcome">- $20,000</p>
+                        </div>
+                        </div>
+                        <div class="d-flex flex-row gap-3">
+                        <div class="icon-history">
+                            <img
+                            src="dash/assets/images/ic_receive_act.svg"
+                            width="32"
+                            height="32"
+                            />
+                        </div>
+                        <div class="trans-history flex-fill">
+                            <div>
+                            <p class="m-0 title">Top Up BCA</p>
+                            <p class="m-0 date">12 Jan</p>
+                            </div>
+                            <p class="m-0 income">+ $120,000</p>
+                        </div>
+                        </div>
+                        <div class="d-flex flex-row gap-3">
+                        <div class="icon-history">
+                            <img
+                            src="dash/assets/images/ic_send_act.svg"
+                            width="32"
+                            height="32"
+                            />
+                        </div>
+                        <div class="trans-history flex-fill">
+                            <div>
+                            <p class="title m-0">Send to @anggapro</p>
+                            <p class="date m-0">12 Jan</p>
+                            </div>
+                            <p class="outcome m-0">- $6,000</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+        </div>
+    </section>
     {{-- ShowOrderPending Modal --}}
     <div class="modal fade" id="listOrder" tabindex="-1" aria-labelledby="listOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -30,23 +126,23 @@
                                 <th id="BL">-</th>
                                 <th id="ticBL">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Result</th>
+                                <th>Waiting</th>
                             </tr>
                             <tr>
                                 <th id="SL">-</th>
                                 <th id="ticSL">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Result</th>
+                                <th>Waiting</th>
                             </tr><tr>
                                 <th id="BS">-</th>
                                 <th id="ticBS">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Result</th>
+                                <th>Waiting</th>
                             </tr><tr>
                                 <th id="SS">-</th>
                                 <th id="ticSS">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Result</th>
+                                <th>Waiting</th>
                             </tr>
                             {{-- <table class="table table-hover">
                                 <thead> --}}
@@ -128,7 +224,7 @@
     {{-- End- ShowOrder Modal --}}
 
     {{-- Add Modal Pending--}}
-     <div class="modal fade" id="AddOrder" tabindex="-1" aria-labelledby="AddOrderModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddOrder" tabindex="-1" aria-labelledby="AddOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -178,7 +274,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listOrder">Back</button>
-                    <button type="button" class="btn btn-primary" id="seve">SEVE</button>
+                    <button type="button" class="btn btn-primary" id="save">SAVE</button>
                 </div>
 
             </div>
@@ -322,13 +418,13 @@
                         <iframe src="" style="width: 100%; height: 480px" frameborder="0" id="loaderCC"></iframe>
                         <span id="signal1">
                             <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                Market
+                                Market :
                                 <div class="col-8">
                                     <select id="cmb_market" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;"> </select>
                                 </div>
                             </li>
-                                <li class=" d-flex justify-content-between align-items-center" style="font-size: 10px; font-weight: bold;color:aqua">
-                                    Signal
+                            <li class="d-flex justify-content-between align-items-center mt-1" style="font-size: 10px; font-weight: bold;color:aqua">
+                                    Signal :
                                     <div class="col-8">
                                         <select id="cmb_signal" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;">
                                             <option value="manual">Manual</option>
@@ -345,7 +441,13 @@
                                         </select>
                                     </div>
                             </li>
-                            </span>
+                            <li class="d-flex justify-content-between align-items-center mt-1" style="font-size: 10px; font-weight: bold;color:aqua">
+                                Duration :
+                                <div class="col-6">
+                                    <select id="cmb_duration" class="badge bg-success" style="font-size: 10px;font-weight: bold;height:22px;"></select>
+                                </div>
+                            </li>
+                        </span>
                             <span class="" id="signal" style="display:no">
                                 <div class="row mb-2" style="display:none" id="Limit">
 
@@ -454,9 +556,8 @@
                                     </div>
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label class="form-label" for="simpleinput"> Duration</label>
-                                            <select id="" class="form-control">
-                                            </select>
+                                            <label class="form-label" for="simpleinput">Stop Loss</label>
+                                            <input type="text" id="txt_stoploss" class="form-control" value='0'>
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -467,27 +568,19 @@
                                     </div>
                                 </div>
                                 <div class="row mb-2">
-                                    <div class="col-4">
+                                    <div class="col-4 mt-2">
                                         <div class="form-group">
                                             <label class="form-label" for="simpleinput">Multiplier</label>
                                             <input type="text" id="txt_muliplier" class="form-control" value='0'>
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-4 mt-2">
                                         <div class="form-group">
                                             <label class="form-label" for="simpleinput">Max. Step</label>
                                             <input type="text" id="txt_max_step" class="form-control" value='0'>
                                         </div>
                                     </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label class="form-label" for="simpleinput">Stop Loss</label>
-                                            <input type="text" id="txt_stoploss" class="form-control" value='0'>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-2">
-                                    <div class="col-6">
+                                    <div class="col-4 mt-2">
                                         <div class="form-group">
                                             <label class="form-label" for="simpleinput">if Loss</label>
                                             <select id="cmb_if_signal_false" class="form-control">
@@ -500,7 +593,7 @@
                                     </div>
                                 </div>
                                 <div class="row" style="margin-bottom:5px">
-                                    <div class="col-6">
+                                    <div class="col-6 mt-2">
                                         <div class="form-group">
                                             <label class="form-label" for="simpleinput">After Max Step</label>
                                             <select id="cmb_after_step" class="form-control">
@@ -510,93 +603,83 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-6"style="display:non" id="VirtualSistem">
-                                        <label class="form-label" for="simpleinput">Virtual Entry System</label>
+                                    <div class="col-6 mt-2"style="display:non" id="VirtualSistem">
+                                        <label class="form-label" for="simpleinput">Demo Entry System (DES)</label>
                                         <select id="lossvirtual" class="form-control">
-                                            <option value="">off</option>
-                                            <option value="1">ves 1x</option>
-                                            <option value="2">ves 2x</option>
-                                            <option value="3">ves 3x</option>
-                                            <option value="4">ves 4x</option>
-                                            <option value="5">ves 5x</option>
-                                            <option value="6">ves 6x</option>
-                                            <option value="7">ves 7x</option>
-                                            <option value="8">ves 8x</option>
-                                            <option value="9">ves 9x</option>
-                                            <option value="10">ves 10x</option>
-                                            <option value="11">ves 11x</option>
-                                            <option value="12">ves 12x</option>
-                                            <option value="13">ves 13x</option>
-                                            <option value="14">ves 14x</option>
-                                            <option value="15">ves 15x</option>
+                                            <option value="">OFF</option>
+                                            <option value="1">DES 1x</option>
+                                            <option value="2">DES 2x</option>
+                                            <option value="3">DES 3x</option>
+                                            <option value="4">DES 4x</option>
+                                            <option value="5">DES 5x</option>
+                                            <option value="6">DES 6x</option>
+                                            <option value="7">DES 7x</option>
+                                            <option value="8">DES 8x</option>
+                                            <option value="9">DES 9x</option>
+                                            <option value="10">DES 10x</option>
+                                            <option value="11">DES 11x</option>
+                                            <option value="12">DES 12x</option>
+                                            <option value="13">DES 13x</option>
+                                            <option value="14">DES 14x</option>
+                                            <option value="15">DES 15x</option>
                                         </select>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="row" style="margin-bottom:5px">
-                                            <div class="form-group">
-                                                <label class="form-label" for="simpleinput">Selected Ves</label>
-                                                <select id="cmb_Ves" class="form-control">
-                                                    <option value="Vesloss">Ves Loss</option>
-                                                    <option value="Veswin">Ves Win</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
+                                    <div class="col-6 mt-2">
                                         <div class="form-group">
-                                            <label class="form-label" for="simpleinput">Selected Loss</label>
+                                            <label class="form-label" for="simpleinput">Demo Entry System For ?</label>
+                                            <select id="cmb_Ves" class="form-control">
+                                                <option value="Vesloss">DES for LOSS</option>
+                                                <option value="Veswin">DES for PROFIT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-2">
+                                        <div class="form-group">
+                                            <label class="form-label" for="simpleinput">If After DES you get Loss ?</label>
                                             <select id="cmb_VesLoss" class="form-control">
-                                                <option value="lossC">Loss Continue</option>
-                                                <option value="lossV">Loss To Ves</option>
+                                                <option value="lossC">Continue Reinvestment</option>
+                                                <option value="lossV">Back To DES</option>
 
                                             </select>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
+                                <div class="col-md-6 align-middle mt-2"><br>
+                                    <div  class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch2" checked="">
+                                        <label class="custom-control-label" for="customSwitch2">Play Notification Sound</label>
 
-                                    <div class="col-md-6 align-middle"><br>
-                                        <div  class="custom-control custom-switch">
-                                            <input type="checkbox" class="custom-control-input" id="customSwitch2" checked="">
-                                            <label class="custom-control-label" for="customSwitch2">Play Notification Sound</label>
-
-                                        </div>
                                     </div>
                                 </div>
+
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-
-                    <div class="container col-xl-6">
-                        <div class="row">
-
                         </div>
                     </div>
                 </div>
 
             <div class="card border-primary mt-2 mb-4" id="tabprofitshow" style="display:none">
                 <div class="card-header">Profit Table</div>
-                <div class="card-body">
-                    <div class="dataTable-container">
-                    <table id="datatablesSimple" class="">
-                        <thead>
-                            <tr>
-                                <td>No</td>
-                                <td>Trx Id</td>
-                                <td>Assets</td>
-                                <td>Volume</td>
-                                <td>Duration</td>
-                                <td> Contract</td>
-                                <td>Entry Price</td>
-                                <td>Exit Price</td>
-                                <td>Result</td>
-                            </tr>
-                        </thead>
-                        {{-- <tbody>
+                    <div class="card-body">
+                        <table id="datatableprofit" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td>No</td>
+                                    <td>Trx Id</td>
+                                    <td>Assets</td>
+                                    <td>Volume</td>
+                                    <td>Duration</td>
+                                    <td>Contract</td>
+                                    <td>Entry Price</td>
+                                    <td>Exit Price</td>
+                                    <td>Result</td>
+                                </tr>
+                            </thead>
+                            {{-- <tbody>
 
-                        </tbody> --}}
+                            </tbody> --}}
                         </table>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -604,211 +687,3 @@
 
 @endsection
 
-@section('scripts')
-
-    <script>
-        $(document).ready(function () {
-            fetchorder();
-
-            function fetchorder()
-            {
-                $.ajax({
-                    type: "GET",
-                    url: "/fetch-order",
-                    dataType: "json",
-                    success: function (response) {
-                        // console.log(response.orders);
-                        $('#tbodyOrderList').html("");
-                        $.each(response.orders, function (key, item) {
-                            $('tbody').append('<tr>\
-                                <td>' + item.id + '</td>\
-                                <td>' + item.signal + '</td>\
-                                <td>' + item.price + '</td>\
-                                <td>' + item.market + '</td>\
-                                <td>' + item.investment + '</td>\
-                                <td>' + item.duration + '</td>\
-                                <td>' + item.result + '</td>\
-                                <td><button type="button" value="' + item.id + '" class="badge bg-danger border-0 deletebtn"><i class="fas fa-trash-alt"></i></button></td>\
-                            \</tr>');
-                            // {
-                            // setInterval('location.reload()', 1000);
-                            // }
-                        });
-                    }
-                });
-            }
-
-            $(document).on('click', '.add_order', function (e) {
-                e.preventDefault();
-
-                // $(this).text('Sending..');
-
-                var data = {
-
-                    'signal': $('.signal').val(),
-                    'price': $('.price').val(),
-                    'market': $('.market').val(),
-                    'investment': $('.investment').val(),
-                    'duration': $('.duration').val(),
-                }
-                 console.log(data);
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    type: "POST",
-                    url: "/showorder-limit",
-                    data: data,
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response);
-                        if (response.status == 400) {
-                            $('#save_msgList').html("");
-                            $('#save_msgList').addClass('alert alert-danger');
-                            $.each(response.errors, function (key, err_value) {
-                                $('#save_msgList').append('<li>' + err_value + '</li>');
-                            });
-                            $('.add_order').text('Save');
-                        } else {
-                            $('#save_msgList').html("");
-                            $('#success_message').addClass('alert alert-success');
-                            $('#success_message').text(response.message);
-                            $('#AddOrderModal').find('input').val('');
-                            $('.add_order').text('Save');
-                            $('#AddOrderModal').modal('hide');
-                            //alert('add order success');
-                            fetchorder(listOrderModal);
-                        }
-                    }
-                });
-
-            });
-
-            // $(document).on('click', '.editbtn', function (e) {
-            //     e.preventDefault();
-            //     var stud_id = $(this).val();
-            //     // alert(stud_id);
-            //     $('#editModal').modal('show');
-            //     $.ajax({
-            //         type: "GET",
-            //         url: "/edit-student/" + stud_id,
-            //         success: function (response) {
-            //             if (response.status == 404) {
-            //                 $('#success_message').addClass('alert alert-success');
-            //                 $('#success_message').text(response.message);
-            //                 $('#editModal').modal('hide');
-            //             } else {
-            //                 // console.log(response.student.name);
-            //                 $('#name').val(response.student.name);
-            //                 $('#course').val(response.student.course);
-            //                 $('#email').val(response.student.email);
-            //                 $('#phone').val(response.student.phone);
-            //                 $('#stud_id').val(stud_id);
-            //             }
-            //         }
-            //     });
-            //     $('.btn-close').find('input').val('');
-
-            // });
-
-            // $(document).on('click', '.update_student', function (e) {
-            //     e.preventDefault();
-
-            //     $(this).text('Updating..');
-            //     var id = $('#stud_id').val();
-            //     // alert(id);
-
-            //     var data = {
-            //         'name': $('#name').val(),
-            //         'course': $('#course').val(),
-            //         'email': $('#email').val(),
-            //         'phone': $('#phone').val(),
-            //     }
-
-            //     $.ajaxSetup({
-            //         headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         }
-            //     });
-
-            //     $.ajax({
-            //         type: "PUT",
-            //         url: "/update-student/" + id,
-            //         data: data,
-            //         dataType: "json",
-            //         success: function (response) {
-            //             // console.log(response);
-            //             if (response.status == 400) {
-            //                 $('#update_msgList').html("");
-            //                 $('#update_msgList').addClass('alert alert-danger');
-            //                 $.each(response.errors, function (key, err_value) {
-            //                     $('#update_msgList').append('<li>' + err_value +
-            //                         '</li>');
-            //                 });
-            //                 $('.update_student').text('Update');
-            //             } else {
-            //                 $('#update_msgList').html("");
-
-            //                 $('#success_message').addClass('alert alert-success');
-            //                 $('#success_message').text(response.message);
-            //                 $('#editModal').find('input').val('');
-            //                 $('.update_student').text('Update');
-            //                 $('#editModal').modal('hide');
-            //                 fetchstudent();
-            //             }
-            //         }
-            //     });
-
-            // });
-
-            // $(document).on('click', '.deletebtn', function () {
-            //     var ord_id = $(this).val();
-            //     $('#DeleteModal').modal('show');
-            //     $('#deleting_id').val(ord_id);
-            // });
-
-            $(document).on('click', '.deletebtn', function (e) {
-                e.preventDefault();
-
-                // $(this).text('Deleting..');
-                var id = $('.deletebtn').val();
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    type: "DELETE",
-                    url: "/delete-order/" + id,
-                    dataType: "json",
-                    success: function (response) {
-                        // console.log(response);
-                        if (response.status == 404) {
-                            $('#success_message').addClass('alert alert-success');
-                            $('#success_message').text(response.message);
-                            $('.delete_student').text('Yes Delete');
-                        } else {
-                            $('#success_message').html("");
-                            $('#success_message').addClass('alert alert-success');
-                            $('#success_message').text(response.message);
-                            $('.delete_student').text('Yes Delete');
-                            $('#DeleteModal').modal('hide');
-                            fetchorder();
-                        }
-                    }
-                });
-            });
-
-
-
-        });
-
-    </script>
-
-@endsection
