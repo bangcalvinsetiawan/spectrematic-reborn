@@ -969,18 +969,37 @@
     //     $("#PointicLB").val(A.toFixed(5));
     // //alert(S)
     // });
+
+
     Dasboard.addEventListener(
     "click",
     function (e) {
         // if($("#home")){
+            $("#homeshow").show();
+           // $("#homesho").show();
             $("#settingshow").hide();
             $("#tabprofitshow").hide();
-            $("#homeshow").show();
+            $("#trx").show();
             $('#Dasboard').addClass('active');
             $('#setting').removeClass('active');
             $('#tabprofit').removeClass('active');
+            // $('#trading').removeClass('active');
         // }
     });
+    // trading.addEventListener(
+    // "click",
+    // function (e) {
+    //     // if($("#home")){
+    //         $("#settingshow").hide();
+    //         $("#tabprofitshow").hide();
+    //         $("#trx").show();
+    //         $("#homeshow").hide();
+    //         $('#trading').addClass('active');
+    //         $('#setting').removeClass('active');
+    //         $('#tabprofit').removeClass('active');
+    //         $('#Dasboard').removeClass('active');
+    //     // }
+    // });
     setting.addEventListener(
     "click",
     function (e) {
@@ -988,9 +1007,11 @@
             $("#settingshow").show();
             $("#tabprofitshow").hide();
             $("#homeshow").hide();
+            $("#trx").hide();
             $('#setting').addClass('active');
             $('#Dasboard').removeClass('active');
             $('#tabprofit').removeClass('active');
+            // $('#trading').removeClass('active');
         // };
         });
     tabprofit.addEventListener(
@@ -999,10 +1020,12 @@
         //if($("#tabprofit")){
             $("#settingshow").hide()
             $("#tabprofitshow").show();
+            $("#trx").hide();
             $("#homeshow").hide();
             $('#tabprofit').addClass('active');
             $('#Dasboard').removeClass('active');
             $('#setting').removeClass('active');
+            // $('#trading').removeClass('active');
         //  }
     });
 
@@ -1864,7 +1887,7 @@
     fsocket.addEventListener("message", function (event) {
     var js = JSON.parse(event.data);
     tableprofit =
-        '<table class="table table-sm table-bordered table-hover" style="font-size: 12px; td.padding:2px;"><thead><tr><td>No</td><td>Trx Id</td> <td>Assets</td><td>Volume</td><td>Duration</td><td> Contract</td><td>Entry Price</td><td>Exit Price</td><td> Result</td></tr></thead><tbody>' +
+        '<table class="table table-hover" style="hight:20px font-size: 12px; td.padding:2px;"><thead><tr><td>No</td><td>Trx Id</td> <td>Assets</td><td>Volume</td><td>Duration</td><td> Contract</td><td>Entry Price</td><td>Exit Price</td><td> Result</td></tr></thead><tbody>' +
         tableN +
         "</tbody></table>";
     $("#datatableprofit").html(tableprofit);
@@ -3109,6 +3132,87 @@
     } while (fsocket_status == 0);
     return true;
     }
+
+
+    var ctx = document.getElementById("chart-revenue").getContext("2d");
+    var gradient = ctx.createLinearGradient(0, 0, 0, 240);
+    gradient.addColorStop(0, "rgba(53, 71, 172, 0.7)");
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+    window.onload = function () {
+        window.myLine = new Chart(ctx, config);
+    };
+
+    var config = {
+        type: "line",
+        data: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            datasets: [
+                {
+                    backgroundColor: gradient,
+                    borderColor: "#3547AC",
+                    fill: true,
+                    borderWidth: 4,
+                    pointRadius: 7,
+                    pointBorderWidth: 4,
+                    pointHoverRadius: 7,
+                    pointHoverBorderWidth: 4,
+                    pointBackgroundColor: "#FFFFFF",
+                    pointStyle: "circle",
+                    data: [12000, 45000, 26000, 15000, 50000, 48000],
+                },
+            ],
+        },
+        options: {
+            legend: {
+                display: false,
+            },
+            responsive: true,
+            scales: {
+                xAxes: [
+                    {
+                        gridLines: {
+                            display: false,
+                        },
+                    },
+                ],
+                yAxes: [
+                    {
+                        ticks: {
+                            callback: function (value) {
+                                var ranges = [
+                                    { divider: 1e6, suffix: "M" },
+                                    { divider: 1e3, suffix: "k" },
+                                ];
+                                function formatNumber(n) {
+                                    for (var i = 0; i < ranges.length; i++) {
+                                        if (n >= ranges[i].divider) {
+                                            return (
+                                                (n / ranges[i].divider).toString() +
+                                                ranges[i].suffix
+                                            );
+                                        }
+                                    }
+                                    return n;
+                                }
+                                return "$" + formatNumber(value);
+                            },
+                            stepSize: 20000,
+                        },
+                    },
+                ],
+            },
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem, data) {
+                        return (
+                            "$" + data["datasets"][0]["data"][tooltipItem["index"]]
+                        );
+                    },
+                },
+            },
+        },
+    };
 
 
 </script>

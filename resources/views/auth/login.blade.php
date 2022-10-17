@@ -8,7 +8,7 @@
     <div class="grid space-y-[14px] mt-[30px]">
         <h1>Hi, you are logged in</h1>
         <a href="/dashboard" class="rounded-2xl bg-alerange py-[13px] text-center">
-            <span class="text-base font-semibold">
+            <span class="text-base text-white">
                 Continue Trade
             </span>
         </a>
@@ -19,9 +19,10 @@
     @guest
     <div>
         {{-- <img src="{{ url('auth/assets/images/moonton-white.svg') }}" alt=""> --}}
-        <div class="font-semibold text-[30px] mb-3">
+        {{-- <div class="font-semibold text-[30px] mb-3">
             Spectrematic
-        </div>
+        </div> --}}
+
         <div class="my-[70px]">
             <div class="font-semibold text-[26px] mb-3">
                 Welcome Back

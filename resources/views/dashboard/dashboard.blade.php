@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <section class="p-3">
+    <section class="p-3"id="homeshow" >
         <header>
         <h3>Overview</h3>
         <p>Your Account Information</p>
@@ -32,12 +32,12 @@
 
                     </div>
                 </div>
-                <div class="col-xl-6 col-12 p-0 mb-5 mb-xl-0 revenue">
+                {{-- <div class="col">
                     <h5>Statistic</h5>
                     <div>
                         <canvas id="chart-revenue" width="100%"></canvas>
                     </div>
-                </div>
+                </div> --}}
             </div>
             {{-- <div class="row px-1 d-flex justify-content-between">
 
@@ -126,7 +126,7 @@
                                 <th id="BL">-</th>
                                 <th id="ticBL">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Waiting</th>
+                                <th id="resulbl">Waiting</th>
                             </tr>
                             <tr>
                                 <th id="SL">-</th>
@@ -144,30 +144,6 @@
                                 {{-- <th>Duration</th> --}}
                                 <th>Waiting</th>
                             </tr>
-                            {{-- <table class="table table-hover">
-                                <thead> --}}
-
-                                    {{-- <tr id="OBL">
-
-                                        <th style="font-size: 8px; font-weight: bold;color:" id="BL"></th>
-                                        <th style="font-size: 8px; font-weight: bold;color:" id="ticBL"></th>
-                                    </tr>
-                                    <tr id="OSL">
-                                        <th style="font-size: 8px; font-weight: bold;color:" id="SL"></th>
-                                        <th style="font-size: 8px; font-weight: bold;color:" id="ticSL"></th>
-                                    </tr>
-                                    <tr id="OBS">
-                                    <th style="font-size: 8px; font-weight: bold;color:" id="BS" ></th>
-                                    <th style="font-size: 8px; font-weight: bold;color:" id="ticBS"></th>
-
-                                    </tr>
-                                    <tr id="OSS">
-                                        <th style="font-size: 8px; font-weight: bold;color:" id="SS"></th>
-                                        <th style="font-size: 8px; font-weight: bold;color:" id="ticSS"></th>
-
-                                    </tr> --}}
-                                {{-- </thead>
-                            </table> --}}
 
                         </thead>
                     </table>
@@ -361,11 +337,10 @@
 
     <main class="mt-4">
         <div class="container-fluid px-4">
-            <div id="homesho" style="display:non">
-            </div>
 
-            <div class="row" id="homeshow" style="display:non">
-                <div class="col-xl-12">
+            <div class="row" id="">
+
+                <div class="col-xl-12" id="trx" style="display:non">
                     <div class="card border-primary mb-4">
                     <div class="card-header" style="display:none">
                         <div class="row">

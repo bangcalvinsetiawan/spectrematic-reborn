@@ -25,11 +25,11 @@
 <body class="font-poppins">
     <!-- Desktop Only -->
     <div class="mx-auto max-w-screen min-h-screen bg-black text-white md:px-10 px-3">
-        <div class="fixed top-[-50px] hidden lg:block">
-            <img src="{{ url('auth/assets/images/signup-image.webp') }}"
-                class="hidden laptopLg:block laptopLg:max-w-[450px] laptopXl:max-w-[640px]" alt="">
+        <div class="fixed top-[50px] hidden lg:block py-20">
+            <img src="{{ url('auth/assets/images/pict1.jpg') }}"
+                class="hidden laptopLg:block laptopLg:max-w-[650px] laptopXl:max-w-[800px] rounded-lg max-w-full h-auto align-middle border-none" alt="">
         </div>
-        <div class="py-24 flex laptopLg:ml-[680px] laptopXl:ml-[870px]">
+        <div class="py-10 flex laptopLg:ml-[680px] laptopXl:ml-[870px]">
             @yield('content')
         </div>
     </div>

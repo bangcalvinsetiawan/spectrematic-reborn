@@ -20,6 +20,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css"
     />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
     <!-- Datatables -->
     <link href="ttps://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
@@ -43,10 +45,10 @@
     />
 
     <!-- CDN Fontawesome -->
-    <script
+    {{-- <script
       src="https://kit.fontawesome.com/32f82e1dca.js"
       crossorigin="anonymous"
-    ></script>
+    ></script> --}}
 
     <style>
         #cacing {
@@ -152,9 +154,9 @@
       </div>
       <div class="d-flex justify-content-center mt-md-5 mb-5">
         <img
-          src="{{ url('dash/assets/images/logo.svg') }}"
+          src="{{ url('dash/assets/images/test.png') }}"
           alt="Logo"
-          width="140px"
+          width="40px"
           height="40px"
         />
       </div>
@@ -165,6 +167,10 @@
             <i class="icon ic-stats"></i>
             Dashboard
           </a>
+          {{-- <a id="trading" class="item-menu">
+            <i class="icon ic-stats"></i>
+            Trading
+          </a> --}}
           <a id="setting" class="item-menu">
             <i class="icon ic-settings"></i>
             Settings
@@ -189,7 +195,7 @@
         </div>
         <div class="menu">
           <p>Others</p>
-          <a href="#" class="item-menu">
+          <a href="#" class="item-menu" style="display:none">
             <i class="icon ic-help"></i>
             Help
           </a>
@@ -255,8 +261,10 @@
                       </select>
                   </ul>
                   <a>Welcome, {{ auth()->user()->name }}</a>
-                  <span id="mserver"><i class="fas fa-circle" style="width:10px;" ></i></span>
-                  <span id="fserver"><i class="fas fa-signal" style="margin-right:20px;"></i></span>
+                  {{-- <span id="mserver"><i class="bi bi-reception-4" style="width:10px;"></i></span>
+                  <span id="fserver"><i class="fas fa-signal" style="margin-right:20px;"></i></span> --}}
+                  <span id="mserver"><i class="bi bi-reception-4" style="width:10px;"></i></span>
+                  <span id="fserver"><i class="bi bi-file-check-fill" style="margin-right:30px;"></i></span>
                 </div>
             </div>
         </nav>
@@ -276,12 +284,9 @@
 
     @include('dashboard.includes.script')
 
-    <!-- Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
