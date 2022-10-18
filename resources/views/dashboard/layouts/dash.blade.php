@@ -45,10 +45,10 @@
     />
 
     <!-- CDN Fontawesome -->
-    {{-- <script
+    <script
       src="https://kit.fontawesome.com/32f82e1dca.js"
       crossorigin="anonymous"
-    ></script> --}}
+    ></script>
 
     <style>
         #cacing {
@@ -167,10 +167,6 @@
             <i class="icon ic-stats"></i>
             Dashboard
           </a>
-          {{-- <a id="trading" class="item-menu">
-            <i class="icon ic-stats"></i>
-            Trading
-          </a> --}}
           <a id="setting" class="item-menu">
             <i class="icon ic-settings"></i>
             Settings
@@ -187,11 +183,6 @@
             <i class="icon ic-msg"></i>
             Messages
           </a>
-          {{-- <a href="#" class="item-menu">
-            <i class="icon ic-stats"></i>
-            Stats
-          </a> --}}
-
         </div>
         <div class="menu">
           <p>Others</p>
@@ -233,27 +224,6 @@
                   </button>
                 </div>
                 <div class="d-flex align-items-center justify-content-end gap-4 navbar fixed-top">
-                  {{-- <input
-                    type="text"
-                    placeholder="Search report or product"
-                    class="search form-control"
-                  />
-                  <button
-                    class="btn btn-search d-flex justify-content-center align-items-center p-0"
-                    type="button"
-                  >
-                    <img
-                      src="{{ url('dash/assets/images/ic_search.svg') }}"
-                      width="20px"
-                      height="20px"
-                    />
-                  </button>
-                  <img
-                    src="{{ url('dash/assets/images/avatar.jpg') }}"
-                    alt="Photo Profile"
-                    class="avatar"
-                  /> --}}
-
                   <ul class="navbar-nav ">
                       <select class="badge bg-success" id="cmbAccountType">
                           <option class="dropdown-item" value="4" selected>Reguler</option>
@@ -284,9 +254,12 @@
 
     @include('dashboard.includes.script')
 
-
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-
+    <!-- Bootstrap JS -->
+    {{-- <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script> --}}
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
