@@ -202,6 +202,24 @@
       </div>
     </nav>
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="needDeposit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="needDepositLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="needDepositLabel">Need deposit</h1>
+            </div>
+            <div class="modal-body">
+              Minimum balance $100, deposit now and continue to trade !
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success"><a href="http://wa.me/6285172194558" style="color: rgb(255, 255, 255); text-decoration:none; ">Deposit Now</a></button>
+            <button type="button" class="btn btn-primary" id="backtodemo"><a href="/dashboard" style="color: rgb(255, 255, 255); text-decoration:none; ">Back to Demo</a></button>
+            </div>
+        </div>
+        </div>
+    </div>
     <!-- Main Content -->
     <main class="content">
         <nav class="navbar navbar-expand-lg">

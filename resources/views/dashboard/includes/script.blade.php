@@ -147,7 +147,14 @@
     // if (getCookie("_authToken")) {
     // $("#txt_t").val(getCookie("_authToken"));
     // }
-
+    backtodemo.addEventListener(
+    "click",
+    function (e) {
+        setCookie("_authAccountType","1","365");
+        if (getCookie("_authAccountType")) {
+    $("#cmbAccountType option[value=" + getCookie("_authAccountType") + "]").attr("selected", "selected");
+        }
+    });
     //load last account type
     if (getCookie("_authAccountType")) {
     $("#cmbAccountType option[value=" + getCookie("_authAccountType") + "]").attr("selected", "selected");
@@ -1918,7 +1925,7 @@
             $("#ein_t").text("0");
             if (js.userdata.account_type == 4){
                 if (js.userdata.account_balance < 100) {
-                window.open('/deposit');
+                    $('#needDeposit').modal('show');
             }
             };
 
