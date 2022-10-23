@@ -117,7 +117,7 @@
                                 {{-- <th>Market</th>
                                 <th>Investment</th> --}}
                                 {{-- <th>Duration</th> --}}
-                                <th>Result</th>
+                                {{-- <th>Result</th> --}}
                                 {{-- <th>Action</th> --}}
                             </tr>
                         </thead>
@@ -126,23 +126,23 @@
                                 <th id="BL">-</th>
                                 <th id="ticBL">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th id="resulbl">Waiting</th>
+                                {{-- <th id="resulbl">Waiting</th> --}}
                             </tr>
                             <tr>
                                 <th id="SL">-</th>
                                 <th id="ticSL">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Waiting</th>
+                                {{-- <th>Waiting</th> --}}
                             </tr><tr>
                                 <th id="BS">-</th>
                                 <th id="ticBS">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Waiting</th>
+                                {{-- <th>Waiting</th> --}}
                             </tr><tr>
                                 <th id="SS">-</th>
                                 <th id="ticSS">-</th>
                                 {{-- <th>Duration</th> --}}
-                                <th>Waiting</th>
+                                {{-- <th>Waiting</th> --}}
                             </tr>
 
                         </thead>
@@ -170,7 +170,8 @@
                 <div id="success_message"></div>
 
                 <div class="card-body">
-                    <table class="table table-hover">
+                    <div class="dataTable-container">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -187,6 +188,7 @@
 
                         </tbody>
                     </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -235,18 +237,16 @@
                         <select type="text" class="market form-select" id="cmb_marketlis" aria-label="Select Market">
                         </select>
                     </div> --}}
-                    <div class="input-group mb-3">
+                    {{-- <div class="input-group mb-3">
                         <span class="input-group-text">$</span>
                         <input type="number" step="0.001" class="investment form-control" aria-label="Input Investment" required>
-                    </div>
-                    <div class="form-group mb-3">
+                    </div> --}}
+                    {{-- <div class="form-group mb-3">
                         <label for="inputDuration" class="form-label">Trade Duration</label>
                         <select type="text" class="duration form-select" id="cmb_duration2" aria-label="Select Market">
-                            {{-- <option value="10s">10s</option>
-                            <option value="60s">60s</option>
-                            <option value="5m">5m</option> --}}
+                           
                         </select>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#listOrder">Back</button>
