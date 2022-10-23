@@ -9,7 +9,7 @@
       content="Spectre, Trading, Option"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Rachma | @rachmadzii" />
+    <meta name="author" content="Rachma" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Spectrematic - {{ $title }}</title>
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
     <!-- Datatables -->
-    <link href="ttps://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 
     <!-- Sweet Alert -->
     <link type="text/css" href="{{ url('mt/vendor/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet" />
@@ -179,17 +179,20 @@
             <i class="icon ic-account"></i>
             Token
           </a>
-          <a id="out" style="display:none" class="item-menu">
-            <i class="icon ic-msg"></i>
-            Messages
-          </a>
         </div>
         <div class="menu">
           <p>Others</p>
-          <a href="#" class="item-menu" style="display:none">
+          <a id="out" href="#" class="item-menu" style="display:none">
             <i class="icon ic-help"></i>
             Help
           </a>
+          @can('admin')
+
+          <a href="/preprod" class="item-menu {{ Request::is('preprod*') ? 'active' : '' }}">
+            <i class="icon ic-msg"></i>
+            Admin
+          </a>
+          @endcan
           <a type="button" href="{{ route('logout') }}" style="cursor: pointer" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();" class="item-menu"><i class="icon ic-logout"></i>
             Logout</a>
@@ -272,22 +275,13 @@
 
     @include('dashboard.includes.script')
 
-    <!-- Bootstrap JS -->
-    {{-- <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script> --}}
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
-
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script> --}}
-    {{-- <script src="{{ url('dash/assets/js/donut_chart.js') }}"></script> --}}
     <script src="{{ url('dash/assets/js/line_chart.js') }}"></script>
+    @yield('scripts')
 
     <script>
       $(document).ready(function () {

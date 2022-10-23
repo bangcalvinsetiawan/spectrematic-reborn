@@ -30,6 +30,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PreprodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,30 +43,6 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-// Route::get('/', function () {
-//     return view('home', [
-//         "title" => "Home",
-//         "active" => 'home'
-//     ]);
-// });
-
-// Route::get('/posts', [PostController::class, 'index']);
-// Route::get('/posts/{post:slug}', [PostController::class, 'show']);
-
-// Route::get('/categories', function() {
-//     return view('categories', [
-//         'title' => 'Post Categories',
-//         'active' => 'categories',
-//         'categories' => Category::all()
-//     ]);
-// });
-
-
 Route::get('/', function () {
     return view('auth.login', [
         'title' => 'Login',
@@ -75,28 +52,14 @@ Route::get('/', function () {
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
-Route::resource('/token', TokenController::class)->middleware('auth');
-// Route::get('/dashboardtest', [DashboardController::class, 'index2'])->middleware('auth');
+Route::resource('/token', TokenController::class)->only([
+    'index', 'edit', 'update'
+])->middleware('auth');
 
-
-// Route::get('/dashboard', function() {
-//     return view('dashboard.index', [
-//         'title' => 'Dashboard',
-//         'active' => 'dashboard'
-//     ]);
-// })->middleware('auth')->name('dashboard');
-
-// Route::get('showorderlimit', [DashboardController::class, 'showorderlimit'])->middleware('auth');
-// Route::post('showorder-limit', [DashboardController::class, 'store'])->middleware('auth');
-
-
-// Route::get('fetch-order', [DashboardController::class, 'fetchorder'])->middleware('auth');
-// Route::delete('delete-order/{id}', [DashboardController::class, 'destroy']);
-
-
-// Route::resource('/order', OrderController::class)->middleware('auth');
+Route::resource('/preprod', PreprodController::class)->middleware('admin');

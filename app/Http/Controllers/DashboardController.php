@@ -13,9 +13,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // return dd(Order::where('user_id', auth()->user()->id)->get());
-        // $order = Order::where('user_id', auth()->user()->id)->get();
-        // return dd($order);
         $user = User::findOrFail(auth()->user()->id);
 
         return view('dashboard.dashboard', [
@@ -23,16 +20,12 @@ class DashboardController extends Controller
             'active' => 'dashboard',
             'orders' => Order::where('user_id', auth()->user()->id)->get(),
             'user' => $user,
-            // 'order' => $order
         ]);
     }
 
     // testing
     public function index2()
     {
-        // return dd(Order::where('user_id', auth()->user()->id)->get());
-        // $order = Order::where('user_id', auth()->user()->id)->get();
-        // return dd($order);
         $user = User::findOrFail(auth()->user()->id);
 
         return view('dashboard.index', [
