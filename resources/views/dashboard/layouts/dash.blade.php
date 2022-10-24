@@ -91,8 +91,13 @@
         text-align: left;
         font-size: 15px;
         }
+<<<<<<< HEAD
 
         /* .table {
+=======
+        /*
+        .table {
+>>>>>>> a9fd56c2845b6b18770cc53124c7e676b5e26dd7
             width: 100%;
             max-width: 100%;
             margin-bottom: 20px
@@ -114,7 +119,12 @@
         .table-responsive {
             min-height: .01%;
             overflow-x: auto
+<<<<<<< HEAD
         } */
+=======
+        }
+        */
+>>>>>>> a9fd56c2845b6b18770cc53124c7e676b5e26dd7
 
         @media screen and (max-width:767px) {
             .table-responsive {
@@ -175,7 +185,7 @@
             <i class="icon ic-trans"></i>
             Transactions
           </a>
-          <a href="/token/{{ $user->id }}/edit" class="item-menu {{ Request::is('token*') ? 'active' : '' }}">
+          <a href="/token/{{ auth()->user()->id }}/edit" class="item-menu {{ Request::is('token*') ? 'active' : '' }}">
             <i class="icon ic-account"></i>
             Token
           </a>
