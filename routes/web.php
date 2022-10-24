@@ -1,23 +1,4 @@
-<?php
-// error_reporting("E_ALL");
-// ini_set('display_errors', 1);
-// $code = $_GET['code'];
-// $header_values = array("Accept: application/json", "Content-Type: application/x-www-form-urlencoded");
-// $url = 'https://wss.hyper-api.com/token.php';
-// $post_arr = array("code" => $code, "grant_type" => "authorization_code");
-// $process = curl_init($url);
-// curl_setopt($process, CURLOPT_HTTPHEADER, $header_values);
-// curl_setopt($process, CURLOPT_USERPWD, "2999a8b9e1ecc9bd2f8d7d85aa46b0f7:0ca33103c520ed2edd261cf66eed06");
-// curl_setopt($process, CURLOPT_POST, 1);
-// curl_setopt($process, CURLOPT_POSTFIELDS, http_build_query($post_arr));
-// curl_setopt($process, CURLOPT_RETURNTRANSFER, 1);
-// $result = curl_exec($process);
-// $json_object = json_decode($result, true);
 
-// $access_token = $json_object['access_token'];
-//  echo $access_token;
-//  print_r($access_token);
-?>
 
 <?php
 
@@ -62,4 +43,10 @@ Route::resource('/token', TokenController::class)->only([
     'index', 'edit', 'update'
 ])->middleware('auth');
 
-Route::resource('/preprod', PreprodController::class)->middleware('admin');
+//Route::resource('/preprod', PreprodController::class)->middleware('admin');
+Route::post('student', [PreprodController::class, 'store']);
+Route::get('preprod', [PreprodController::class, 'index']);
+Route::get('fetch-students', [PreprodController::class, 'fetchstudent']);
+Route::get('edit-student/{id}', [PreprodController::class, 'edit']);
+Route::put('update-student/{id}', [PreprodController::class, 'update']);
+Route::delete('delete-student/{id}', [PreprodController::class, 'destroy']);
