@@ -92,7 +92,7 @@
         font-size: 15px;
         }
 
-        .table {
+        /* .table {
             width: 100%;
             max-width: 100%;
             margin-bottom: 20px
@@ -114,7 +114,7 @@
         .table-responsive {
             min-height: .01%;
             overflow-x: auto
-        }
+        } */
 
         @media screen and (max-width:767px) {
             .table-responsive {

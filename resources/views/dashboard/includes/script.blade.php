@@ -862,7 +862,7 @@
                      if ($("#btnStart").text() == "Stop") {
                         OnTrade = true;
                         //alert(Ontrade);
-                        LastDirection = "CALL";
+                        LastDirection = "PUT";
                         Signal='SELL STOP';
                         OpenOrder(LastDirection);
                         }
