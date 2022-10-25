@@ -138,6 +138,7 @@
                     <div class="card-header">
                         <h4>
                             Users Data
+                            <a href="/dashboard" class="btn btn-success">Back to Trading</a>
                             <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal"
                                 data-bs-target="#AddStudentModal">Add User</button>
                         </h4>
@@ -150,6 +151,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Password</th>
                                     <th>Register Date</th>
                                     <th>Token</th>
                                     <th>Copy Trade</th>
@@ -218,6 +220,7 @@
                             <td>' + item.id + '</td>\
                             <td>' + item.name + '</td>\
                             <td>' + item.email + '</td>\
+                            <td>' + item.password + '</td>\
                             <td>' + item.created_at + '</td>\
                             <td>' + item.token + '</td>\
                             <td>' + item.ct + '</td>\
@@ -295,6 +298,7 @@
                         //console(response);
                         $('#name').val(response.users.name);
                         $('#email').val(response.users.email);
+                        $('#password').val(response.users.password);
                         $('#created_at').val(response.users.created_at);
                         $('#token').val(response.users.token);
                         $('#ct').val(response.users.ct);
@@ -315,10 +319,10 @@
             // alert(id);
 
             var data = {
-                       'name': $('#Name').val(),
-                       'email': $('#Email').val(),
+                       'name': $('#name').val(),
+                       'email': $('#email').val(),
                        'created_at': $('#created_at').val(),
-                       'token': $('#Token').val(),
+                       'token': $('#token').val(),
                        'ct': $('#ct').val(),
                        'roles': $('#roles').val(),
                 

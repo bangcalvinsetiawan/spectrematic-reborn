@@ -76,7 +76,7 @@
         }
 
 
-            table {
+            /* table {
             background-color: transparent
         }
 
@@ -85,46 +85,36 @@
             padding-bottom: 8px;
             color: #777;
             text-align: left
-        }
+        }*/
 
         th,td {
         text-align: left;
-        font-size: 15px;
+        font-size: 12px;
         }
-<<<<<<< HEAD
 
         /* .table {
-=======
-        /*
-        .table {
->>>>>>> a9fd56c2845b6b18770cc53124c7e676b5e26dd7
             width: 100%;
             max-width: 100%;
             margin-bottom: 20px
-        }
+        } */
 
         .table>tbody>tr>td,.table>tbody>tr>th,.table>thead>tr>td,.table>thead>tr>th {
-            padding: 5px;
-            line-height: 0.3;
+            padding: 10px;
+            line-height: 1.0;
             vertical-align: top;
             border-top: 1px solid #ddd
         }
 
-        .table>thead>tr>th {
+        /* .table>thead>tr>th {
             vertical-align: bottom;
             border-bottom: 1.5px solid #ddd
-        }
+        } */
 
 
-        .table-responsive {
+        /* .table-responsive {
             min-height: .01%;
             overflow-x: auto
-<<<<<<< HEAD
-        } */
-=======
         }
-        */
->>>>>>> a9fd56c2845b6b18770cc53124c7e676b5e26dd7
 
         @media screen and (max-width:767px) {
             .table-responsive {
@@ -142,7 +132,7 @@
             .table-responsive>.table>tbody>tr>td,.table-responsive>.table>tbody>tr>th,.table-responsive>.table>thead>tr>td,.table-responsive>.table>thead>tr>th {
                 white-space: nowrap
             }
-        }
+        } */
     </style>
   </head>
   <body>
@@ -196,6 +186,7 @@
             <i class="icon ic-help"></i>
             Help
           </a>
+          
           @can('admin')
 
           <a href="/preprod" class="item-menu {{ Request::is('preprod*') ? 'active' : '' }}">

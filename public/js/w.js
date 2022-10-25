@@ -30,21 +30,7 @@
     total = 0;
     //var token ="";
     last_investment = $("#txt_invest").val();
-    //token = $("#{txt_t}").val();
-    //if(window.open("")){
-    // window.localStorage.setItem("access_token
 
-    //  if (window.localStorage.getItem("access_token") == null) {alert(1);
-    //         window.open('login.php')
-
-    //     }
-    // Mark();
-    //};
-    //var token = window.localStorage.getItem("access_token");
-    /*if (window.localStorage.getItem("tokenx") == null) {
-            open('./login.html')
-    $("#pdod option").filter(":selected").val() == "BUYLIMIT"
-        }*/
         save.addEventListener(
     "click",
     function (e) {
@@ -775,7 +761,6 @@
 
 
             case "Pending-order":
-                    // alert(spot_price1)
                     $("#Ticpoin").hide();
                     $("#Jam").hide();
                     $("#LimitS").show();
